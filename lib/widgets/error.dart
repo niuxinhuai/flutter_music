@@ -24,7 +24,7 @@ class GpErrorWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Image.asset(
-                    'assets/images/girl_cry.png',
+                    'assets/images/cm8_my_empty_pic_night~iphone.png',
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 10),
