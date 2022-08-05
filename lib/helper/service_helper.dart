@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter_music/constants/url.dart';
+import 'package:flutter_music/helper/user.dart';
 //import 'package:flutter_wanandroid/helper/user.dart';
 
 class ServiceHelper {
@@ -70,12 +72,16 @@ class ServiceHelper {
   }
 
   static Options? _getOptions() {
-    return null;
-//    Map<String, String>? map = UserDefault.getHeader();
-//    if (map != null) {
-//      return Options(headers: map);
-//    } else {
-//      return null;
-//    }
+    Map<String, String>? map = UserDefault.getHeader();
+    if (map != null) {
+      return Options(headers: map);
+    } else {
+      return null;
+    }
+  }
+
+  static Options? buildCacheOption(Duration duration, String cacheKey) {
+    return buildCacheOptions(duration,
+        subKey: cacheKey, options: _getOptions());
   }
 }
