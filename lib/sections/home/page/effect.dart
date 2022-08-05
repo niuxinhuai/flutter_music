@@ -1,4 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter_music/helper/router.dart';
+import 'package:flutter_music/helper/router_helper.dart';
 import 'package:flutter_music/repository/services/common_service.dart';
 import 'package:flutter_music/sections/home/models/home.dart';
 import 'action.dart';
@@ -48,6 +50,11 @@ void _onTapCustomIcon(Action action, Context<HomeMusicState> ctx) {
 void _onTapRecommendMore(Action action, Context<HomeMusicState> ctx) {
   final UiElementButton elementButton = action.payload;
   print(">>>>>>>>>>>>>>>button:${elementButton.action}");
+  String actionStr = elementButton.action ?? "";
+  String playlistSquare = "playlistCollection";
+  if (actionStr.contains(playlistSquare)) {
+    ARouter.open(ctx.context, RouterKeys.square, params: {"action": actionStr});
+  }
 }
 
 ///推荐歌单，item点击

@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart' as P;
+import 'package:flutter_music/helper/user.dart';
 //import 'package:flutter_wanandroid/helper/user.dart';
 import 'action.dart';
 import 'state.dart';
@@ -16,7 +17,7 @@ Effect<ApplicationState>? buildEffect() {
 
 void _initState(Action action, Context<ApplicationState> ctx) {
 //  ///每次登录刷新一下当前状态
-//  UserDefault.refresh();
+  UserDefault.refresh();
   int initialPage = 0;
   P.PageController pageController = P.PageController(initialPage: initialPage);
   ctx.dispatch(

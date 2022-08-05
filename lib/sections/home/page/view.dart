@@ -42,25 +42,20 @@ Widget buildView(
         child: Container(
           width: 44,
           height: 44,
-          child: Icon(
-            Icons.menu,
-            color: Colors.black,
-          ),
+          child: Image.asset(
+              'assets/images/cm8_nav_icn_setting_normal~iphone.png'),
         ),
       ),
       actions: [
         Container(
           width: 44,
           height: 44,
-          child: Icon(
-            Icons.mic,
-            color: Colors.black,
-          ),
+          child: Image.asset('assets/images/cm8_nav_icn_searchmic~iphone.png'),
         )
       ],
     ),
     drawer: SmartDrawer(
-      widthPercent: 0.7,
+      widthPercent: 0.8,
       semanticLabel: "Label",
       child: HomeDrawerPage().buildPage({}),
     ),
