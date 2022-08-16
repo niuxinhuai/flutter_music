@@ -12,6 +12,7 @@ Reducer<SquareChildState>? buildReducer() {
       SquareChildAction.didError: _didError,
       SquareChildAction.didFetchData: _didFetchData,
       SquareChildAction.didLoading: _didLoading,
+      SquareChildAction.didFilterAndRefresh: _didFilterAndRefresh,
     },
   );
 }
@@ -25,6 +26,7 @@ SquareChildState _didError(SquareChildState state, Action action) {
 SquareChildState _didFetchData(SquareChildState state, Action action) {
   final PlaylistSquareWrap squareWrap = action.payload;
   final SquareChildState newState = state.clone();
+
   newState.squareWrap = squareWrap;
   newState.loadingState = LoadingState.success;
   if (newState.squareWrap?.playlists != null &&
@@ -46,6 +48,16 @@ SquareChildState _didLoading(SquareChildState state, Action action) {
     newState.refreshController!.loadNoData();
     newState.loadNoMoreData = true;
   }
+  return newState;
+}
+
+SquareChildState _didFilterAndRefresh(SquareChildState state, Action action) {
+  final SquareChildState newState = state.clone();
+
+  ///初始化所有状态
+  newState.stages?.clear();
+  newState.loadingState = LoadingState.isLoading;
+  newState.offset = 0;
   return newState;
 }
 

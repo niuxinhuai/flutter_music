@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter_music/sections/square/models/playlist.dart';
+import 'package:flutter_music/sections/square/models/tag.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -9,6 +10,11 @@ class SquareChildState implements Cloneable<SquareChildState> {
   LoadingState? loadingState;
   int? limit;
   int offset = 0;
+
+  ///当为精品页时，有lastItemBeforeTime和childCat
+  int? lastItemBeforeTime;
+  String? childCat;
+  HighqualityTagsWrap? tagsWrap;
 
   RefreshController? refreshController;
   bool? loadNoMoreData;
@@ -25,7 +31,10 @@ class SquareChildState implements Cloneable<SquareChildState> {
       ..offset = offset
       ..refreshController = refreshController
       ..loadNoMoreData = loadNoMoreData
-      ..stages = stages;
+      ..stages = stages
+      ..lastItemBeforeTime = lastItemBeforeTime
+      ..childCat = childCat
+      ..tagsWrap = tagsWrap;
   }
 }
 
@@ -39,9 +48,11 @@ SquareChildState initState(Map<String, dynamic>? args) {
   return SquareChildState()
     ..tag = tag
     ..loadingState = LoadingState.isLoading
-    ..limit = 10
+    ..limit = 15
     ..offset = 0
     ..refreshController = RefreshController()
     ..loadNoMoreData = false
-    ..stages = [];
+    ..stages = []
+    ..lastItemBeforeTime = 0
+    ..childCat = "";
 }
