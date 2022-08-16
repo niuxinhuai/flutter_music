@@ -26,6 +26,9 @@ class HomeBlockCodeUtils {
   ///专属场景歌单
   static const String official = "HOMEPAGE_BLOCK_OFFICIAL_PLAYLIST";
 
+  ///排行榜
+  static const String toplist = "HOMEPAGE_BLOCK_TOPLIST";
+
   ///热门播客
   static const String vlog = "HOMEPAGE_VOICELIST_RCMD";
 

@@ -5,6 +5,8 @@ class ColorUtils {
   static Map<String, Color> colorMap() => {
         "blue": Colors.blue,
         "red": Colors.red,
-        "gray": CommonColors.textColor999
+        "gray": CommonColors.textColor999,
+        "colorPrimary1": Colors.red,
+        "colorSecondary7": Colors.green,
       };
 }

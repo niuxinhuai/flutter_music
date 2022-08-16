@@ -55,10 +55,10 @@ class TimeUtils {
 
   static DateTime formatExpiresTime(String str) {
     var expiresTime =
-        RegExp("Expires[^;]*;").stringMatch(str)!.split(" ")[1].split("-");
-    var year = expiresTime[2];
-    var day = expiresTime[0];
-    var mounth = _getMounthByStr(expiresTime[1]);
+        RegExp("Expires[^;]*;").stringMatch(str)!.split("=")[1].split(" ");
+    var year = expiresTime[3];
+    var day = expiresTime[1];
+    var mounth = _getMounthByStr(expiresTime[2]);
     return DateTime(int.parse(year), mounth, int.parse(day));
   }
 
