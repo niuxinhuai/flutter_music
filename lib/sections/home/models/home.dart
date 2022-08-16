@@ -142,6 +142,7 @@ class MusicUiElement {
   UiElementTitle? mainTitle;
   UiElementButton? button;
   UiElementImage? image;
+  UiElementLabelText? labelText;
   String? rcmdShowType;
   List<String>? labelTexts;
   String? labelType;
@@ -158,6 +159,7 @@ class UiElementTitle {
 
   String? title;
   String? titleImgUrl;
+  String? titleDesc;
 
   factory UiElementTitle.fromJson(Map<String, dynamic> json) =>
       _$UiElementTitleFromJson(json);
@@ -178,6 +180,19 @@ class UiElementButton {
       _$UiElementButtonFromJson(json);
 
   toJson() => _$UiElementButtonToJson(this);
+}
+
+@JsonSerializable()
+class UiElementLabelText {
+  UiElementLabelText();
+
+  String? textColor;
+  String? text;
+
+  factory UiElementLabelText.fromJson(Map<String, dynamic> json) =>
+      _$UiElementLabelTextFromJson(json);
+
+  toJson() => _$UiElementLabelTextToJson(this);
 }
 
 @JsonSerializable()
@@ -202,7 +217,7 @@ class CreativesItem {
   String? action;
   String? actionType;
   int? position;
-  String? logInfo;
+//  String? logInfo;
   String? alg;
   MusicUiElement? uiElement;
   List<ResourcesItem>? resources;
@@ -226,7 +241,7 @@ class ResourcesItem {
   String? actionType;
   bool? valid;
   String? alg;
-  String? logInfo;
+//  String? logInfo;
   ResourceExtInfo? resourceExtInfo;
 
   factory ResourcesItem.fromJson(Map<String, dynamic> json) =>

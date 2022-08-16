@@ -108,6 +108,10 @@ MusicUiElement _$MusicUiElementFromJson(Map json) => MusicUiElement()
   ..image = json['image'] == null
       ? null
       : UiElementImage.fromJson(Map<String, dynamic>.from(json['image'] as Map))
+  ..labelText = json['labelText'] == null
+      ? null
+      : UiElementLabelText.fromJson(
+          Map<String, dynamic>.from(json['labelText'] as Map))
   ..rcmdShowType = json['rcmdShowType'] as String?
   ..labelTexts =
       (json['labelTexts'] as List<dynamic>?)?.map((e) => e as String).toList()
@@ -119,6 +123,7 @@ Map<String, dynamic> _$MusicUiElementToJson(MusicUiElement instance) =>
       'mainTitle': instance.mainTitle,
       'button': instance.button,
       'image': instance.image,
+      'labelText': instance.labelText,
       'rcmdShowType': instance.rcmdShowType,
       'labelTexts': instance.labelTexts,
       'labelType': instance.labelType,
@@ -126,12 +131,14 @@ Map<String, dynamic> _$MusicUiElementToJson(MusicUiElement instance) =>
 
 UiElementTitle _$UiElementTitleFromJson(Map json) => UiElementTitle()
   ..title = json['title'] as String?
-  ..titleImgUrl = json['titleImgUrl'] as String?;
+  ..titleImgUrl = json['titleImgUrl'] as String?
+  ..titleDesc = json['titleDesc'] as String?;
 
 Map<String, dynamic> _$UiElementTitleToJson(UiElementTitle instance) =>
     <String, dynamic>{
       'title': instance.title,
       'titleImgUrl': instance.titleImgUrl,
+      'titleDesc': instance.titleDesc,
     };
 
 UiElementButton _$UiElementButtonFromJson(Map json) => UiElementButton()
@@ -148,6 +155,17 @@ Map<String, dynamic> _$UiElementButtonToJson(UiElementButton instance) =>
       'iconUrl': instance.iconUrl,
     };
 
+UiElementLabelText _$UiElementLabelTextFromJson(Map json) =>
+    UiElementLabelText()
+      ..textColor = json['textColor'] as String?
+      ..text = json['text'] as String?;
+
+Map<String, dynamic> _$UiElementLabelTextToJson(UiElementLabelText instance) =>
+    <String, dynamic>{
+      'textColor': instance.textColor,
+      'text': instance.text,
+    };
+
 UiElementImage _$UiElementImageFromJson(Map json) =>
     UiElementImage()..imageUrl = json['imageUrl'] as String?;
 
@@ -162,7 +180,6 @@ CreativesItem _$CreativesItemFromJson(Map json) => CreativesItem()
   ..action = json['action'] as String?
   ..actionType = json['actionType'] as String?
   ..position = json['position'] as int?
-  ..logInfo = json['logInfo'] as String?
   ..alg = json['alg'] as String?
   ..uiElement = json['uiElement'] == null
       ? null
@@ -179,7 +196,6 @@ Map<String, dynamic> _$CreativesItemToJson(CreativesItem instance) =>
       'action': instance.action,
       'actionType': instance.actionType,
       'position': instance.position,
-      'logInfo': instance.logInfo,
       'alg': instance.alg,
       'uiElement': instance.uiElement,
       'resources': instance.resources,
@@ -197,7 +213,6 @@ ResourcesItem _$ResourcesItemFromJson(Map json) => ResourcesItem()
   ..actionType = json['actionType'] as String?
   ..valid = json['valid'] as bool?
   ..alg = json['alg'] as String?
-  ..logInfo = json['logInfo'] as String?
   ..resourceExtInfo = json['resourceExtInfo'] == null
       ? null
       : ResourceExtInfo.fromJson(
@@ -213,7 +228,6 @@ Map<String, dynamic> _$ResourcesItemToJson(ResourcesItem instance) =>
       'actionType': instance.actionType,
       'valid': instance.valid,
       'alg': instance.alg,
-      'logInfo': instance.logInfo,
       'resourceExtInfo': instance.resourceExtInfo,
     };
 

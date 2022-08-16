@@ -18,7 +18,7 @@ class HomeModule {
 
   static const List<IconData> iconDatas = [
     IconF.calendarrili,
-    IconF.a_tupianyihuifu_05,
+    IconF.atupianyihuifu05,
     IconF.gedan,
     IconF.paihangbang,
     IconF.tushu,
