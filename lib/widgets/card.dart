@@ -7,6 +7,7 @@ class GpCard extends StatelessWidget {
   final EdgeInsets? padding;
   final EdgeInsets? margin;
   final BoxDecoration? decoration;
+  final BorderRadius? borderRadius;
 
   const GpCard(
       {required this.child,
@@ -14,7 +15,8 @@ class GpCard extends StatelessWidget {
       this.margin,
       this.width,
       this.height,
-      this.decoration});
+      this.decoration,
+      this.borderRadius});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class GpCard extends StatelessWidget {
                       offset: Offset(0, 2),
                       blurRadius: 6.0)
                 ],
-                borderRadius: BorderRadius.circular(6)),
+                borderRadius: borderRadius ?? BorderRadius.circular(6)),
         padding: padding ?? EdgeInsets.zero,
         margin: margin ?? EdgeInsets.zero,
         child: child);
