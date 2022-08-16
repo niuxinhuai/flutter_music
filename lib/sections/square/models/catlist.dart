@@ -1,3 +1,4 @@
+import 'package:flutter_music/constants/key.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'catlist.g.dart';
@@ -72,7 +73,7 @@ class CatlistSectionModel {
   bool canEdit = false;
   bool editing = false;
 
-  bool isUser() => key == "-1";
+  bool isUser() => key == ConstantsKey.squareKey;
 
   List<CatlistSubItem>? items;
 }
