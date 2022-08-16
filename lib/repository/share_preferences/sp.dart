@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_music/constants/key.dart';
 import 'package:flutter_music/helper/sp_helper.dart';
 import 'package:flutter_music/sections/square/models/catlist.dart';
 
@@ -10,6 +11,9 @@ class SpAppKey {
   static const String _username = "username";
   static const String _password = "password";
   static const String _squareData = "square_data";
+  static const String _token = "token";
+  static const String _email = "email";
+  static const String _square_highquality_tag = "highquality_tag";
 
   static const List<String> allKey = [
     _one,
@@ -18,6 +22,9 @@ class SpAppKey {
     _username,
     _password,
     _squareData,
+    _token,
+    _email,
+    _square_highquality_tag,
   ];
 }
 
@@ -38,6 +45,26 @@ class SpUtil {
     return SpHelper.putString(SpAppKey._password, value);
   }
 
+  static Future<bool> setEmail(String value) {
+    return SpHelper.putString(SpAppKey._email, value);
+  }
+
+  static Future<bool> setToken(String value) {
+    return SpHelper.putString(SpAppKey._token, value);
+  }
+
+  static Future<bool> setSquareTag(String value) {
+    return SpHelper.putString(SpAppKey._square_highquality_tag, value);
+  }
+
+  static Future<String?> getToken() {
+    return SpHelper.getString(SpAppKey._token);
+  }
+
+  static Future<String?> getEmail() {
+    return SpHelper.getString(SpAppKey._email);
+  }
+
   static Future<String?> getCookie() {
     return SpHelper.getString(SpAppKey._cookie);
   }
@@ -52,6 +79,14 @@ class SpUtil {
 
   static Future<String?> getPassword() {
     return SpHelper.getString(SpAppKey._password);
+  }
+
+  static Future<String?> getSquareTag() async {
+    String? tagStr = await SpHelper.getString(SpAppKey._square_highquality_tag);
+    if (tagStr == null || tagStr.isEmpty == true) {
+      return ConstantsKey.square_tag;
+    }
+    return tagStr;
   }
 
   ///存储用户歌单广场的数据
