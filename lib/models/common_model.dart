@@ -7,3 +7,10 @@ abstract class CommonModel<T> {
   int? code;
   T? data;
 }
+
+class EventBusFireModule {
+  EventBusFireModule();
+
+  //歌单广场数据，返回刷新状态
+  bool? squareRefresh;
+}
