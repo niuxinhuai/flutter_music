@@ -6,13 +6,15 @@ class ImageItemWidget extends StatelessWidget {
   final double? width;
   final double? height;
   final BoxFit? fit;
+  final BorderRadius? borderRadius;
 
-  ImageItemWidget({this.url, this.width, this.height, this.fit});
+  ImageItemWidget(
+      {this.url, this.width, this.height, this.fit, this.borderRadius});
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+      borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(8.0)),
       child: CachedNetworkImage(
         imageUrl: url ?? "",
         width: width,

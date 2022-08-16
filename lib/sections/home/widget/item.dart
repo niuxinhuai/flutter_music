@@ -10,6 +10,7 @@ import 'package:flutter_music/sections/home/models/home.dart';
 import 'package:flutter_music/sections/home/page/action.dart';
 import 'package:flutter_music/sections/home/widget/image.dart';
 import 'package:flutter_music/sections/home/widget/text.dart';
+import 'package:flutter_music/sections/music/widget/play_count.dart';
 import 'package:flutter_music/utils/mathUtil.dart';
 
 class RItemWidget extends StatefulWidget {
@@ -158,26 +159,6 @@ class _RItemWidgetState extends State<RItemWidget> {
 
   ///count
   Widget _buildCount(BuildContext context, int count) {
-    return Container(
-      padding: const EdgeInsets.only(left: 4, right: 4, top: 1, bottom: 1),
-      margin: const EdgeInsets.only(right: 4, top: 3),
-      decoration: BoxDecoration(
-          color: Color(0xFF848484).withOpacity(0.8),
-          borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      child: Row(
-        children: [
-          Icon(
-            Icons.play_arrow,
-            color: Colors.white,
-            size: 19,
-          ),
-          Text(
-            MathUtils.getPlayNumberStr(count),
-            style: GpOtherTheme.size13(context)!
-                .copyWith(color: CommonColors.onPrimaryTextColor, fontSize: 12),
-          )
-        ],
-      ),
-    );
+    return PlayCountWidget(count: count,);
   }
 }

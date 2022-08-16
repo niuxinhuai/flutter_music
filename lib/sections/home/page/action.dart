@@ -13,6 +13,7 @@ enum HomeMusicAction {
   onTapYuncunItem,
   onTapBroadcastItem,
   onTapCalendarItem,
+  onTapToplistItem,
   onChildItemScrollLoading,
   didRefresh,
   didFetchData
@@ -53,6 +54,10 @@ class HomeMusicActionCreator {
 
   static Action onTapCalendarItemAction(ResourcesItem resourcesItem) {
     return Action(HomeMusicAction.onTapCalendarItem, payload: resourcesItem);
+  }
+
+  static Action onTapToplistItemAction(ResourcesItem resourcesItem) {
+    return Action(HomeMusicAction.onTapToplistItem, payload: resourcesItem);
   }
 
   static Action onChildItemScrollLoadingAction(MusicItem musicItem) {

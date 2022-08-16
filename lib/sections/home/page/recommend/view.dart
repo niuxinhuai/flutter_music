@@ -49,6 +49,7 @@ Widget buildView(MusicItem item, Dispatch dispatch, ViewService viewService) {
                       child: RItemWidget(
                         item: e,
                         size: itemSie,
+                        dispatch: dispatch,
                       ),
                     );
                   }).toList(),

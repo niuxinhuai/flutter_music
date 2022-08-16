@@ -19,6 +19,7 @@ Effect<HomeMusicState>? buildEffect() {
     HomeMusicAction.onTapBroadcastItem: _onTapBroadcastItem,
     HomeMusicAction.onTapCalendarItem: _onTapCalendarItem,
     HomeMusicAction.onTapLeading: _onTapLeading,
+    HomeMusicAction.onTapToplistItem: _onTapToplistItem,
     HomeMusicAction.onChildItemScrollLoading: _onChildItemScrollLoading,
     Lifecycle.initState: _initState,
   });
@@ -43,10 +44,11 @@ void _onTapBanner(Action action, Context<HomeMusicState> ctx) {
 ///topic 2
 void _onTapCustomIcon(Action action, Context<HomeMusicState> ctx) {
   String title = action.payload;
+  ARouter.open(ctx.context, RouterKeys.every_day_recommend_song);
   print(">>>>>>>>>>>>>title:$title");
 }
 
-///推荐更多按钮/新歌新碟数字专辑更多按钮/云村更多按钮/热门播客，有声书更多按钮/音乐日历
+///推荐更多按钮/新歌新碟数字专辑更多按钮/云村更多按钮/热门播客，有声书更多按钮/音乐日历/排行榜
 void _onTapRecommendMore(Action action, Context<HomeMusicState> ctx) {
   final UiElementButton elementButton = action.payload;
   print(">>>>>>>>>>>>>>>button:${elementButton.action}");
@@ -80,6 +82,11 @@ void _onTapBroadcastItem(Action action, Context<HomeMusicState> ctx) {
 
 ///音乐日历 item点击
 void _onTapCalendarItem(Action action, Context<HomeMusicState> ctx) {
+  final ResourcesItem resourcesItem = action.payload;
+}
+
+///排行榜 item点击
+void _onTapToplistItem(Action action, Context<HomeMusicState> ctx) {
   final ResourcesItem resourcesItem = action.payload;
 }
 

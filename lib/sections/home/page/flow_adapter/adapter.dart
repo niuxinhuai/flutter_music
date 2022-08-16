@@ -8,6 +8,7 @@ import 'package:flutter_music/sections/home/page/custom/component.dart';
 import 'package:flutter_music/sections/home/page/flow_adapter/cell_connector.dart';
 import 'package:flutter_music/sections/home/page/recommend/component.dart';
 import 'package:flutter_music/sections/home/page/state.dart';
+import 'package:flutter_music/sections/home/page/toplist/component.dart';
 import 'package:flutter_music/sections/home/page/yuncun/component.dart';
 import 'package:flutter_music/utils/typeUtils.dart';
 
@@ -46,6 +47,9 @@ FlowAdapter<HomeMusicState> get adapter => FlowAdapter<HomeMusicState>(
           } else if (blockCode == HomeBlockCodeUtils.calendar) {
             ///音乐日历
             return CellConnector(index: index) + MusicCalendarComponent();
+          } else if (blockCode == HomeBlockCodeUtils.toplist) {
+            ///排行榜
+            return CellConnector(index: index) + ToplistComponent();
           }
         },
         length: state.musicWrap?.data?.blocks?.length ?? 0));
