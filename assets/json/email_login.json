@@ -1,0 +1,26 @@
+{
+  "loginType":0,
+  "code":200,
+  "account":{
+    "id":7980816661,
+    "userName":"0_success20220809@163.com",
+    "type":0,
+    "status":-10,
+    "whitelistAuthority":0,
+    "createTime":1660010727451,
+    "salt":"",
+    "tokenVersion":0,
+    "ban":0,
+    "baoyueVersion":0,
+    "donateVersion":0,
+    "vipType":0,
+    "viptypeVersion":0,
+    "anonimousUser":false,
+    "uninitialized":true
+  },
+  "token":"3448e9d5d85d24c8456e2758e9b5c2e0c5d2e02a51e5f2ae5e9b5233b736633d4d4172c8442cc07f0dd0453f4972428fc992d8d934fede39c45d446976032e9b46ce567297221abedd110cbe05f206105957dc72d17edc514212382188fe1965",
+  "bindings":[
+
+  ],
+  "cookie":"MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/weapi/feedback;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/wapi/feedback;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/api/clientlog;;MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/neapi/feedback;;MUSIC_U=3448e9d5d85d24c8456e2758e9b5c2e0c5d2e02a51e5f2ae5e9b5233b736633d4d4172c8442cc07f0dd0453f4972428fc992d8d934fede39c45d446976032e9b46ce567297221abedd110cbe05f206105957dc72d17edc514212382188fe1965; Max-Age=1296000; Expires=Wed, 24 Aug 2022 02:05:27 GMT; Path=/;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/eapi/feedback;;MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/api/clientlog;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/weapi/feedback;;MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/wapi/clientlog;;MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/api/feedback;;MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/eapi/clientlog;;MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/weapi/clientlog;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/neapi/feedback;;MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/wapi/feedback;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/api/feedback;;MUSIC_SNS=; Max-Age=0; Expires=Tue, 09 Aug 2022 02:05:27 GMT; Path=/;MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/neapi/clientlog;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/weapi/clientlog;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/openapi/clientlog;;__remember_me=true; Max-Age=1296000; Expires=Wed, 24 Aug 2022 02:05:27 GMT; Path=/;;MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/eapi/feedback;;MUSIC_R_T=0; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/openapi/clientlog;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/wapi/clientlog;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/neapi/clientlog;;__csrf=a72dd742dafef7f63d1c73cfc4baa664; Max-Age=1296010; Expires=Wed, 24 Aug 2022 02:05:37 GMT; Path=/;;MUSIC_A_T=1660010727451; Max-Age=2147483647; Expires=Sun, 27 Aug 2090 05:19:34 GMT; Path=/eapi/clientlog;"
+}
