@@ -44,7 +44,7 @@ class IconF {
             res = p.findall(line)
             if res:
                 name, value = res[0]
-                name = name.replace('-', '_')
+                name = name.replace('-', '')
                 tmp.append((name.lower(), value))
 
     tmp.sort()
