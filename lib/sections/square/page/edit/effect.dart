@@ -1,4 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter_music/constants/key.dart';
+import 'package:flutter_music/models/common_model.dart';
 import 'package:flutter_music/repository/services/common_service.dart';
 import 'package:flutter_music/repository/share_preferences/sp.dart';
 import 'package:flutter_music/sections/square/models/catlist.dart';
@@ -11,6 +13,7 @@ Effect<SquareEditState>? buildEffect() {
     SquareEditAction.action: _onAction,
     Lifecycle.initState: _initState,
     SquareEditAction.onTapItem: _onTapItem,
+    Lifecycle.dispose: _dispose,
   });
 }
 
@@ -56,7 +59,7 @@ void _initState(Action action, Context<SquareEditState> ctx) async {
         ///肯定会有数据
         CatlistSectionModel cacheModel = CatlistSectionModel();
         cacheModel.items = cacheList;
-        cacheModel.key = "-1";
+        cacheModel.key = ConstantsKey.squareKey;
         cacheModel.value = "我的歌单广场";
         cacheModel.sub = "(长按可编辑)";
         cacheModel.canEdit = true;
@@ -97,6 +100,23 @@ void _onTapItem(Action action, Context<SquareEditState> ctx) async {
     ctx.state.sections!.first.items!.add(subItem);
   }
   ctx.dispatch(SquareEditActionCreator.didTapItemAction());
+}
+
+void _dispose(Action action, Context<SquareEditState> ctx) async {
+  if (ctx.state.sections != null && ctx.state.sections?.isNotEmpty == true) {
+    CatlistSectionModel sectionModel = ctx.state.sections!.firstWhere(
+        (element) => element.isUser(),
+        orElse: () => CatlistSectionModel());
+    if (sectionModel.items != null && sectionModel.items?.isNotEmpty == true) {
+      setUserCache(sectionModel.items!);
+      //通知上级界面，返回刷新
+      eventBus.fire(EventBusFireModule()..squareRefresh = true);
+    }
+  }
+}
+
+void setUserCache(List<CatlistSubItem> items) async {
+  SpUtil.setUserSquareSource(items);
 }
 
 void _onAction(Action action, Context<SquareEditState> ctx) async {}
