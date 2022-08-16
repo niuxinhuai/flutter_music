@@ -1,7 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter_music/helper/router.dart';
 import 'package:flutter_music/helper/router_helper.dart';
-import 'package:flutter_music/helper/sp_helper.dart';
+import 'package:flutter_music/models/common_model.dart';
 import 'package:flutter_music/repository/services/common_service.dart';
 import 'package:flutter_music/repository/share_preferences/sp.dart';
 import 'package:flutter_music/sections/square/models/catlist.dart';
@@ -18,6 +18,16 @@ Effect<PlaylistSquareState>? buildEffect() {
 }
 
 void _initState(Action action, Context<PlaylistSquareState> ctx) async {
+  eventBus.on<EventBusFireModule>().listen((event) {
+    if (event.squareRefresh != null && event.squareRefresh == true) {
+      _reload(action, ctx);
+    }
+  });
+
+  _reload(action, ctx);
+}
+
+void _reload(Action action, Context<PlaylistSquareState> ctx) async {
   List<CatlistSubItem>? list = await SpUtil.getUserSquareSource();
   if (list != null && list.isNotEmpty == true) {
     ctx.dispatch(PlaylistSquareActionCreator.didFeatchDataAction(list));

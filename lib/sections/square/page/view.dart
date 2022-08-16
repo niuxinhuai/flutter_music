@@ -18,7 +18,10 @@ Widget buildView(
         return TabBarSegmentController(
           tabTitles: state.items!.map((e) => e.name).toList(),
           children: state.items!
-              .map((e) => SquareChildPage().buildPage({"name": e.name}))
+              .map((e) => Container(
+                    color: CommonColors.foregroundColor,
+                    child: SquareChildPage().buildPage({"name": e.name}),
+                  ))
               .toList(),
           navgationTitle: state.title,
           actions: [

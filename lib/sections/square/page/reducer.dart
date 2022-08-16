@@ -17,6 +17,7 @@ Reducer<PlaylistSquareState>? buildReducer() {
 PlaylistSquareState _didFeatchData(PlaylistSquareState state, Action action) {
   final List<CatlistSubItem> items = action.payload;
   final PlaylistSquareState newState = state.clone();
+  newState.items?.clear();
   newState.items = items;
   newState.loadingState = LoadingState.success;
   return newState;
