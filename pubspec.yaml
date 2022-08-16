@@ -54,6 +54,9 @@ dependencies:
   #拖动组件
   reorderables: ^0.4.0
 
+  #音频播放器
+  audioplayers: ^1.0.0
+
 
 
 dev_dependencies:
@@ -99,5 +102,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/json/
+
 
 
