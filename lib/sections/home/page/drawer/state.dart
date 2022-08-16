@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music/sections/home/models/home_module.dart';
 
 class HomeDrawerState implements Cloneable<HomeDrawerState> {
-  bool isLogin = true;
+  bool isLogin = false;
+  String? nickname;
 
   List<DrawerSectionModel>? sectionModels;
 
@@ -12,7 +13,8 @@ class HomeDrawerState implements Cloneable<HomeDrawerState> {
   HomeDrawerState clone() {
     return HomeDrawerState()
       ..isLogin = isLogin
-      ..sectionModels = sectionModels;
+      ..sectionModels = sectionModels
+      ..nickname = nickname;
   }
 }
 

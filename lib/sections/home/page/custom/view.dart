@@ -7,6 +7,7 @@ import 'package:flutter_music/sections/home/page/action.dart';
 
 Widget buildView(MusicItem item, Dispatch dispatch, ViewService viewService) {
   return Container(
+    margin: const EdgeInsets.only(bottom: 10),
     decoration: BoxDecoration(
         color: CommonColors.foregroundColor,
         border:

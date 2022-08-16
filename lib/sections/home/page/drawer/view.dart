@@ -74,9 +74,13 @@ Widget _buildAuth(
         Padding(
           padding: const EdgeInsets.only(left: 5),
           child: Text(
-            "立即登录",
+            state.nickname ?? "",
             style: GpOtherTheme.size15(viewService.context)!
                 .copyWith(fontWeight: FontWeight.bold, fontSize: 17),
+            softWrap: true,
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
         ),
         Image.asset("assets/images/cm8_profile_arrow~iphone.png"),
