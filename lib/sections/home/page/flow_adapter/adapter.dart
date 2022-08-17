@@ -41,8 +41,9 @@ FlowAdapter<HomeMusicState> get adapter => FlowAdapter<HomeMusicState>(
           } else if (blockCode == HomeBlockCodeUtils.dragon) {
             ///广播
             return CellConnector(index: index) + BoradcastComponent();
-          } else if (blockCode == HomeBlockCodeUtils.vlog) {
-            ///热门播客/有声书
+          } else if (blockCode == HomeBlockCodeUtils.vlog ||
+              blockCode == HomeBlockCodeUtils.songListAlign) {
+            ///热门播客/有声书/歌谣
             return CellConnector(index: index) + SongNewAlbumComponent();
           } else if (blockCode == HomeBlockCodeUtils.calendar) {
             ///音乐日历

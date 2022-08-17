@@ -44,7 +44,14 @@ void _onTapBanner(Action action, Context<HomeMusicState> ctx) {
 ///topic 2
 void _onTapCustomIcon(Action action, Context<HomeMusicState> ctx) {
   String title = action.payload;
-  ARouter.open(ctx.context, RouterKeys.every_day_recommend_song);
+  if (title == "每日推荐") {
+    ARouter.open(ctx.context, RouterKeys.every_day_recommend_song);
+  } else if (title == "排行榜") {
+    ARouter.open(ctx.context, RouterKeys.toplist_detail);
+  } else if (title == "歌单") {
+    ARouter.open(ctx.context, RouterKeys.square);
+  }
+
   print(">>>>>>>>>>>>>title:$title");
 }
 

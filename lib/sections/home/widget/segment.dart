@@ -38,7 +38,8 @@ class _SegmentWidgetState extends State<SegmentWidget> {
     if (widget.item != null &&
         widget.item?.creatives != null &&
         widget.item?.creatives?.isNotEmpty == true) {
-      isVlog = widget.item!.blockCode == HomeBlockCodeUtils.vlog;
+      isVlog = widget.item!.blockCode == HomeBlockCodeUtils.vlog ||
+          widget.item!.blockCode == HomeBlockCodeUtils.songListAlign;
       List<CreativesItem> songList = [];
       List<CreativesItem> albumList = [];
       List<CreativesItem> digitalList = [];
@@ -58,6 +59,9 @@ class _SegmentWidgetState extends State<SegmentWidget> {
         } else if (childItem.creativeType == RCMDTypeUtils.book) {
           //有声书
           albumList.add(childItem);
+        } else if (childItem.creativeType == "SONG_LIST_HOMEPAGE") {
+          //歌谣
+          songList.add(childItem);
         }
       }
       if (songList.length != 0) {
@@ -88,6 +92,12 @@ class _SegmentWidgetState extends State<SegmentWidget> {
   }
 
   Widget _buildHeader() {
+    if (widget.item!.blockCode == HomeBlockCodeUtils.songListAlign) {
+      return RHeaderWidget(
+        item: widget.item,
+        dispatch: widget.dispatch,
+      );
+    }
     String buttonTitle = children[index].first.uiElement?.button?.text ?? "";
     return RHeaderWidget(
       titles: titles,
