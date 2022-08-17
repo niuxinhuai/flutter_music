@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart' as FishRedux;
+import 'package:flutter_music/sections/Leaderboard/page/page.dart';
 import 'package:flutter_music/sections/login/page/login/page.dart';
 import 'package:flutter_music/sections/login/page/photo_login/page.dart';
 import 'package:flutter_music/sections/music/page/playlist_detail/page.dart';
@@ -15,7 +16,8 @@ class RouterHelper {
     RouterKeys.photo_login: PhotoLoginPage(),
     RouterKeys.every_day_recommend_song: RecommendListPage(),
     RouterKeys.song: AudioPlayerPage(),
-    RouterKeys.playlist_detail: PlaylistDetailPage()
+    RouterKeys.playlist_detail: PlaylistDetailPage(),
+    RouterKeys.toplist_detail: LeaderboardPage(),
   };
 }
 
@@ -38,4 +40,7 @@ class RouterKeys {
 
   //歌单详情
   static const playlist_detail = "play_list_detail";
+
+  //排行榜
+  static const toplist_detail = "toplist_detail";
 }

@@ -114,4 +114,7 @@ before: 分页参数,取上一页最后一个歌单的 updateTime 获取下一�
 
   ///获取歌单详情
   static String getPlaylistDetail(String id) => "/playlist/detail?id=$id";
+
+  ///所有榜单内容摘要
+  static String toplist_detail = "/toplist/detail";
 }

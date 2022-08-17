@@ -39,4 +39,7 @@ class JsonStringConstants {
 
   ///歌单详情
   static const String playlist_detail = "assets/json/playlist_detail.json";
+
+  ///排行榜
+  static const String toplist_detail = "assets/json/toplist_detail.json";
 }

@@ -8,6 +8,7 @@ import 'package:flutter_music/constants/url.dart';
 import 'package:flutter_music/helper/service_helper.dart';
 import 'package:flutter_music/helper/user.dart';
 import 'package:flutter_music/models/simple_model.dart';
+import 'package:flutter_music/sections/Leaderboard/models/Leaderboard.dart';
 import 'package:flutter_music/sections/home/models/home.dart';
 import 'package:flutter_music/sections/login/models/login.dart';
 import 'package:flutter_music/sections/music/models/lyric.dart';
@@ -204,5 +205,16 @@ class CommonService {
 
     return await ServiceHelper.get(MusicUri.getPlaylistDetail(id))
         .then((value) => PlaylistSquareWrap.fromJson(value));
+  }
+
+  ///排行榜
+  static Future<LeaderboardWrap> getToplistDetail() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.toplist_detail)
+          .then((value) => LeaderboardWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.toplist_detail)
+        .then((value) => LeaderboardWrap.fromJson(value));
   }
 }
