@@ -46,14 +46,17 @@ class _SongItemWidgetState extends State<SongItemWidget> {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            widget.item?.name ?? "",
-                            softWrap: true,
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
-                            style: GpOtherTheme.size17(context)!.copyWith(
-                                color: CommonColors.onSurfaceTextColor),
+                          Container(
+                            constraints: BoxConstraints(maxWidth: 200),
+                            child: Text(
+                              widget.item?.name ?? "",
+                              softWrap: true,
+                              textAlign: TextAlign.left,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                              style: GpOtherTheme.size17(context)!.copyWith(
+                                  color: CommonColors.onSurfaceTextColor),
+                            ),
                           ),
                           if (widget.item?.alia != null &&
                               widget.item?.alia?.isNotEmpty == true)
