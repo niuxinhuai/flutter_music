@@ -117,4 +117,13 @@ before: 分页参数,取上一页最后一个歌单的 updateTime 获取下一�
 
   ///所有榜单内容摘要
   static String toplist_detail = "/toplist/detail";
+
+  ///电台 - 推荐类型
+  static String dj_recommend_category = "/dj/category/recommend";
+
+  ///电台 - banner
+  static String dj_banner = "/dj/banner";
+
+  ///电台 - 电台个性推荐
+  static String dj_recommend = "/dj/personalize/recommend";
 }
