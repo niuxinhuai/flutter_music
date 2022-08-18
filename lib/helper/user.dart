@@ -47,7 +47,7 @@ class UserDefault {
       //提前3天请求cookie
       if (cookieExpiresDateTime!.isAfter(TimeUtils.getDaysAgo(3))) {
         Timer(Duration(milliseconds: 100), () {
-          refreshLoginState();
+//          refreshLoginState();
         });
       }
     }
