@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/res/other_theme.dart';
 import 'package:flutter_music/sections/home/page/drawer/page.dart';
+import 'package:flutter_music/sections/home/widget/search.dart';
 import 'package:flutter_music/widgets/appbar.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
 import 'package:flutter_music/widgets/refresh_indicator.dart';
@@ -19,23 +20,7 @@ Widget buildView(
       elevation: 0,
       backgroundColor: Colors.transparent,
       titleSpacing: 0,
-      title: Container(
-        height: 44,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(22)),
-            color: CommonColors.foregroundColor),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.search),
-            Text(
-              "多远都要在一起~",
-              style: GpOtherTheme.size15(viewService.context)!
-                  .copyWith(color: CommonColors.textColor999),
-            )
-          ],
-        ),
-      ),
+      title: SearchWidget(),
       leading: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () => dispatch(HomeMusicActionCreator.onTapLeadingAction()),

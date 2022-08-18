@@ -3,6 +3,7 @@ import 'package:flutter_music/helper/router.dart';
 import 'package:flutter_music/helper/router_helper.dart';
 import 'package:flutter_music/repository/services/common_service.dart';
 import 'package:flutter_music/sections/home/models/home.dart';
+import 'package:flutter_music/utils/typeUtils.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -58,11 +59,16 @@ void _onTapCustomIcon(Action action, Context<HomeMusicState> ctx) {
 ///推荐更多按钮/新歌新碟数字专辑更多按钮/云村更多按钮/热门播客，有声书更多按钮/音乐日历/排行榜
 void _onTapRecommendMore(Action action, Context<HomeMusicState> ctx) {
   final UiElementButton elementButton = action.payload;
-  print(">>>>>>>>>>>>>>>button:${elementButton.action}");
+
   String actionStr = elementButton.action ?? "";
+  print(">>>>>>>>>>>>>>>button:${elementButton.action}  actionStr:$actionStr");
   String playlistSquare = "playlistCollection";
-  if (actionStr.contains(playlistSquare)) {
+  if (actionStr.contains(HomeBlockCodeUtils.recommendList)) {
+    //推荐歌单更多按钮点击
     ARouter.open(ctx.context, RouterKeys.square, params: {"action": actionStr});
+  } else if (actionStr.contains(HomeBlockCodeUtils.toplist)) {
+    //排行榜更多点击
+    ARouter.open(ctx.context, RouterKeys.toplist_detail);
   }
 }
 
@@ -70,6 +76,10 @@ void _onTapRecommendMore(Action action, Context<HomeMusicState> ctx) {
 void _onTapRecommendItem(Action action, Context<HomeMusicState> ctx) {
   final ResourcesItem item = action.payload;
   print(">>>>>>>>>推荐歌单点击:${item.uiElement?.mainTitle?.title}");
+  ARouter.open(ctx.context, RouterKeys.playlist_detail, params: {
+    "id": item.resourceId!.toString(),
+    "coverImgUrl": item.uiElement?.image?.imageUrl ?? ""
+  });
 }
 
 ///新歌新碟数字专辑 item点击/ 热门播客，有声书 item点击

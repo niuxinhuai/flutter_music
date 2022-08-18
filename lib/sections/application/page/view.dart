@@ -16,6 +16,7 @@ Widget buildView(
       controller: state.pageController,
     ),
     bottomNavigationBar: BottomNavigationBar(
+      backgroundColor: CommonColors.foregroundColor,
       unselectedItemColor: CommonColors.textColor999,
       selectedItemColor: Colors.red,
       items: ApplicationModule.bottomTabs,
