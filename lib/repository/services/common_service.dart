@@ -1,12 +1,10 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_music/constants/json.dart';
 import 'package:flutter_music/constants/url.dart';
 import 'package:flutter_music/helper/service_helper.dart';
-import 'package:flutter_music/helper/user.dart';
 import 'package:flutter_music/models/simple_model.dart';
 import 'package:flutter_music/sections/Leaderboard/models/Leaderboard.dart';
 import 'package:flutter_music/sections/home/models/home.dart';
@@ -14,6 +12,9 @@ import 'package:flutter_music/sections/login/models/login.dart';
 import 'package:flutter_music/sections/music/models/lyric.dart';
 import 'package:flutter_music/sections/music/models/recommend.dart';
 import 'package:flutter_music/sections/music/models/song.dart';
+import 'package:flutter_music/sections/podcast/models/banner.dart';
+import 'package:flutter_music/sections/podcast/models/personalize.dart';
+import 'package:flutter_music/sections/podcast/models/podcast.dart';
 import 'package:flutter_music/sections/square/models/catlist.dart';
 import 'package:flutter_music/sections/square/models/playlist.dart';
 import 'package:flutter_music/sections/square/models/square.dart';
@@ -88,7 +89,8 @@ class CommonService {
 
   ///推荐歌单
   static Future<void> getRecommendSong() async {
-    ServiceHelper.get(MusicUri.recommend_url,
+    //MusicUri.recommend_url,
+    ServiceHelper.get("/dj/catelist",
             options: ServiceHelper.buildCacheOption(
                 Duration(days: 3), "home_recommend_music_cache"))
         .then((value) {
@@ -216,5 +218,38 @@ class CommonService {
 
     return await ServiceHelper.get(MusicUri.toplist_detail)
         .then((value) => LeaderboardWrap.fromJson(value));
+  }
+
+  ///电台-推荐
+  static Future<PodcastWrap> getDJCategoryRecommendList() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.dj_category_recommend)
+          .then((value) => PodcastWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.dj_recommend_category)
+        .then((value) => PodcastWrap.fromJson(value));
+  }
+
+  ///电台-电台今日优选
+  static Future<PersonalizeWrap> getDJTodayRecommend() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.dj_recommend)
+          .then((value) => PersonalizeWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.dj_recommend)
+        .then((value) => PersonalizeWrap.fromJson(value));
+  }
+
+  ///电台-banner
+  static Future<PodcastBannerWrap> getDJBanner() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.dj_banner)
+          .then((value) => PodcastBannerWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.dj_banner)
+        .then((value) => PodcastBannerWrap.fromJson(value));
   }
 }
