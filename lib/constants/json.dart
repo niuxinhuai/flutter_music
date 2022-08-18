@@ -42,4 +42,14 @@ class JsonStringConstants {
 
   ///排行榜
   static const String toplist_detail = "assets/json/toplist_detail.json";
+
+  ///电台 - 推荐类型
+  static const String dj_category_recommend =
+      "assets/json/dj_recommend_category.json";
+
+  ///电台 - banner
+  static const String dj_banner = "assets/json/dj_banner.json";
+
+  ///电台 - 顶部推荐
+  static const String dj_recommend = "assets/json/dj_recommend.json";
 }
