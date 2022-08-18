@@ -7,6 +7,7 @@ import 'package:flutter_music/sections/music/page/recommend_list/page.dart';
 import 'package:flutter_music/sections/music/page/song/page.dart';
 import 'package:flutter_music/sections/square/page/edit/page.dart';
 import 'package:flutter_music/sections/square/page/page.dart';
+import 'package:flutter_music/sections/webview/page/page.dart';
 
 class RouterHelper {
   static Map<String, FishRedux.Page> routers = {
@@ -18,6 +19,7 @@ class RouterHelper {
     RouterKeys.song: AudioPlayerPage(),
     RouterKeys.playlist_detail: PlaylistDetailPage(),
     RouterKeys.toplist_detail: LeaderboardPage(),
+    RouterKeys.web_view: CustomWebViewPage(),
   };
 }
 
@@ -43,4 +45,7 @@ class RouterKeys {
 
   //排行榜
   static const toplist_detail = "toplist_detail";
+
+  //web
+  static const web_view = "web_view";
 }
