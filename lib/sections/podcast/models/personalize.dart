@@ -20,8 +20,10 @@ class PersonalizeItem {
 
   int? id;
   String? name;
+  String? desc;
   String? picUrl;
   int? subCount;
+  int? programCount;
   int? categoryId;
   String? category;
   int? secondCategoryId;

@@ -24,8 +24,10 @@ Map<String, dynamic> _$PersonalizeWrapToJson(PersonalizeWrap instance) =>
 PersonalizeItem _$PersonalizeItemFromJson(Map json) => PersonalizeItem()
   ..id = json['id'] as int?
   ..name = json['name'] as String?
+  ..desc = json['desc'] as String?
   ..picUrl = json['picUrl'] as String?
   ..subCount = json['subCount'] as int?
+  ..programCount = json['programCount'] as int?
   ..categoryId = json['categoryId'] as int?
   ..category = json['category'] as String?
   ..secondCategoryId = json['secondCategoryId'] as int?
@@ -38,8 +40,10 @@ Map<String, dynamic> _$PersonalizeItemToJson(PersonalizeItem instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'desc': instance.desc,
       'picUrl': instance.picUrl,
       'subCount': instance.subCount,
+      'programCount': instance.programCount,
       'categoryId': instance.categoryId,
       'category': instance.category,
       'secondCategoryId': instance.secondCategoryId,
