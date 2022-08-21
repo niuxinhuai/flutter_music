@@ -1,7 +1,7 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/sections/podcast/models/podcast.dart';
-import 'package:flutter_music/sections/podcast/page/action.dart';
+import 'package:flutter_music/sections/podcast/page/podcast/action.dart';
 import 'package:flutter_music/sections/podcast/widget/grid_item.dart';
 import 'package:flutter_music/sections/podcast/widget/header.dart';
 

@@ -1,5 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter_music/sections/podcast/page/flow_adapter/adapter.dart';
+import 'package:flutter_music/sections/podcast/page/podcast/flow_adapter/adapter.dart';
 
 import 'effect.dart';
 import 'reducer.dart';

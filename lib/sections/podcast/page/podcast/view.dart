@@ -31,10 +31,14 @@ Widget buildView(
         ),
       ),
       actions: [
-        Container(
-          width: 44,
-          height: 44,
-          child: Image.asset('assets/images/cm4_applewatch_add_btn~iphone.png'),
+        GestureDetector(
+          onTap: () => dispatch(PodcastActionCreator.onTapNavActionAction()),
+          child: Container(
+            width: 44,
+            height: 44,
+            child:
+                Image.asset('assets/images/cm4_applewatch_add_btn~iphone.png'),
+          ),
         )
       ],
     ),

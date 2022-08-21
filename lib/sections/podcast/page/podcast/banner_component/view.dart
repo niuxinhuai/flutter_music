@@ -5,7 +5,7 @@ import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/res/other_theme.dart';
 import 'package:flutter_music/sections/home/widget/image.dart';
 import 'package:flutter_music/sections/podcast/models/banner.dart';
-import 'package:flutter_music/sections/podcast/page/action.dart';
+import 'package:flutter_music/sections/podcast/page/podcast/action.dart';
 
 Widget buildView(
     PodcastBannerWrap bannerWrap, Dispatch dispatch, ViewService viewService) {

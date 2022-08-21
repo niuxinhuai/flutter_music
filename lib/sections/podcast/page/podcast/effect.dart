@@ -19,6 +19,7 @@ Effect<PodcastState>? buildEffect() {
     PodcastAction.onTapBanner: _onTapBanner,
     PodcastAction.onTapPersonalItem: _onTapPersonalItem,
     PodcastAction.onTapGridItem: _onTapGridItem,
+    PodcastAction.onTapNavAction: _onTapNavAction,
   });
 }
 
@@ -33,14 +34,6 @@ void _initState(Action action, Context<PodcastState> ctx) async {
   PersonalizeWrap perfered_wrap = await CommonService.getDJTodayRecommend();
 
   if (wrap.code != null && wrap.code == 200) {
-    if (bannerWrap.code != null && bannerWrap.code == 200) {
-      PodcastStage bannerStage = PodcastStage();
-      bannerStage.categoryId = PodcastUtils.dj_banner;
-      if (wrap.data != null && wrap.data?.isNotEmpty == true) {
-        wrap.data!.insert(0, bannerStage);
-      }
-    }
-
     ///猜你喜欢
     if (perfered_wrap.code != null && perfered_wrap.code == 200) {
       PodcastStage perferedStage = PodcastStage();
@@ -48,6 +41,14 @@ void _initState(Action action, Context<PodcastState> ctx) async {
       perferedStage.categoryName = "猜你喜欢";
       if (wrap.data != null && wrap.data?.isNotEmpty == true) {
         wrap.data!.insert(0, perferedStage);
+      }
+    }
+
+    if (bannerWrap.code != null && bannerWrap.code == 200) {
+      PodcastStage bannerStage = PodcastStage();
+      bannerStage.categoryId = PodcastUtils.dj_banner;
+      if (wrap.data != null && wrap.data?.isNotEmpty == true) {
+        wrap.data!.insert(0, bannerStage);
       }
     }
     ctx.dispatch(PodcastActionCreator.didFeatchDataAction(
@@ -69,6 +70,10 @@ void _onTapError(Action action, Context<PodcastState> ctx) {
 void _onTapHeaderMore(Action action, Context<PodcastState> ctx) {
   final PodcastStage stage = action.payload;
   print(">>>>>>>>category:${stage.categoryId} name:${stage.categoryName}");
+  if (stage.categoryId != null && stage.categoryId != 991) {
+    ARouter.open(ctx.context, RouterKeys.podcast_catelist,
+        params: {"id": stage.categoryId});
+  }
 }
 
 ///banner
@@ -87,6 +92,11 @@ void _onTapPersonalItem(Action action, Context<PodcastState> ctx) {
 void _onTapGridItem(Action action, Context<PodcastState> ctx) {
   final RadiosItem item = action.payload;
   print(">>>>>>>>>>>>id:${item.id}");
+}
+
+///点击了导航台的action
+void _onTapNavAction(Action action, Context<PodcastState> ctx) {
+  ARouter.open(ctx.context, RouterKeys.podcast_catelist);
 }
 
 void _onAction(Action action, Context<PodcastState> ctx) {}

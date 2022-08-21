@@ -11,6 +11,7 @@ enum PodcastAction {
   onTapGridItem,
   onTapPersonalItem,
   onTapBanner,
+  onTapNavAction,
   didError,
   didFeatchData
 }
@@ -18,6 +19,10 @@ enum PodcastAction {
 class PodcastActionCreator {
   static Action onAction() {
     return const Action(PodcastAction.action);
+  }
+
+  static Action onTapNavActionAction() {
+    return const Action(PodcastAction.onTapNavAction);
   }
 
   static Action onTapHeaderMoreAction(PodcastStage stage) {
