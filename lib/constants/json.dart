@@ -52,4 +52,11 @@ class JsonStringConstants {
 
   ///电台 - 顶部推荐
   static const String dj_recommend = "assets/json/dj_recommend.json";
+
+  ///电台 - 全部分类下的数据
+  static const String dj_catelist_recommend =
+      "assets/json/dj_catelist_recommend.json";
+
+  ///电台 - 全部分类segment
+  static const String dj_catelist = "assets/json/dj_catelist.json";
 }
