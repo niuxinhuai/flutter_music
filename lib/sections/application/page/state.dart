@@ -3,7 +3,7 @@ import 'package:flutter/material.dart' as P;
 import 'package:flutter_music/sections/follow/page/page.dart';
 import 'package:flutter_music/sections/home/page/page.dart';
 import 'package:flutter_music/sections/my/page/page.dart';
-import 'package:flutter_music/sections/podcast/page/page.dart';
+import 'package:flutter_music/sections/podcast/page/podcast/page.dart';
 import 'package:flutter_music/sections/village/page/page.dart';
 import 'package:flutter_music/widgets/segment.dart';
 

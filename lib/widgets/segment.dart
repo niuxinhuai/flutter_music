@@ -15,6 +15,7 @@ class TabBarSegmentController extends StatefulWidget {
 
   final bool tabBarIsScrollable;
   final int initialIndex;
+  final BoxDecoration? decoration;
 
   TabBarSegmentController(
       {required this.tabTitles,
@@ -25,7 +26,8 @@ class TabBarSegmentController extends StatefulWidget {
       this.tabBarIsScrollable = true,
       this.actions,
       this.backgroundColor,
-      this.initialIndex = 0});
+      this.initialIndex = 0,
+      this.decoration});
 
   @override
   _TabBarSegmentControllerState createState() =>
@@ -87,6 +89,7 @@ class _TabBarSegmentControllerState extends State<TabBarSegmentController>
                   controller: _controller,
                   onTap: _segmentButtonDidClick,
                   isScrollable: widget.tabBarIsScrollable,
+                  indicator: widget.decoration,
                 ),
           actions: widget.actions == null ? [] : widget.actions,
         ),
@@ -110,6 +113,7 @@ class _TabBarSegmentControllerState extends State<TabBarSegmentController>
           controller: _controller,
           onTap: _segmentButtonDidClick,
           isScrollable: widget.tabBarIsScrollable,
+          indicator: widget.decoration,
         ),
         Expanded(
           child: TabBarView(

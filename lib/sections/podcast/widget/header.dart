@@ -4,7 +4,7 @@ import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/res/other_theme.dart';
 import 'package:flutter_music/sections/podcast/models/personalize.dart';
 import 'package:flutter_music/sections/podcast/models/podcast.dart';
-import 'package:flutter_music/sections/podcast/page/action.dart';
+import 'package:flutter_music/sections/podcast/page/podcast/action.dart';
 import 'package:flutter_music/utils/podcast_util.dart';
 
 class PodcastHeaderWidget extends StatelessWidget {
