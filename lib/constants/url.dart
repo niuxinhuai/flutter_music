@@ -126,4 +126,11 @@ before: 分页参数,取上一页最后一个歌单的 updateTime 获取下一�
 
   ///电台 - 电台个性推荐
   static String dj_recommend = "/dj/personalize/recommend";
+
+  ///电台 - 电台全部分类
+  static String dj_catelist = "/dj/catelist";
+
+  ///电台 - 电台全部分类下的数据
+  static String dj_catelist_recommend(int type) =>
+      "/dj/recommend/type?type=$type";
 }
