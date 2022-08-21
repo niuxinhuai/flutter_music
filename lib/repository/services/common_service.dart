@@ -13,6 +13,7 @@ import 'package:flutter_music/sections/music/models/lyric.dart';
 import 'package:flutter_music/sections/music/models/recommend.dart';
 import 'package:flutter_music/sections/music/models/song.dart';
 import 'package:flutter_music/sections/podcast/models/banner.dart';
+import 'package:flutter_music/sections/podcast/models/catelist.dart';
 import 'package:flutter_music/sections/podcast/models/personalize.dart';
 import 'package:flutter_music/sections/podcast/models/podcast.dart';
 import 'package:flutter_music/sections/square/models/catlist.dart';
@@ -251,5 +252,27 @@ class CommonService {
 
     return await ServiceHelper.get(MusicUri.dj_banner)
         .then((value) => PodcastBannerWrap.fromJson(value));
+  }
+
+  /// 电台 - 全部分类
+  static Future<CatelistWrap> getDJCatelist() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.dj_catelist)
+          .then((value) => CatelistWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.dj_catelist)
+        .then((value) => CatelistWrap.fromJson(value));
+  }
+
+  /// 电台 - 全部分类下的数据
+  static Future<CatelistRecommendWrap> getDJCatelistRecommend(int type) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.dj_catelist_recommend)
+          .then((value) => CatelistRecommendWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.dj_catelist_recommend(type))
+        .then((value) => CatelistRecommendWrap.fromJson(value));
   }
 }
