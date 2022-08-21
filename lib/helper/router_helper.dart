@@ -5,6 +5,7 @@ import 'package:flutter_music/sections/login/page/photo_login/page.dart';
 import 'package:flutter_music/sections/music/page/playlist_detail/page.dart';
 import 'package:flutter_music/sections/music/page/recommend_list/page.dart';
 import 'package:flutter_music/sections/music/page/song/page.dart';
+import 'package:flutter_music/sections/podcast/page/catelist/page.dart';
 import 'package:flutter_music/sections/square/page/edit/page.dart';
 import 'package:flutter_music/sections/square/page/page.dart';
 import 'package:flutter_music/sections/webview/page/page.dart';
@@ -20,6 +21,7 @@ class RouterHelper {
     RouterKeys.playlist_detail: PlaylistDetailPage(),
     RouterKeys.toplist_detail: LeaderboardPage(),
     RouterKeys.web_view: CustomWebViewPage(),
+    RouterKeys.podcast_catelist: CatelistPage(),
   };
 }
 
@@ -45,6 +47,9 @@ class RouterKeys {
 
   //排行榜
   static const toplist_detail = "toplist_detail";
+
+  //播客下全部分类
+  static const podcast_catelist = "podcast_catelist";
 
   //web
   static const web_view = "web_view";
