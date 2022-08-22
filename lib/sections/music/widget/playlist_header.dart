@@ -5,6 +5,7 @@ import 'package:flutter_music/res/other_theme.dart';
 import 'package:flutter_music/sections/home/widget/image.dart';
 import 'package:flutter_music/sections/music/widget/detail_sheet.dart';
 import 'package:flutter_music/sections/music/widget/play_count.dart';
+import 'package:flutter_music/sections/music/widget/user_focus.dart';
 import 'package:flutter_music/sections/square/models/playlist.dart';
 import 'package:flutter_music/utils/mathUtil.dart';
 import 'package:flutter_music/widgets/card.dart';
@@ -119,40 +120,9 @@ class _PlaylistDetailHeaderWidgetState
   Widget _buildUserAvaFocus() {
     return Padding(
       padding: EdgeInsets.only(top: 15, bottom: 20),
-      child: Row(
-        children: [
-          Stack(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(right: 5),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(14)),
-                  child: CachedNetworkImage(
-                    imageUrl: widget.stage?.creator?.avatarUrl ?? "",
-                    fit: BoxFit.fill,
-                    width: 28,
-                    height: 28,
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 0,
-                right: 0,
-                child: Image.asset(
-                  "assets/images/cm2_icn_daren~iphone.png",
-                  width: 14,
-                  height: 14,
-                ),
-              )
-            ],
-          ),
-          Text(
-            widget.stage?.creator?.nickname ?? "",
-            style: GpOtherTheme.size12(context)!
-                .copyWith(color: CommonColors.textColor999, fontSize: 13),
-          ),
-          _buildFocusWidget()
-        ],
+      child: DetailUserFocusWidget(
+        avatarUrl: widget.stage?.creator?.avatarUrl,
+        name: widget.stage?.creator?.nickname,
       ),
     );
   }
@@ -190,29 +160,6 @@ class _PlaylistDetailHeaderWidgetState
             Icons.arrow_forward_ios,
             color: CommonColors.textColor999,
             size: 14,
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFocusWidget() {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.3),
-          borderRadius: BorderRadius.all(Radius.circular(12.0))),
-      padding: EdgeInsets.only(left: 4, right: 8, top: 3, bottom: 3),
-      child: Row(
-        children: [
-          Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 14,
-          ),
-          Text(
-            "关注",
-            style: GpOtherTheme.size12(context)!
-                .copyWith(fontSize: 10, color: CommonColors.onPrimaryTextColor),
           )
         ],
       ),

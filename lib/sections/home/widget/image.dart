@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_music/res/colors.dart';
 
 class ImageItemWidget extends StatelessWidget {
   final String? url;
