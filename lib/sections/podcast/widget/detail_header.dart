@@ -60,12 +60,13 @@ class DetailHeaderWidget extends StatelessWidget {
                 ]),
           ),
         )),
-        Padding(
+        Container(
           padding: EdgeInsets.only(left: 15, right: 15, top: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Stack(
                     children: [
@@ -98,27 +99,33 @@ class DetailHeaderWidget extends StatelessWidget {
                       ))
                     ],
                   ),
-                  Padding(
+                  Expanded(
+                      child: Container(
                     padding: EdgeInsets.only(left: 15),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          wrap?.data?.name ?? "",
-                          softWrap: true,
-                          textAlign: TextAlign.left,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: GpOtherTheme.size17(context)!
-                              .copyWith(color: CommonColors.onPrimaryTextColor),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              wrap?.data?.name ?? "",
+                              softWrap: true,
+                              textAlign: TextAlign.left,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: GpOtherTheme.size17(context)!.copyWith(
+                                  color: CommonColors.onPrimaryTextColor),
+                            ),
+                            if (wrap?.data?.dj != null) _buildUser(context),
+                          ],
                         ),
-                        if (wrap?.data?.dj != null) _buildUser(context),
                         if (models.isNotEmpty == true)
                           _buildIndicator(context, models),
                       ],
                     ),
-                  )
+                  ))
                 ],
               ),
               _buildDetail(context),
@@ -146,7 +153,7 @@ class DetailHeaderWidget extends StatelessWidget {
 
   Widget _buildUser(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(top: 1),
       child: DetailUserFocusWidget(
         avatarUrl: wrap?.data?.dj?.avatarUrl,
         name: wrap?.data?.dj?.nickname,
@@ -156,14 +163,19 @@ class DetailHeaderWidget extends StatelessWidget {
 
   Widget _buildIndicator(
       BuildContext context, List<DetailIndicatorModel> models) {
-    return Wrap(
-      spacing: 5,
-      children: models.map((e) => _buildIndicatorItem(e, context)).toList(),
+    return Container(
+      height: 30,
+      child: ListView(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        children: models.map((e) => _buildIndicatorItem(e, context)).toList(),
+      ),
     );
   }
 
   Widget _buildIndicatorItem(DetailIndicatorModel model, BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.2),
           borderRadius: BorderRadius.all(Radius.circular(3.0))),

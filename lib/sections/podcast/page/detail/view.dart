@@ -51,28 +51,6 @@ Widget buildView(
 GpAppBar _buildAppbar(
     PodcastDetailState state, Dispatch dispatch, ViewService viewService) {
   return GpAppBar(
-    title: Stack(
-      children: [
-        Container(
-          margin: EdgeInsets.only(right: 10),
-          child: Text(
-            '歌单',
-            style: GpOtherTheme.size17(viewService.context)!
-                .copyWith(color: CommonColors.onPrimaryTextColor),
-          ),
-        ),
-        Positioned(
-          right: 0,
-          top: 0,
-          child: Image.asset(
-            "assets/images/cm7_playlist_registered_trademark~iphone.png",
-            color: CommonColors.textColor999,
-            width: 10,
-            height: 10,
-          ),
-        )
-      ],
-    ),
     leadingColors: CommonColors.onPrimaryTextColor,
     elevation: 0,
     backgroundColor: Colors.transparent,
