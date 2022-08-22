@@ -45,6 +45,8 @@ class PersonalizeDJ {
   String? avatarUrl;
   String? nickname;
   String? backgroundUrl;
+  //赞赏次数
+  int? rewardCount;
 
   factory PersonalizeDJ.fromJson(Map<String, dynamic> json) =>
       _$PersonalizeDJFromJson(json);
