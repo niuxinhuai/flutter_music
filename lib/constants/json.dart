@@ -59,4 +59,12 @@ class JsonStringConstants {
 
   ///电台 - 全部分类segment
   static const String dj_catelist = "assets/json/dj_catelist.json";
+
+  ///电台 - 详情个人数据
+  static const String dj_catelist_detail =
+      "assets/json/dj_catelist_detail.json";
+
+  ///电台 - 详情列表
+  static const String dj_catelist_detail_list =
+      "assets/json/dj_catelist_detail_list.json";
 }
