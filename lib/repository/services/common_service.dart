@@ -14,6 +14,8 @@ import 'package:flutter_music/sections/music/models/recommend.dart';
 import 'package:flutter_music/sections/music/models/song.dart';
 import 'package:flutter_music/sections/podcast/models/banner.dart';
 import 'package:flutter_music/sections/podcast/models/catelist.dart';
+import 'package:flutter_music/sections/podcast/models/detail.dart';
+import 'package:flutter_music/sections/podcast/models/detail_list.dart';
 import 'package:flutter_music/sections/podcast/models/personalize.dart';
 import 'package:flutter_music/sections/podcast/models/podcast.dart';
 import 'package:flutter_music/sections/square/models/catlist.dart';
@@ -91,7 +93,7 @@ class CommonService {
   ///推荐歌单
   static Future<void> getRecommendSong() async {
     //MusicUri.recommend_url,
-    ServiceHelper.get("/dj/catelist",
+    ServiceHelper.get("/user/subcount?uid=118549258",
             options: ServiceHelper.buildCacheOption(
                 Duration(days: 3), "home_recommend_music_cache"))
         .then((value) {
@@ -274,5 +276,27 @@ class CommonService {
 
     return await ServiceHelper.get(MusicUri.dj_catelist_recommend(type))
         .then((value) => CatelistRecommendWrap.fromJson(value));
+  }
+
+  /// 电台 - 详情用户detail
+  static Future<PodcastDetailWrap> getDJCatelistDetail(int rid) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.dj_catelist_detail)
+          .then((value) => PodcastDetailWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.dj_catelist_detail(rid))
+        .then((value) => PodcastDetailWrap.fromJson(value));
+  }
+
+  /// 电台 - 详情用户detail下的list
+  static Future<PodcastDetailListWrap> getDJCatelistDetaillist(int rid) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.dj_catelist_detail_list)
+          .then((value) => PodcastDetailListWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.dj_catelist_detail_list(rid))
+        .then((value) => PodcastDetailListWrap.fromJson(value));
   }
 }
