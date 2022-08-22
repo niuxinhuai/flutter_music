@@ -52,10 +52,10 @@ class RowItemWidget extends StatelessWidget {
                         Padding(
                           padding: EdgeInsets.only(left: 10, right: 10),
                           child: _buildChildIconRow(item!.playCount!,
-                              "cm6_square_feed_video~iphone.png", context),
+                              "cm4_discover_play_cnt_icn~iphone.png", context),
                         ),
                         _buildChildIconRow(item!.programCount!,
-                            "cm6_square_feed_audio~iphone.png", context),
+                            "cm2_list_search_time~iphone.png", context),
                       ],
                     ),
                   )
@@ -71,7 +71,10 @@ class RowItemWidget extends StatelessWidget {
   Widget _buildChildIconRow(int count, String assetName, BuildContext context) {
     return Row(
       children: [
-        Image.asset("assets/images/$assetName"),
+        Padding(
+          padding: EdgeInsets.only(right: 4),
+          child: Image.asset("assets/images/$assetName"),
+        ),
         Text(
           MathUtils.getPlayNumberStr(count),
           style: GpOtherTheme.size13(context)!
