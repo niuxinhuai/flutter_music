@@ -86,12 +86,22 @@ void _onTapBanner(Action action, Context<PodcastState> ctx) {
 void _onTapPersonalItem(Action action, Context<PodcastState> ctx) {
   final PersonalizeItem item = action.payload;
   print(">>>>>>>>>>>>id:${item.id}");
+  ARouter.open(ctx.context, RouterKeys.podcast_catelist_detail, params: {
+    "rid": item.id,
+    "coverImgUrl": item.picUrl,
+    "playcount": item.subCount
+  });
 }
 
 ///grid，item点击
 void _onTapGridItem(Action action, Context<PodcastState> ctx) {
   final RadiosItem item = action.payload;
   print(">>>>>>>>>>>>id:${item.id}");
+  ARouter.open(ctx.context, RouterKeys.podcast_catelist_detail, params: {
+    "rid": item.id,
+    "coverImgUrl": item.picUrl,
+    "playcount": item.playCount
+  });
 }
 
 ///点击了导航台的action
