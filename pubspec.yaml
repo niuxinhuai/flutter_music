@@ -57,7 +57,8 @@ dependencies:
   #音频播放器
   audioplayers: ^1.0.0
 
-
+  #国际化、日期等
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
