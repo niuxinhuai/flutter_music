@@ -1,6 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TimeUtils {
+  static const String _format1 = "yyyy-MM";
+
+  static String getFormat1({int? time}) {
+    return DateFormat(_format1).format(time == null
+        ? DateTime.now()
+        : DateTime.fromMillisecondsSinceEpoch(time));
+  }
+
+  ///秒转换分钟
+  static String getMinuteFromMillSecond(int millSecond) {
+    if (null == millSecond) return '00:00';
+
+    double second = (millSecond / 1000);
+    int minute = second % 3600 ~/ 60;
+    int seconds = (second % 60).toInt();
+    return TimeUtils.formatSecondTime(minute) +
+        ':' +
+        TimeUtils.formatSecondTime(seconds);
+  }
+
+  static String formatSecondTime(int s) {
+    return s < 10 ? "0" + s.toString() : s.toString();
+  }
+
   static String timeByString(int? mill) {
     if (mill == null) return "未知";
     if (isToday(mill)) return "今天";
