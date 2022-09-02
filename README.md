@@ -9,6 +9,8 @@ flutter 仿写网易云音乐
 
 #####先上效果图
 ##发现页
+
+
 ![IMG_0625.PNG](https://upload-images.jianshu.io/upload_images/2189604-fb39a69590a46a74.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
 ![IMG_0626.PNG](https://upload-images.jianshu.io/upload_images/2189604-50efdb283b45fef6.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
