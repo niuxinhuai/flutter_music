@@ -48,5 +48,4 @@ void _onTapLoginAction(Action action, Context<HomeDrawerState> ctx) {
 void _onTapQRCode(Action action, Context<HomeDrawerState> ctx) {
   UserDefault.visitorLogin();
   print(">>>>>>>>>走了开始加载");
-  CommonService.getRecommendSong();
 }

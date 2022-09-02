@@ -4,6 +4,7 @@ import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/sections/home/page/drawer/page.dart';
 import 'package:flutter_music/sections/home/widget/search.dart';
 import 'package:flutter_music/widgets/appbar.dart';
+import 'package:flutter_music/widgets/child/nav_add.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
 import 'package:flutter_music/widgets/smart_drawer.dart';
 
@@ -12,6 +13,7 @@ import 'state.dart';
 
 Widget buildView(
     PodcastState state, Dispatch dispatch, ViewService viewService) {
+//  return Container(width: 0, height: 0);
   return Scaffold(
     backgroundColor: CommonColors.foregroundColor,
     key: state.globalKey,
@@ -31,14 +33,8 @@ Widget buildView(
         ),
       ),
       actions: [
-        GestureDetector(
-          onTap: () => dispatch(PodcastActionCreator.onTapNavActionAction()),
-          child: Container(
-            width: 44,
-            height: 44,
-            child:
-                Image.asset('assets/images/cm4_applewatch_add_btn~iphone.png'),
-          ),
+        NavAddWidget(
+          callback: () => dispatch(PodcastActionCreator.onTapNavActionAction()),
         )
       ],
     ),
