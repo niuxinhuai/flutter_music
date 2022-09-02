@@ -104,16 +104,19 @@ class _TabBarSegmentControllerState extends State<TabBarSegmentController>
       );
     } else {
       return Column(children: [
-        TabBar(
-          tabs: widget.tabTitles!
-              .map((value) => Tab(
-                    text: value,
-                  ))
-              .toList(),
-          controller: _controller,
-          onTap: _segmentButtonDidClick,
-          isScrollable: widget.tabBarIsScrollable,
-          indicator: widget.decoration,
+        Container(
+          color: CommonColors.foregroundColor,
+          child: TabBar(
+            tabs: widget.tabTitles!
+                .map((value) => Tab(
+                      text: value,
+                    ))
+                .toList(),
+            controller: _controller,
+            onTap: _segmentButtonDidClick,
+            isScrollable: widget.tabBarIsScrollable,
+            indicator: widget.decoration,
+          ),
         ),
         Expanded(
           child: TabBarView(

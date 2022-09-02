@@ -48,6 +48,36 @@ class GpButton extends StatelessWidget {
   }
 }
 
+///绿色圆角按钮
+class GpGreenCornerButton extends StatelessWidget {
+  final Widget child;
+  final VoidCallback? onPressed;
+  final EdgeInsetsGeometry? padding;
+  final bool isSmall;
+
+  const GpGreenCornerButton({
+    required this.child,
+    required this.onPressed,
+    this.padding,
+    this.isSmall = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle? textStyle = Theme.of(context).textTheme.button;
+    return GpButton(
+      child: child,
+      onPressed: onPressed,
+      buttonStyle: _defaultCornerBtnStyle(
+          primary: Theme.of(context).primaryColor,
+          onPrimary: Theme.of(context).colorScheme.onPrimary),
+      padding: padding,
+      textStyle: textStyle,
+      isSmall: isSmall,
+    );
+  }
+}
+
 class GPRedCornerButton extends StatelessWidget {
   final Widget child;
   final VoidCallback? onPressed;

@@ -5,10 +5,12 @@ import 'package:flutter_music/res/other_theme.dart';
 
 class DetailUserFocusWidget extends StatefulWidget {
   String? avatarUrl;
+  String? bottomUrl;
   String? name;
   bool? hasFocus;
 
-  DetailUserFocusWidget({this.avatarUrl, this.name, this.hasFocus});
+  DetailUserFocusWidget(
+      {this.avatarUrl, this.bottomUrl, this.name, this.hasFocus = false});
 
   @override
   _DetailUserFocusWidgetState createState() => _DetailUserFocusWidgetState();
@@ -43,20 +45,35 @@ class _DetailUserFocusWidgetState extends State<DetailUserFocusWidget> {
               Positioned(
                 bottom: 0,
                 right: 0,
-                child: Image.asset(
-                  "assets/images/cm2_icn_daren~iphone.png",
-                  width: 14,
-                  height: 14,
-                ),
+                child: widget.bottomUrl != null
+                    ? CachedNetworkImage(
+                        imageUrl: widget.bottomUrl!,
+                        width: 14,
+                        height: 14,
+                      )
+                    : Image.asset(
+                        "assets/images/cm2_icn_daren~iphone.png",
+                        width: 14,
+                        height: 14,
+                      ),
               )
             ],
           ),
-          Text(
-            widget.name ?? "",
-            style: GpOtherTheme.size12(context)!
-                .copyWith(color: CommonColors.textColor999, fontSize: 13),
+          Container(
+            constraints: const BoxConstraints(
+              maxWidth: 90,
+            ),
+            child: Text(
+              widget.name ?? "",
+              softWrap: true,
+              maxLines: 1,
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              style: GpOtherTheme.size12(context)!
+                  .copyWith(color: CommonColors.textColor999, fontSize: 13),
+            ),
           ),
-          _buildFocusWidget()
+          if (widget.hasFocus == false) _buildFocusWidget()
         ],
       ),
     );
