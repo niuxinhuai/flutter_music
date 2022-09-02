@@ -20,8 +20,15 @@ import 'package:flutter_music/sections/podcast/models/personalize.dart';
 import 'package:flutter_music/sections/podcast/models/podcast.dart';
 import 'package:flutter_music/sections/square/models/catlist.dart';
 import 'package:flutter_music/sections/square/models/playlist.dart';
+import 'package:flutter_music/sections/square/models/recommend.dart';
 import 'package:flutter_music/sections/square/models/square.dart';
 import 'package:flutter_music/sections/square/models/tag.dart';
+import 'package:flutter_music/sections/video/models/comment.dart';
+import 'package:flutter_music/sections/video/models/detail.dart';
+import 'package:flutter_music/sections/video/models/info.dart';
+import 'package:flutter_music/sections/video/models/url.dart';
+import 'package:flutter_music/sections/village/models/category.dart';
+import 'package:flutter_music/sections/village/models/source.dart';
 import 'package:flutter_music/utils/debug_util.dart';
 
 class CommonService {
@@ -90,17 +97,25 @@ class CommonService {
         .then((value) => RecommendListWrap.fromJson(value));
   }
 
+  ///每日推荐歌单
+  static Future<SquareEveryDayRecommendWrap> getRecommendResource() async {
+    if (DebugUtils.debug) {
+      return _jsonDecode(JsonStringConstants.recommend_resource)
+          .then((value) => SquareEveryDayRecommendWrap.fromJson(value));
+    }
+    return ServiceHelper.get(MusicUri.recommend_resource)
+        .then((value) => SquareEveryDayRecommendWrap.fromJson(value));
+  }
+
   ///推荐歌单
-  static Future<void> getRecommendSong() async {
-    //MusicUri.recommend_url,
-    ServiceHelper.get("/user/subcount?uid=118549258",
-            options: ServiceHelper.buildCacheOption(
-                Duration(days: 3), "home_recommend_music_cache"))
-        .then((value) {
-      print(">>>>>>>>>>>>>valur:${value.runtimeType}  >>>>data:$value");
-    }).catchError((e) {
-      print(">>>>>>>请求失败:$e");
-    });
+  static Future<SquareRecommendWrap> getRecommendPersonalized(
+      {int limit = 6}) async {
+    if (DebugUtils.debug) {
+      return _jsonDecode(JsonStringConstants.recommend_personalized)
+          .then((value) => SquareRecommendWrap.fromJson(value));
+    }
+    return ServiceHelper.get(MusicUri.recommend_personalized(limit: limit))
+        .then((value) => SquareRecommendWrap.fromJson(value));
   }
 
   ///歌单分类
@@ -298,5 +313,84 @@ class CommonService {
 
     return await ServiceHelper.get(MusicUri.dj_catelist_detail_list(rid))
         .then((value) => PodcastDetailListWrap.fromJson(value));
+  }
+
+  ///视频 - 标签列表
+  static Future<VideoCategoryWrap> getVideoGroupList() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.video_group)
+          .then((value) => VideoCategoryWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.video_group)
+        .then((value) => VideoCategoryWrap.fromJson(value));
+  }
+
+  ///视频 - 分类列表
+  static Future<VideoCategoryWrap> getVideoCategoryList() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.video_category)
+          .then((value) => VideoCategoryWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.video_category)
+        .then((value) => VideoCategoryWrap.fromJson(value));
+  }
+
+  ///视频 - 获取视频标签/分类下的视频
+  static Future<VideoSourceWrap?> getVideoGroupListSource(int id,
+      {int offset = 0}) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.video_group_source)
+          .then((value) => VideoSourceWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(
+            MusicUri.video_group_source(id, offset: offset))
+        .then((value) => VideoSourceWrap.fromJson(value));
+  }
+
+  ///视频 - 获取视频详情
+  static Future<VideoDetailWrap?> getVideoDetail(String id) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.video_detail)
+          .then((value) => VideoDetailWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.video_detail(id))
+        .then((value) => VideoDetailWrap.fromJson(value));
+  }
+
+  ///视频 - 获取视频Url,url有大概1个小时的有效期，过期需要重新获取链接
+  static Future<VideoUrlWrap?> getVideoUrl(String id) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.video_url)
+          .then((value) => VideoUrlWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.video_url(id))
+        .then((value) => VideoUrlWrap.fromJson(value));
+  }
+
+  ///视频 - 获取视频点赞转发评论数数据
+  static Future<VideoDetailInfoWrap?> getVideoDetailInfo(String id) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.video_detail_info)
+          .then((value) => VideoDetailInfoWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.video_detail_info(id))
+        .then((value) => VideoDetailInfoWrap.fromJson(value));
+  }
+
+  ///视频 - 获取视频评论
+  static Future<VideoCommentWrap?> getVideoComment(String id) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.video_comment)
+          .then((value) => VideoCommentWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.video_comment(id))
+        .then((value) => VideoCommentWrap.fromJson(value));
   }
 }
