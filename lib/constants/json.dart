@@ -2,6 +2,10 @@ class JsonStringConstants {
   ///获取每日推荐歌曲
   static const String recommend_songs = "assets/json/recommend_songs.json";
 
+  ///获取推荐歌单
+  static const String recommend_personalized =
+      "assets/json/recommend_personalized.json";
+
   ///获取每日推荐歌单
   static const String recommend_resource =
       "assets/json/recommend_resource.json";
@@ -67,4 +71,26 @@ class JsonStringConstants {
   ///电台 - 详情列表
   static const String dj_catelist_detail_list =
       "assets/json/dj_catelist_detail_list.json";
+
+  ///视频 - group
+  static const String video_group = "assets/json/video_group.json";
+
+  ///视频 - category
+  static const String video_category = "assets/json/video_category.json";
+
+  ///视频 - souce
+  static const String video_group_source =
+      "assets/json/video_group_source.json";
+
+  ///视频 - detail
+  static const String video_detail = "assets/json/video_detail.json";
+
+  ///视频 - url
+  static const String video_url = "assets/json/video_url.json";
+
+  ///视频 -获取视频点赞转发评论数数据
+  static const String video_detail_info = "assets/json/video_detail_info.json";
+
+  ///视频 - 评论
+  static const String video_comment = "assets/json/video_comment.json";
 }
