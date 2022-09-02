@@ -37,7 +37,11 @@ class MusicUri extends UrlConstants {
   static String visitorLogin = "/register/anonimous";
 
   ///推荐音乐
-  static String recommend_url = "/recommend/resource";
+  static String recommend_resource = "/recommend/resource";
+
+  ///推荐歌单
+  static String recommend_personalized({int limit = 6}) =>
+      "/personalized?limit=$limit";
 
   ///获取每日推荐歌曲
   static const String recommend_songs = "/recommend/songs";
@@ -154,4 +158,40 @@ before: 分页参数,取上一页最后一个歌单的 updateTime 获取下一�
     int limit = 40,
   }) =>
       "/dj/program?rid=$rid&limit=$limit";
+
+  ///获取视频标签列表
+  static const String video_group = "/video/group/list";
+
+  ///获取视频分类列表
+  static const String video_category = "/video/category/list";
+
+  ///获取视频标签/分类下的视频
+  static String video_group_source(int id, {int offset = 0}) =>
+      "/video/group?id=$id&offset=$offset";
+
+  ///获取视频详情
+  static String video_detail(String vid) => "/video/detail?id=$vid";
+
+  ///获取视频url
+  static String video_url(String vid) => "/video/url?id=$vid";
+
+  ///获取视频点赞转发评论数数据
+  static String video_detail_info(String vid) => "/video/detail/info?id=$vid";
+
+  /*
+  * 视频评论
+说明 : 调用此接口 , 传入音乐 id 和 limit 参数 , 可获得该 视频 的所有评论 ( 不需要登录 )
+
+必选参数 : id: 视频的 id
+
+可选参数 : limit: 取出评论数量 , 默认为 20
+
+offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*20, 其中 20 为 limit 的值
+
+before: 分页参数,取上一页最后一项的 time 获取下一页数据(获取超过 5000 条评论的时候需要用到)
+
+接口地址 : /comment/video
+  *
+  * */
+  static String video_comment(String vid) => "/comment/video?id=$vid";
 }
