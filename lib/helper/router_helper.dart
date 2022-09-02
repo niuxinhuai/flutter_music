@@ -9,6 +9,7 @@ import 'package:flutter_music/sections/podcast/page/catelist/page.dart';
 import 'package:flutter_music/sections/podcast/page/detail/page.dart';
 import 'package:flutter_music/sections/square/page/edit/page.dart';
 import 'package:flutter_music/sections/square/page/page.dart';
+import 'package:flutter_music/sections/video/page/page.dart';
 import 'package:flutter_music/sections/webview/page/page.dart';
 
 class RouterHelper {
@@ -24,6 +25,7 @@ class RouterHelper {
     RouterKeys.web_view: CustomWebViewPage(),
     RouterKeys.podcast_catelist: CatelistPage(),
     RouterKeys.podcast_catelist_detail: PodcastDetailPage(),
+    RouterKeys.video_detail: VideoDetailPage(),
   };
 }
 
@@ -55,6 +57,9 @@ class RouterKeys {
 
   //播客详情页面
   static const podcast_catelist_detail = "podcast_catelist_detail";
+
+  //视频详情页面
+  static const video_detail = "video_detail";
 
   //web
   static const web_view = "web_view";
