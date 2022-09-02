@@ -87,7 +87,18 @@ PlaylistCreator _$PlaylistCreatorFromJson(Map json) => PlaylistCreator()
   ..avatarUrl = json['avatarUrl'] as String?
   ..userId = json['userId'] as int?
   ..backgroundUrl = json['backgroundUrl'] as String?
-  ..nickname = json['nickname'] as String?;
+  ..nickname = json['nickname'] as String?
+  ..signature = json['signature'] as String?
+  ..vipType = json['vipType'] as int?
+  ..userType = json['userType'] as int?
+  ..avatarDetail = json['avatarDetail'] == null
+      ? null
+      : CreatorAvatarDetail.fromJson(
+          Map<String, dynamic>.from(json['avatarDetail'] as Map))
+  ..vipRights = json['vipRights'] == null
+      ? null
+      : CreatorVipRights.fromJson(
+          Map<String, dynamic>.from(json['vipRights'] as Map));
 
 Map<String, dynamic> _$PlaylistCreatorToJson(PlaylistCreator instance) =>
     <String, dynamic>{
@@ -95,6 +106,57 @@ Map<String, dynamic> _$PlaylistCreatorToJson(PlaylistCreator instance) =>
       'userId': instance.userId,
       'backgroundUrl': instance.backgroundUrl,
       'nickname': instance.nickname,
+      'signature': instance.signature,
+      'vipType': instance.vipType,
+      'userType': instance.userType,
+      'avatarDetail': instance.avatarDetail,
+      'vipRights': instance.vipRights,
+    };
+
+CreatorAvatarDetail _$CreatorAvatarDetailFromJson(Map json) =>
+    CreatorAvatarDetail()
+      ..userType = json['userType'] as int?
+      ..identityLevel = json['identityLevel'] as int?
+      ..identityIconUrl = json['identityIconUrl'] as String?;
+
+Map<String, dynamic> _$CreatorAvatarDetailToJson(
+        CreatorAvatarDetail instance) =>
+    <String, dynamic>{
+      'userType': instance.userType,
+      'identityLevel': instance.identityLevel,
+      'identityIconUrl': instance.identityIconUrl,
+    };
+
+CreatorVipRights _$CreatorVipRightsFromJson(Map json) => CreatorVipRights()
+  ..associator = json['associator'] == null
+      ? null
+      : VipAssociator.fromJson(
+          Map<String, dynamic>.from(json['associator'] as Map))
+  ..musicPackage = json['musicPackage'] == null
+      ? null
+      : VipAssociator.fromJson(
+          Map<String, dynamic>.from(json['musicPackage'] as Map))
+  ..redVipAnnualCount = json['redVipAnnualCount'] as int?
+  ..redVipLevel = json['redVipLevel'] as int?;
+
+Map<String, dynamic> _$CreatorVipRightsToJson(CreatorVipRights instance) =>
+    <String, dynamic>{
+      'associator': instance.associator,
+      'musicPackage': instance.musicPackage,
+      'redVipAnnualCount': instance.redVipAnnualCount,
+      'redVipLevel': instance.redVipLevel,
+    };
+
+VipAssociator _$VipAssociatorFromJson(Map json) => VipAssociator()
+  ..vipCode = json['vipCode'] as int?
+  ..rights = json['rights'] as bool?
+  ..iconUrl = json['iconUrl'] as String?;
+
+Map<String, dynamic> _$VipAssociatorToJson(VipAssociator instance) =>
+    <String, dynamic>{
+      'vipCode': instance.vipCode,
+      'rights': instance.rights,
+      'iconUrl': instance.iconUrl,
     };
 
 SubscribersItem _$SubscribersItemFromJson(Map json) => SubscribersItem()

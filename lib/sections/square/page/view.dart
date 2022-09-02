@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/sections/square/page/child/page.dart';
+import 'package:flutter_music/sections/square/page/recommend/page.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
 import 'package:flutter_music/widgets/segment.dart';
 
@@ -20,7 +21,9 @@ Widget buildView(
           children: state.items!
               .map((e) => Container(
                     color: CommonColors.foregroundColor,
-                    child: SquareChildPage().buildPage({"name": e.name}),
+                    child: e.name! == "推荐"
+                        ? SquareRecommendPage().buildPage({})
+                        : SquareChildPage().buildPage({"name": e.name}),
                   ))
               .toList(),
           navgationTitle: state.title,

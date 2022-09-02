@@ -61,11 +61,59 @@ class PlaylistCreator {
   int? userId;
   String? backgroundUrl;
   String? nickname;
+  String? signature;
+  int? vipType;
+  int? userType;
+  CreatorAvatarDetail? avatarDetail;
+  CreatorVipRights? vipRights;
 
   factory PlaylistCreator.fromJson(Map<String, dynamic> json) =>
       _$PlaylistCreatorFromJson(json);
 
   toJson() => _$PlaylistCreatorToJson(this);
+}
+
+@JsonSerializable()
+class CreatorAvatarDetail {
+  CreatorAvatarDetail();
+
+  int? userType;
+  int? identityLevel;
+  String? identityIconUrl;
+
+  factory CreatorAvatarDetail.fromJson(Map<String, dynamic> json) =>
+      _$CreatorAvatarDetailFromJson(json);
+
+  toJson() => _$CreatorAvatarDetailToJson(this);
+}
+
+@JsonSerializable()
+class CreatorVipRights {
+  CreatorVipRights();
+
+  VipAssociator? associator;
+  VipAssociator? musicPackage;
+  int? redVipAnnualCount;
+  int? redVipLevel;
+
+  factory CreatorVipRights.fromJson(Map<String, dynamic> json) =>
+      _$CreatorVipRightsFromJson(json);
+
+  toJson() => _$CreatorVipRightsToJson(this);
+}
+
+@JsonSerializable()
+class VipAssociator {
+  VipAssociator();
+
+  int? vipCode;
+  bool? rights;
+  String? iconUrl;
+
+  factory VipAssociator.fromJson(Map<String, dynamic> json) =>
+      _$VipAssociatorFromJson(json);
+
+  toJson() => _$VipAssociatorToJson(this);
 }
 
 @JsonSerializable()
