@@ -24,9 +24,13 @@ flutter 仿写网易云音乐
 
 ####每日推荐
 
+
+
 ![IMG_0674.PNG](https://upload-images.jianshu.io/upload_images/2189604-3f73f709d2e1d6ac.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
 ####歌单广场
+
+
 ![IMG_0675.PNG](https://upload-images.jianshu.io/upload_images/2189604-6f1528c02015a266.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
 
@@ -50,6 +54,7 @@ flutter 仿写网易云音乐
 
 
 
+
 ![IMG_0681.PNG](https://upload-images.jianshu.io/upload_images/2189604-e9d3710cf5274036.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
 
@@ -65,6 +70,8 @@ flutter 仿写网易云音乐
 
 ####歌单详情
 
+
+
 ![IMG_0685.PNG](https://upload-images.jianshu.io/upload_images/2189604-0406dc27235116ec.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
 
@@ -72,6 +79,9 @@ flutter 仿写网易云音乐
 
 
 ##播客页
+
+
+
 ![IMG_0687.PNG](https://upload-images.jianshu.io/upload_images/2189604-31bb99d1e536fbea.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
 ![IMG_0688.PNG](https://upload-images.jianshu.io/upload_images/2189604-8f8409809bdb53d7.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
@@ -87,6 +97,7 @@ flutter 仿写网易云音乐
 ####播客详情页
 
 
+
 ![IMG_0693.PNG](https://upload-images.jianshu.io/upload_images/2189604-1ac1472d8ab06ee4.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
 ![IMG_0694.PNG](https://upload-images.jianshu.io/upload_images/2189604-9735152c14daae36.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
@@ -95,7 +106,9 @@ flutter 仿写网易云音乐
 
 
 ##云村页
+
 ####云村视频页瀑布流
+
 
 
 
@@ -104,25 +117,37 @@ flutter 仿写网易云音乐
 
 ####视频详情
 
+
+
 ![IMG_0697.PNG](https://upload-images.jianshu.io/upload_images/2189604-93abe6909ac99d96.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
 ####视频评论页
+
+
 
 ![IMG_0698.PNG](https://upload-images.jianshu.io/upload_images/2189604-778c295b5be807f0.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
 
 
 #####下边上gif总体图，有点大，但是值得等待
+
+
+
 ![Untitled4.gif](https://upload-images.jianshu.io/upload_images/2189604-9578f8787ea3e644.gif?imageMogr2/auto-orient/strip)
 
 
 
 
 #####技术点
+
+
 * fish_redux 状态管理
 * Dio 网络请求
 * SmartRefresher 数据刷新
+
 ######代码还在持续开发中，仅供学习参考
+
+
 
 * [项目地址](https://github.com/niuxinhuai/flutter_music)
 
