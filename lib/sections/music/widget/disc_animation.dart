@@ -49,8 +49,9 @@ class _MusicDiscAnimationWidgetState extends State<MusicDiscAnimationWidget>
 
   @override
   void dispose() {
-    super.dispose();
+    controller?.stop();
     controller?.dispose();
+    super.dispose();
   }
 
   @override

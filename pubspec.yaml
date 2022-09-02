@@ -114,7 +114,6 @@ flutter:
   assets:
     - assets/images/
     - assets/json/
-    - assets/compress/
 
 
 
