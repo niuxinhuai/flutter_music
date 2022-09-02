@@ -58,8 +58,8 @@ class SpHelper {
         .then((sp) => sp.setStringList(key, value));
   }
 
-  static Future<List<String>> getStringList(String key) {
-    return SharedPreferences.getInstance().then((sp) => sp.getStringList(key)!);
+  static Future<List<String>?> getStringList(String key) {
+    return SharedPreferences.getInstance().then((sp) => sp.getStringList(key));
   }
 
   static Future<bool> remove(String key) {

@@ -97,8 +97,8 @@ class SpUtil {
 
   ///获取用户歌单广场的数据
   static Future<List<CatlistSubItem>?> getUserSquareSource() async {
-    List<String> list = await SpHelper.getStringList(SpAppKey._squareData);
-    if (list.isNotEmpty == true) {
+    List<String>? list = await SpHelper.getStringList(SpAppKey._squareData);
+    if (list != null && list.isNotEmpty == true) {
       return list.map((e) => CatlistSubItem.fromJson(jsonDecode(e))).toList();
     }
     return null;
