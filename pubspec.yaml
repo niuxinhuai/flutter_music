@@ -65,7 +65,7 @@ dependencies:
   reorderables: ^0.4.0
 
   #音频播放器
-  audioplayers: ^1.0.0
+  audioplayers: 0.20.0
 
   #国际化、日期等
   intl: ^0.17.0

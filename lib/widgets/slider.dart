@@ -2,11 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_music/res/colors.dart';
 
 class SliderWidget extends StatefulWidget {
+  final Color? bgColor;
+  final Color? inactiveTrackColor;
+  final Color? activeTrackColor;
   final double? trackHeight;
   final double? thumbRadius;
   final double? value;
 
-  SliderWidget({this.trackHeight = 2, this.thumbRadius = 6, this.value = 0});
+  SliderWidget(
+      {this.bgColor = Colors.black,
+      this.inactiveTrackColor = Colors.white10,
+      this.activeTrackColor = const Color(0xFFDDDDDD),
+      this.trackHeight = 2,
+      this.thumbRadius = 6,
+      this.value = 0});
 
   @override
   _SliderWidgetState createState() => _SliderWidgetState();
@@ -17,13 +26,13 @@ class _SliderWidgetState extends State<SliderWidget> {
   Widget build(BuildContext context) {
 //    print(">>>>>>>>>>>value:${widget.value}");
     return Material(
-      color: Colors.black,
+      color: widget.bgColor,
       child: SliderTheme(
         data: SliderTheme.of(context).copyWith(
           trackHeight: widget.trackHeight, // 轨道高度
           trackShape: FullWidthTrackShape(), // 轨道形状，可以自定义
-          activeTrackColor: CommonColors.textColorDDD, // 激活的轨道颜色
-          inactiveTrackColor: CommonColors.divider, // 未激活的轨道颜色
+          activeTrackColor: widget.activeTrackColor, // 激活的轨道颜色
+          inactiveTrackColor: widget.inactiveTrackColor, // 未激活的轨道颜色
           thumbShape: RoundSliderThumbShape(
               //  滑块形状，可以自定义
               enabledThumbRadius: widget.thumbRadius! // 滑块大小

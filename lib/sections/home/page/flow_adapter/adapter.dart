@@ -26,31 +26,32 @@ FlowAdapter<HomeMusicState> get adapter => FlowAdapter<HomeMusicState>(
           } else if (blockCode == HomeBlockCodeUtils.recommendList) {
             ///推荐歌单
             return CellConnector(index: index) + RecommendSongComponent();
-          } else if (blockCode == HomeBlockCodeUtils.playlist) {
-            ///网易云雷达歌单
-            return CellConnector(index: index) + RecommendSongComponent();
-          } else if (blockCode == HomeBlockCodeUtils.official) {
-            ///专属场景歌单
-            return CellConnector(index: index) + RecommendSongComponent();
-          } else if (blockCode == HomeBlockCodeUtils.songNewAlbum) {
-            ///新歌/新碟/数字专辑
-            return CellConnector(index: index) + SongNewAlbumComponent();
-          } else if (blockCode == HomeBlockCodeUtils.yuncun) {
-            ///云村出品
-            return CellConnector(index: index) + YuncunComponent();
-          } else if (blockCode == HomeBlockCodeUtils.dragon) {
-            ///广播
-            return CellConnector(index: index) + BoradcastComponent();
-          } else if (blockCode == HomeBlockCodeUtils.vlog ||
-              blockCode == HomeBlockCodeUtils.songListAlign) {
-            ///热门播客/有声书/歌谣
-            return CellConnector(index: index) + SongNewAlbumComponent();
-          } else if (blockCode == HomeBlockCodeUtils.calendar) {
-            ///音乐日历
-            return CellConnector(index: index) + MusicCalendarComponent();
-          } else if (blockCode == HomeBlockCodeUtils.toplist) {
-            ///排行榜
-            return CellConnector(index: index) + ToplistComponent();
           }
+//          else if (blockCode == HomeBlockCodeUtils.playlist) {
+//            ///网易云雷达歌单
+//            return CellConnector(index: index) + RecommendSongComponent();
+//          } else if (blockCode == HomeBlockCodeUtils.official) {
+//            ///专属场景歌单
+//            return CellConnector(index: index) + RecommendSongComponent();
+//          } else if (blockCode == HomeBlockCodeUtils.songNewAlbum) {
+//            ///新歌/新碟/数字专辑
+//            return CellConnector(index: index) + SongNewAlbumComponent();
+//          } else if (blockCode == HomeBlockCodeUtils.yuncun) {
+//            ///云村出品
+//            return CellConnector(index: index) + YuncunComponent();
+//          } else if (blockCode == HomeBlockCodeUtils.dragon) {
+//            ///广播
+//            return CellConnector(index: index) + BoradcastComponent();
+//          } else if (blockCode == HomeBlockCodeUtils.vlog ||
+//              blockCode == HomeBlockCodeUtils.songListAlign) {
+//            ///热门播客/有声书/歌谣
+//            return CellConnector(index: index) + SongNewAlbumComponent();
+//          } else if (blockCode == HomeBlockCodeUtils.calendar) {
+//            ///音乐日历
+//            return CellConnector(index: index) + MusicCalendarComponent();
+//          } else if (blockCode == HomeBlockCodeUtils.toplist) {
+//            ///排行榜
+//            return CellConnector(index: index) + ToplistComponent();
+//          }
         },
         length: state.musicWrap?.data?.blocks?.length ?? 0));

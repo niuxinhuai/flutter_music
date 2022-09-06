@@ -1,5 +1,5 @@
 PODS:
-  - audioplayers_darwin (0.0.1):
+  - audioplayers (0.0.1):
     - Flutter
   - Flutter (1.0.0)
   - flutter_pdfview (1.0.2):
@@ -20,7 +20,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
+  - audioplayers (from `.symlinks/plugins/audioplayers/ios`)
   - Flutter (from `Flutter`)
   - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
@@ -34,8 +34,8 @@ SPEC REPOS:
     - FMDB
 
 EXTERNAL SOURCES:
-  audioplayers_darwin:
-    :path: ".symlinks/plugins/audioplayers_darwin/ios"
+  audioplayers:
+    :path: ".symlinks/plugins/audioplayers/ios"
   Flutter:
     :path: Flutter
   flutter_pdfview:
@@ -52,7 +52,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
-  audioplayers_darwin: 387322cb364026a1782298c982693b1b6aa9fa1b
+  audioplayers: 455322b54050b30ea4b1af7cd9e9d105f74efa8c
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a

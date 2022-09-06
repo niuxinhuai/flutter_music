@@ -131,7 +131,7 @@ class CommonService {
   }
 
   ///获取歌曲url
-  static Future<SongWrap> getSongUrl(String id) async {
+  static Future<SongWrap?> getSongUrl(String id) async {
     if (DebugUtils.debug) {
       return await _jsonDecode(JsonStringConstants.song_url)
           .then((value) => SongWrap.fromJson(value));
@@ -145,7 +145,7 @@ class CommonService {
   }
 
   ///获取歌曲歌词
-  static Future<SongLyric> getSongLyric(String id) async {
+  static Future<SongLyric?> getSongLyric(String id) async {
     if (DebugUtils.debug) {
       return await _jsonDecode(JsonStringConstants.song_lyric)
           .then((value) => SongLyric.fromJson(value));
