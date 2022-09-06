@@ -50,3 +50,12 @@ class LrcData {
 
   toJson() => _$LrcDataToJson(this);
 }
+
+class AudioLyricModel {
+  AudioLyricModel();
+
+  String? lyric;
+  int start = 0;
+  int? end;
+  bool selected = false;
+}
