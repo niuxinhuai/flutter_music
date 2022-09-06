@@ -22,6 +22,18 @@ class TimeUtils {
         TimeUtils.formatSecondTime(seconds);
   }
 
+  ///分钟转换毫秒
+  static int getMillSecondFromMinute(String minute) {
+    String chart = ":";
+    if (minute.contains(chart)) {
+      List<String> list = minute.split(chart);
+      int mi = _getminute(list.first) * 60 * 1000;
+      int se = (double.parse(list.last) * 1000.0).toInt();
+      return mi + se;
+    }
+    return 0;
+  }
+
   static String formatSecondTime(int s) {
     return s < 10 ? "0" + s.toString() : s.toString();
   }
@@ -125,6 +137,40 @@ class TimeUtils {
         break;
       case "Dec":
         output = 12;
+        break;
+    }
+    return output;
+  }
+
+  static int _getminute(String str) {
+    int output = 0;
+    switch (str) {
+      case "01":
+        output = 1;
+        break;
+      case "02":
+        output = 2;
+        break;
+      case "03":
+        output = 3;
+        break;
+      case "04":
+        output = 4;
+        break;
+      case "05":
+        output = 5;
+        break;
+      case "06":
+        output = 6;
+        break;
+      case "07":
+        output = 7;
+        break;
+      case "08":
+        output = 8;
+        break;
+      case "09":
+        output = 9;
         break;
     }
     return output;
