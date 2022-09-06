@@ -112,7 +112,7 @@ class _AudioLyricWidgetState extends State<AudioLyricWidget> {
 
   @override
   void dispose() {
-    AudioPlayerUtils.dispose();
+//    AudioPlayerUtils.dispose();
     super.dispose();
   }
 }
