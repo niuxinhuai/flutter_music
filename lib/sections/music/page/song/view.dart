@@ -5,12 +5,11 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/res/other_theme.dart';
-import 'package:flutter_music/sections/home/widget/image.dart';
 import 'package:flutter_music/sections/music/widget/song_control.dart';
+import 'package:flutter_music/sections/music/widget/song_lyric.dart';
 import 'package:flutter_music/sections/music/widget/song_normal.dart';
 import 'package:flutter_music/widgets/appbar.dart';
 import 'package:flutter_music/widgets/effect.dart';
-import 'package:flutter_music/widgets/water.dart';
 
 import 'action.dart';
 import 'state.dart';
@@ -28,12 +27,7 @@ Widget buildView(
             fit: BoxFit.fill,
           ),
         ),
-        BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: Container(
-            color: Colors.white.withOpacity(0),
-          ),
-        ),
+        EffectWidget(),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: _buildAppbar(state, dispatch, viewService),
@@ -149,11 +143,21 @@ Widget _buildBody(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Expanded(
-          child: SongNormalWidget(
-        imageUrl: state.imageUrl,
-        width: width,
+          child: GestureDetector(
+        onTap: () => dispatch(AudioPlayerActionCreator.didTapShowLyricAction()),
+        child: state.showLyric!
+            ? AudioLyricWidget(
+                songLyric: state.songLyric,
+              )
+            : SongNormalWidget(
+                imageUrl: state.imageUrl,
+                width: width,
+              ),
       )),
-      AudioControl()
+      if (state.url != null)
+        AudioControl(
+          url: state.url,
+        )
     ],
   );
 }
