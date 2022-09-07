@@ -56,6 +56,7 @@ class _SquareItemWidgetState extends State<SquareItemWidget> {
                 fit: BoxFit.fill,
                 width: widget.size,
                 height: widget.size,
+                needAddParam: true,
               ),
               Positioned(
                 right: 0,

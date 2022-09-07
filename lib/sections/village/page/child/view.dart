@@ -68,8 +68,8 @@ Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
               ImageItemWidget(
                 url: item.data?.coverUrl,
                 fit: BoxFit.fitWidth,
-//            width: imageWidth,
-//            height: imageHeight,
+                width: imageWidth,
+                height: imageHeight,
               ),
               if (item.data?.vid != null)
                 Positioned(

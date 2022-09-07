@@ -154,11 +154,14 @@ class _RItemWidgetState extends State<RItemWidget> {
       url: url,
       width: widget.size,
       height: widget.size,
+      needAddParam: true,
     );
   }
 
   ///count
   Widget _buildCount(BuildContext context, int count) {
-    return PlayCountWidget(count: count,);
+    return PlayCountWidget(
+      count: count,
+    );
   }
 }
