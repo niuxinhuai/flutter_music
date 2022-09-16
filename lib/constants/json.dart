@@ -93,4 +93,16 @@ class JsonStringConstants {
 
   ///视频 - 评论
   static const String video_comment = "assets/json/video_comment.json";
+
+  ///搜索 - 关键词
+  static const String search_deault = "assets/json/search_default.json";
+
+  ///搜索 - 热搜榜
+  static const String search_hot_detail = "assets/json/search_hot_detail.json";
+
+  ///搜索 - 推荐
+  static const String search_recommend = "assets/json/search_recommend.json";
+
+  ///搜索 - 详情
+  static const String search_detail = "assets/json/search_detail_1018.json";
 }
