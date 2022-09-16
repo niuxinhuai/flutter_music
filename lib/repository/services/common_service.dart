@@ -6,7 +6,7 @@ import 'package:flutter_music/constants/json.dart';
 import 'package:flutter_music/constants/url.dart';
 import 'package:flutter_music/helper/service_helper.dart';
 import 'package:flutter_music/models/simple_model.dart';
-import 'package:flutter_music/sections/Leaderboard/models/Leaderboard.dart';
+import 'package:flutter_music/sections/Leaderboard/models/leaderboard.dart';
 import 'package:flutter_music/sections/home/models/home.dart';
 import 'package:flutter_music/sections/login/models/login.dart';
 import 'package:flutter_music/sections/music/models/lyric.dart';
@@ -18,6 +18,10 @@ import 'package:flutter_music/sections/podcast/models/detail.dart';
 import 'package:flutter_music/sections/podcast/models/detail_list.dart';
 import 'package:flutter_music/sections/podcast/models/personalize.dart';
 import 'package:flutter_music/sections/podcast/models/podcast.dart';
+import 'package:flutter_music/sections/search/models/search_default.dart';
+import 'package:flutter_music/sections/search/models/search_hot.dart';
+import 'package:flutter_music/sections/search/models/search_recommend.dart';
+import 'package:flutter_music/sections/search/models/search_result.dart';
 import 'package:flutter_music/sections/square/models/catlist.dart';
 import 'package:flutter_music/sections/square/models/playlist.dart';
 import 'package:flutter_music/sections/square/models/recommend.dart';
@@ -392,5 +396,50 @@ class CommonService {
 
     return await ServiceHelper.get(MusicUri.video_comment(id))
         .then((value) => VideoCommentWrap.fromJson(value));
+  }
+
+  ///搜索 - 关键词
+  static Future<SearchDefaultWrap?> getSearchDefaultWord() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.search_deault)
+          .then((value) => SearchDefaultWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.search_default)
+        .then((value) => SearchDefaultWrap.fromJson(value));
+  }
+
+  ///搜索 - 热搜榜
+  static Future<SearchHotWrap?> getSearchHotData() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.search_hot_detail)
+          .then((value) => SearchHotWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.search_hot_detail)
+        .then((value) => SearchHotWrap.fromJson(value));
+  }
+
+  ///搜索 - 推荐列表
+  static Future<SearchRecommendWrap?> getSearchRecommendHot() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.search_recommend)
+          .then((value) => SearchRecommendWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.search_recommend)
+        .then((value) => SearchRecommendWrap.fromJson(value));
+  }
+
+  ///搜索 - 详情
+  static Future<SearchResultWrap?> getSearchDetail(
+      String keywords, int type) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.search_detail)
+          .then((value) => SearchResultWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.search_detail(keywords, type: type))
+        .then((value) => SearchResultWrap.fromJson(value));
   }
 }
