@@ -33,6 +33,9 @@ dependencies:
     #接口缓存
   dio_http_cache: ^0.3.0
 
+  #sqflite
+  sqflite: ^2.0.2
+
   video_player: ^2.2.16
 
     #文件路径操作

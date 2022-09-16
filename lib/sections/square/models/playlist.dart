@@ -41,11 +41,14 @@ class PlaylistStage {
   int? shareCount;
   int? commentCount;
   int? subscribedCount;
+  int? trackCount;
+  int? specialType;
 
   PlaylistCreator? creator;
   List<SubscribersItem>? subscribers;
   List<DailySongItem>? tracks;
   List<TrackIdItem>? trackIds;
+  List<String>? officialTags;
 
   factory PlaylistStage.fromJson(Map<String, dynamic> json) =>
       _$PlaylistStageFromJson(json);

@@ -73,16 +73,18 @@ PreferredSizeWidget _buildAppbar(
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                  child: Text(
-                state.singer ?? "",
-                softWrap: true,
-                textAlign: TextAlign.left,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                style: GpOtherTheme.size15(viewService.context)!
-                    .copyWith(color: CommonColors.onPrimaryTextColor),
-              )),
+              Container(
+                constraints: BoxConstraints(maxWidth: 150),
+                child: Text(
+                  state.singer ?? "",
+                  softWrap: true,
+                  textAlign: TextAlign.left,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: GpOtherTheme.size15(viewService.context)!
+                      .copyWith(color: CommonColors.onPrimaryTextColor),
+                ),
+              ),
               Container(
                 padding: EdgeInsets.only(left: 4, right: 5, top: 1, bottom: 2),
                 decoration: BoxDecoration(

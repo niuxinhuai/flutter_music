@@ -6,6 +6,12 @@
       <excludeFolder url="file://$MODULE_DIR$/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audioplayers/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audioplayers/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audioplayers/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audioplayers/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audioplayers/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audioplayers/example/build" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audioplayers_darwin/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audioplayers_darwin/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/audioplayers_darwin/build" />

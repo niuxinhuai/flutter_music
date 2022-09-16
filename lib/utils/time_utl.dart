@@ -3,9 +3,16 @@ import 'package:intl/intl.dart';
 
 class TimeUtils {
   static const String _format1 = "yyyy-MM";
+  static const String _format2 = "yyyy-MM-dd";
 
   static String getFormat1({int? time}) {
     return DateFormat(_format1).format(time == null
+        ? DateTime.now()
+        : DateTime.fromMillisecondsSinceEpoch(time));
+  }
+
+  static String getFormat2({int? time}) {
+    return DateFormat(_format2).format(time == null
         ? DateTime.now()
         : DateTime.fromMillisecondsSinceEpoch(time));
   }
@@ -44,6 +51,11 @@ class TimeUtils {
     if (isYesterday(mill)) return "昨天";
     if (isTomorrow(mill)) return "明天";
     return "其他";
+  }
+
+  static int getApartSeconds() {
+    DateTime now = DateTime.now();
+    return now.millisecondsSinceEpoch ~/ 1000;
   }
 
   static bool isToday(int? mill) {

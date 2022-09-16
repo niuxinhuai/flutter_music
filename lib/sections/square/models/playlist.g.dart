@@ -46,6 +46,8 @@ PlaylistStage _$PlaylistStageFromJson(Map json) => PlaylistStage()
   ..shareCount = json['shareCount'] as int?
   ..commentCount = json['commentCount'] as int?
   ..subscribedCount = json['subscribedCount'] as int?
+  ..trackCount = json['trackCount'] as int?
+  ..specialType = json['specialType'] as int?
   ..creator = json['creator'] == null
       ? null
       : PlaylistCreator.fromJson(
@@ -59,6 +61,9 @@ PlaylistStage _$PlaylistStageFromJson(Map json) => PlaylistStage()
       .toList()
   ..trackIds = (json['trackIds'] as List<dynamic>?)
       ?.map((e) => TrackIdItem.fromJson(Map<String, dynamic>.from(e as Map)))
+      .toList()
+  ..officialTags = (json['officialTags'] as List<dynamic>?)
+      ?.map((e) => e as String)
       .toList();
 
 Map<String, dynamic> _$PlaylistStageToJson(PlaylistStage instance) =>
@@ -77,10 +82,13 @@ Map<String, dynamic> _$PlaylistStageToJson(PlaylistStage instance) =>
       'shareCount': instance.shareCount,
       'commentCount': instance.commentCount,
       'subscribedCount': instance.subscribedCount,
+      'trackCount': instance.trackCount,
+      'specialType': instance.specialType,
       'creator': instance.creator,
       'subscribers': instance.subscribers,
       'tracks': instance.tracks,
       'trackIds': instance.trackIds,
+      'officialTags': instance.officialTags,
     };
 
 PlaylistCreator _$PlaylistCreatorFromJson(Map json) => PlaylistCreator()
