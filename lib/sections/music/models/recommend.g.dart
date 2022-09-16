@@ -49,6 +49,9 @@ DailySongItem _$DailySongItemFromJson(Map json) => DailySongItem()
   ..mv = json['mv'] as int?
   ..fee = json['fee'] as int?
   ..no = json['no'] as int?
+  ..originCoverType = json['originCoverType'] as int?
+  ..officialTags =
+      (json['officialTags'] as List<dynamic>?)?.map((e) => e as String).toList()
   ..noCopyrightRcmd = json['noCopyrightRcmd'] == null
       ? null
       : NoCopyrightRcmd.fromJson(
@@ -64,6 +67,8 @@ Map<String, dynamic> _$DailySongItemToJson(DailySongItem instance) =>
       'mv': instance.mv,
       'fee': instance.fee,
       'no': instance.no,
+      'originCoverType': instance.originCoverType,
+      'officialTags': instance.officialTags,
       'noCopyrightRcmd': instance.noCopyrightRcmd,
     };
 

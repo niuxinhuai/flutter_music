@@ -57,7 +57,9 @@ PersonalizeDJ _$PersonalizeDJFromJson(Map json) => PersonalizeDJ()
   ..avatarUrl = json['avatarUrl'] as String?
   ..nickname = json['nickname'] as String?
   ..backgroundUrl = json['backgroundUrl'] as String?
-  ..rewardCount = json['rewardCount'] as int?;
+  ..rewardCount = json['rewardCount'] as int?
+  ..followed = json['followed'] as bool?
+  ..gender = json['gender'] as int?;
 
 Map<String, dynamic> _$PersonalizeDJToJson(PersonalizeDJ instance) =>
     <String, dynamic>{
@@ -67,4 +69,6 @@ Map<String, dynamic> _$PersonalizeDJToJson(PersonalizeDJ instance) =>
       'nickname': instance.nickname,
       'backgroundUrl': instance.backgroundUrl,
       'rewardCount': instance.rewardCount,
+      'followed': instance.followed,
+      'gender': instance.gender,
     };

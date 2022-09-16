@@ -47,6 +47,10 @@ class PersonalizeDJ {
   String? backgroundUrl;
   //赞赏次数
   int? rewardCount;
+  //是否关注
+  bool? followed;
+  //性别 1男性
+  int? gender;
 
   factory PersonalizeDJ.fromJson(Map<String, dynamic> json) =>
       _$PersonalizeDJFromJson(json);

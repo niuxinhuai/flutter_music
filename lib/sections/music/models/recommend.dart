@@ -45,6 +45,11 @@ class DailySongItem {
   //状态，小于25时显示SQ
   int? no;
 
+  //1代表原唱
+  int? originCoverType;
+
+  List<String>? officialTags;
+
   NoCopyrightRcmd? noCopyrightRcmd;
 
   @JsonKey(ignore: true)
@@ -85,6 +90,14 @@ class DailySongItem {
       return false;
     }
     return no! < 25;
+  }
+
+  ///是否可以显示原唱
+  bool canShowAuthSinger() {
+    if (originCoverType == null) {
+      return false;
+    }
+    return originCoverType == 1;
   }
 
   ///是否可以显示试听
