@@ -2,7 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter_music/helper/router.dart';
 import 'package:flutter_music/helper/router_helper.dart';
 import 'package:flutter_music/repository/services/common_service.dart';
-import 'package:flutter_music/sections/Leaderboard/models/Leaderboard.dart';
+import 'package:flutter_music/sections/Leaderboard/models/leaderboard.dart';
 import 'package:flutter_music/sections/Leaderboard/models/toplist.dart';
 import 'package:flutter_music/utils/typeUtils.dart';
 import 'action.dart';

@@ -1,5 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
-import 'package:flutter_music/sections/Leaderboard/models/Leaderboard.dart';
+import 'package:flutter_music/sections/Leaderboard/models/leaderboard.dart';
 import 'package:flutter_music/sections/Leaderboard/models/toplist.dart';
 
 enum LeaderboardAction {

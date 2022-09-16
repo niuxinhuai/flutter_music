@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-part 'Leaderboard.g.dart';
+part 'leaderboard.g.dart';
 
 @JsonSerializable()
 class LeaderboardWrap {
@@ -34,6 +34,9 @@ class BoardListItem {
   String? description;
   int? id;
   String? name;
+  String? picUrl;
+  int? publishTime;
+  AlbumArtist? artist;
 
   factory BoardListItem.fromJson(Map<String, dynamic> json) =>
       _$BoardListItemFromJson(json);
@@ -71,4 +74,17 @@ class ArtistToplist {
       _$ArtistToplistFromJson(json);
 
   toJson() => _$ArtistToplistToJson(this);
+}
+
+@JsonSerializable()
+class AlbumArtist {
+  AlbumArtist();
+
+  String? name;
+  int? id;
+
+  factory AlbumArtist.fromJson(Map<String, dynamic> json) =>
+      _$AlbumArtistFromJson(json);
+
+  toJson() => _$AlbumArtistToJson(this);
 }

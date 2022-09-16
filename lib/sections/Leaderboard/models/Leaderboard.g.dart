@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'Leaderboard.dart';
+part of 'leaderboard.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -39,7 +39,12 @@ BoardListItem _$BoardListItemFromJson(Map json) => BoardListItem()
   ..trackUpdateTime = json['trackUpdateTime'] as int?
   ..description = json['description'] as String?
   ..id = json['id'] as int?
-  ..name = json['name'] as String?;
+  ..name = json['name'] as String?
+  ..picUrl = json['picUrl'] as String?
+  ..publishTime = json['publishTime'] as int?
+  ..artist = json['artist'] == null
+      ? null
+      : AlbumArtist.fromJson(Map<String, dynamic>.from(json['artist'] as Map));
 
 Map<String, dynamic> _$BoardListItemToJson(BoardListItem instance) =>
     <String, dynamic>{
@@ -57,6 +62,9 @@ Map<String, dynamic> _$BoardListItemToJson(BoardListItem instance) =>
       'description': instance.description,
       'id': instance.id,
       'name': instance.name,
+      'picUrl': instance.picUrl,
+      'publishTime': instance.publishTime,
+      'artist': instance.artist,
     };
 
 TracksItem _$TracksItemFromJson(Map json) => TracksItem()
@@ -87,4 +95,14 @@ Map<String, dynamic> _$ArtistToplistToJson(ArtistToplist instance) =>
       'name': instance.name,
       'updateFrequency': instance.updateFrequency,
       'position': instance.position,
+    };
+
+AlbumArtist _$AlbumArtistFromJson(Map json) => AlbumArtist()
+  ..name = json['name'] as String?
+  ..id = json['id'] as int?;
+
+Map<String, dynamic> _$AlbumArtistToJson(AlbumArtist instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'id': instance.id,
     };

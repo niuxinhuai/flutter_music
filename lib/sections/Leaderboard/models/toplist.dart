@@ -1,4 +1,4 @@
-import 'package:flutter_music/sections/Leaderboard/models/Leaderboard.dart';
+import 'package:flutter_music/sections/Leaderboard/models/leaderboard.dart';
 
 class ToplistDetailSection {
   ToplistDetailSection();
