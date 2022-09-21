@@ -44,10 +44,14 @@ class RowItemWidget extends StatelessWidget {
                         Container(
                           child: Text(
                             item?.name ?? "",
+                            softWrap: true,
+                            textAlign: TextAlign.left,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                             style: GpOtherTheme.size14(context)
                                 .copyWith(color: CommonColors.textColor999),
                           ),
-                          constraints: BoxConstraints(maxWidth: 180),
+                          constraints: BoxConstraints(maxWidth: 130),
                         ),
                         Padding(
                           padding: EdgeInsets.only(left: 10, right: 10),

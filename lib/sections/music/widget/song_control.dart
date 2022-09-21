@@ -38,7 +38,7 @@ class _AudioControlState extends State<AudioControl> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 200,
+      height: 150,
       child: Column(
         children: [_buildSliderProgressWidget(), _buildBottom()],
       ),

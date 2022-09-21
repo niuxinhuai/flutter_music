@@ -34,7 +34,7 @@ class _CollectWidgetState extends State<CollectWidget> {
                 ? Colors.red
                 : Colors.white.withOpacity(0.2),
             borderRadius: BorderRadius.all(Radius.circular(22.0))),
-        padding: EdgeInsets.only(top: 8, bottom: 8, left: 20, right: 20),
+        padding: EdgeInsets.only(top: 8, bottom: 8, left: 18, right: 18),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

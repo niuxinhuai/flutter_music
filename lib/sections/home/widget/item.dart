@@ -74,13 +74,7 @@ class _RItemWidgetState extends State<RItemWidget> {
                     width: widget.size,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 30,
-                          height: 10,
-                        ),
-                        _buildCount(context, count)
-                      ],
+                      children: [Spacer(), _buildCount(context, count)],
                     ),
                   )
               ],

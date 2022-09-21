@@ -10,7 +10,7 @@ import 'package:flutter_music/res/other_theme.dart';
 import 'package:flutter_music/sections/follow/widget/image_viewer.dart';
 import 'package:flutter_music/widgets/appbar.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
+//import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:photo_view/photo_view.dart';
 
 import 'action.dart';
@@ -168,62 +168,62 @@ Widget _buildlistViewBody(
   );
 }
 
-Widget _buildBody(
-    MyFocusState state, Dispatch dispatch, ViewService viewService) {
-  return Stack(
-    children: <Widget>[
-      PDFView(
-        filePath: state.pdfFilePath,
-        enableSwipe: true,
-        swipeHorizontal: false,
-        autoSpacing: true,
-        pageFling: false,
-        pageSnap: true,
-        defaultPage: 0,
-        fitPolicy: FitPolicy.WIDTH,
-        fitEachPage: true,
-        preventLinkNavigation:
-            false, // if set to true the link is handled in flutter
-        onRender: (_pages) {
-//          setState(() {
-//            pages = _pages;
-//            isReady = true;
-//          });
-        },
-        onError: (error) {
-//          setState(() {
-//            errorMessage = error.toString();
-//          });
-          print(error.toString());
-        },
-        onPageError: (page, error) {
-//          setState(() {
-//            errorMessage = '$page: ${error.toString()}';
-//          });
-          print('$page: ${error.toString()}');
-        },
-        onViewCreated: (PDFViewController pdfViewController) {
-//          _controller.complete(pdfViewController);
-        },
-        onLinkHandler: (String? uri) {
-          print('goto uri: $uri');
-        },
-        onPageChanged: (int? page, int? total) {
-          print('page change: $page/$total');
-//          setState(() {
-//            currentPage = page;
-//          });
-        },
-      ),
-//      errorMessage.isEmpty
-//          ? !isReady
-//          ? Center(
-//        child: CircularProgressIndicator(),
-//      )
-//          : Container()
-//          : Center(
-//        child: Text(errorMessage),
-//      )
-    ],
-  );
-}
+//Widget _buildBody(
+//    MyFocusState state, Dispatch dispatch, ViewService viewService) {
+//  return Stack(
+//    children: <Widget>[
+//      PDFView(
+//        filePath: state.pdfFilePath,
+//        enableSwipe: true,
+//        swipeHorizontal: false,
+//        autoSpacing: true,
+//        pageFling: false,
+//        pageSnap: true,
+//        defaultPage: 0,
+//        fitPolicy: FitPolicy.WIDTH,
+//        fitEachPage: true,
+//        preventLinkNavigation:
+//            false, // if set to true the link is handled in flutter
+//        onRender: (_pages) {
+////          setState(() {
+////            pages = _pages;
+////            isReady = true;
+////          });
+//        },
+//        onError: (error) {
+////          setState(() {
+////            errorMessage = error.toString();
+////          });
+//          print(error.toString());
+//        },
+//        onPageError: (page, error) {
+////          setState(() {
+////            errorMessage = '$page: ${error.toString()}';
+////          });
+//          print('$page: ${error.toString()}');
+//        },
+//        onViewCreated: (PDFViewController pdfViewController) {
+////          _controller.complete(pdfViewController);
+//        },
+//        onLinkHandler: (String? uri) {
+//          print('goto uri: $uri');
+//        },
+//        onPageChanged: (int? page, int? total) {
+//          print('page change: $page/$total');
+////          setState(() {
+////            currentPage = page;
+////          });
+//        },
+//      ),
+////      errorMessage.isEmpty
+////          ? !isReady
+////          ? Center(
+////        child: CircularProgressIndicator(),
+////      )
+////          : Container()
+////          : Center(
+////        child: Text(errorMessage),
+////      )
+//    ],
+//  );
+//}

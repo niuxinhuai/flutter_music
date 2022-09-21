@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/res/colors.dart';
@@ -67,7 +68,7 @@ Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
             children: [
               ImageItemWidget(
                 url: item.data?.coverUrl,
-                fit: BoxFit.fitWidth,
+//                fit: BoxFit.fitWidth,
                 width: imageWidth,
                 height: imageHeight,
               ),
@@ -108,12 +109,15 @@ Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
                 Row(
 //                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+//                    Expanded(
+//                        child: DetailUserFocusWidget(
+//                      hasFocus: true,
+//                      avatarUrl: item.data?.creator?.avatarUrl,
+//                      name: item.data?.creator?.nickname,
+//                    )),
                     Expanded(
-                        child: DetailUserFocusWidget(
-                      hasFocus: true,
-                      avatarUrl: item.data?.creator?.avatarUrl,
-                      name: item.data?.creator?.nickname,
-                    )),
+                        child: _buildFocus(item.data?.creator?.avatarUrl, null,
+                            item.data?.creator?.nickname, viewService.context)),
                     PraisedWidget(
                       count: item.data?.praisedCount,
                     )
@@ -124,6 +128,58 @@ Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
           ),
         ],
       ),
+    ),
+  );
+}
+
+Widget _buildFocus(
+    String? avatarUrl, String? bottomUrl, String? name, BuildContext context) {
+  return Padding(
+    padding: EdgeInsets.only(top: 15, bottom: 20),
+    child: Row(
+      children: [
+        Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(14)),
+                child: CachedNetworkImage(
+                  imageUrl: avatarUrl ?? "",
+                  fit: BoxFit.fill,
+                  width: 28,
+                  height: 28,
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: bottomUrl != null
+                  ? CachedNetworkImage(
+                      imageUrl: bottomUrl,
+                      width: 14,
+                      height: 14,
+                    )
+                  : Image.asset(
+                      "assets/images/cm2_icn_daren~iphone.png",
+                      width: 14,
+                      height: 14,
+                    ),
+            )
+          ],
+        ),
+        Expanded(
+            child: Text(
+          name ?? "",
+          softWrap: true,
+          maxLines: 1,
+          textAlign: TextAlign.left,
+          overflow: TextOverflow.ellipsis,
+          style: GpOtherTheme.size12(context)!
+              .copyWith(color: CommonColors.textColor999, fontSize: 13),
+        )),
+      ],
     ),
   );
 }

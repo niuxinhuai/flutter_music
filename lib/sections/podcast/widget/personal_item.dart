@@ -45,9 +45,12 @@ class PersonalItemWidget extends StatelessWidget {
             ],
           ),
           Container(
-            height: 42,
             padding: EdgeInsets.only(top: 3),
             child: RichText(
+              softWrap: true,
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
               text: TextSpan(children: [
                 TextSpan(
                   text: item!.secondCategory!,

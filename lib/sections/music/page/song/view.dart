@@ -74,7 +74,7 @@ PreferredSizeWidget _buildAppbar(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                constraints: BoxConstraints(maxWidth: 150),
+                constraints: BoxConstraints(maxWidth: 140),
                 child: Text(
                   state.singer ?? "",
                   softWrap: true,
@@ -86,14 +86,14 @@ PreferredSizeWidget _buildAppbar(
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(left: 4, right: 5, top: 1, bottom: 2),
+                padding: EdgeInsets.only(left: 3, right: 3, top: 1, bottom: 2),
                 decoration: BoxDecoration(
                     border: Border.all(color: CommonColors.textColor999),
                     borderRadius: BorderRadius.all(Radius.circular(5.0))),
                 child: Text(
                   '关注',
                   style: GpOtherTheme.size13(viewService.context)!
-                      .copyWith(color: CommonColors.textColor999, fontSize: 11),
+                      .copyWith(color: CommonColors.textColor999, fontSize: 9),
                 ),
               )
             ],
@@ -125,7 +125,7 @@ PreferredSizeWidget _buildAppbar(
       UnconstrainedBox(
         child: Container(
 //                color: Colors.red,
-          margin: EdgeInsets.only(left: 10, right: 20),
+          margin: EdgeInsets.only(left: 5, right: 15),
           width: 30,
           child: Image.asset(
             'assets/images/cm6_set_icn_share~iphone.png',

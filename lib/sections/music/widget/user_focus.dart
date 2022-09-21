@@ -59,19 +59,14 @@ class _DetailUserFocusWidgetState extends State<DetailUserFocusWidget> {
               )
             ],
           ),
-          Container(
-            constraints: const BoxConstraints(
-              maxWidth: 90,
-            ),
-            child: Text(
-              widget.name ?? "",
-              softWrap: true,
-              maxLines: 1,
-              textAlign: TextAlign.left,
-              overflow: TextOverflow.ellipsis,
-              style: GpOtherTheme.size12(context)!
-                  .copyWith(color: CommonColors.textColor999, fontSize: 13),
-            ),
+          Text(
+            widget.name ?? "",
+            softWrap: true,
+            maxLines: 1,
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+            style: GpOtherTheme.size12(context)!
+                .copyWith(color: CommonColors.textColor999, fontSize: 13),
           ),
           if (widget.hasFocus == false) _buildFocusWidget()
         ],

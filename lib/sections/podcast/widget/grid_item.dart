@@ -46,11 +46,13 @@ class GridItemWidget extends StatelessWidget {
             ],
           ),
           Container(
-            height: 42,
             padding: EdgeInsets.only(top: 3),
             child: Text(
               item?.name ?? "",
               maxLines: 2,
+              softWrap: true,
+              textAlign: TextAlign.left,
+              overflow: TextOverflow.ellipsis,
               style: GpOtherTheme.size13(context)!
                   .copyWith(color: CommonColors.onSurfaceTextColor),
             ),

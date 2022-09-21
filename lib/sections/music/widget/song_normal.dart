@@ -61,79 +61,81 @@ class _SongNormalWidgetState extends State<SongNormalWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
 //          color: Colors.cyan,
-          child: Stack(
-            children: [
-              Container(
-                height: size,
-                width: size,
+            child: Stack(
+              children: [
+                Container(
+                  height: size,
+                  width: size,
 //                decoration: BoxDecoration(
 //                    color: Colors.white.withOpacity(0.2),
 //                    borderRadius:
 //                        BorderRadius.all(Radius.circular(size / 2.0))),
-                margin: EdgeInsets.only(left: scale, right: scale, top: 100),
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                    image: new ExactAssetImage(
-                        'assets/images/ic_play_share_listen_together_blackcover~iphone.png'),
-                    fit: BoxFit.fitWidth,
-                  )),
-                  child: RotationTransition(
-                    alignment: Alignment.center,
-                    turns: controller!,
-                    child: Container(
-                      margin: EdgeInsets.all(50),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(110)),
-                        child: Image.network(
-                          widget.imageUrl ?? "",
-                          fit: BoxFit.fill,
+                  margin: EdgeInsets.only(left: scale, right: scale, top: 100),
+                  child: Container(
+                    margin: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                      image: new ExactAssetImage(
+                          'assets/images/ic_play_share_listen_together_blackcover~iphone.png'),
+                      fit: BoxFit.fitWidth,
+                    )),
+                    child: RotationTransition(
+                      alignment: Alignment.center,
+                      turns: controller!,
+                      child: Container(
+                        margin: EdgeInsets.all(50),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(110)),
+                          child: Image.network(
+                            widget.imageUrl ?? "",
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                left: widget.width! / 2.0 - 20,
-                child: Container(
-                  child: Image.asset(
-                    'assets/images/cm7_share_card_needle~iphone.png',
-                    height: 200,
-                    fit: BoxFit.cover,
+                Positioned(
+                  left: widget.width! / 2.0 - 20,
+                  child: Container(
+                    child: Image.asset(
+                      'assets/images/cm7_share_card_needle~iphone.png',
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
-        ),
-        Container(
-          width: double.infinity,
-          height: 100,
+          Container(
+            width: double.infinity,
+            height: 100,
 //          color: Colors.red,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: imageNameList
-                .map((e) => Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: imageNameList
+                  .map((e) => Container(
 //                      color: CommonColors.randomColor,
-                      child: Image.asset(
-                        'assets/images/$e',
-                        color: Colors.white,
-                        width: 30,
-                        height: 30,
-                        fit: BoxFit.fitHeight,
-                      ),
-                    ))
-                .toList(),
-          ),
-        )
-      ],
+                        child: Image.asset(
+                          'assets/images/$e',
+                          color: Colors.white,
+                          width: 30,
+                          height: 30,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ))
+                  .toList(),
+            ),
+          )
+        ],
+      ),
     );
   }
 
