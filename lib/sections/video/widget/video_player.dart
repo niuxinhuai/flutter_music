@@ -18,6 +18,8 @@ class VideoPlayerWidget extends StatefulWidget {
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   VideoPlayerController? _controller;
+  String url =
+      "https://netease-cloud-music-api-sable-gamma.vercel.app/video/url?id=D52DA5A9DA969DF16175877C7527E828";
 
   @override
   void initState() {
@@ -92,7 +94,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                 )
               : Container(
                   child: Text(
-                    "无法播放视频时，记得把debug关掉",
+                    "无法播放视频时，网页调用$url,将json复制到assets下的video_url中",
                     style: GpOtherTheme.size17(context)!
                         .copyWith(color: CommonColors.onPrimaryTextColor),
                   ),

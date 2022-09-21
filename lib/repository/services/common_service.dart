@@ -356,6 +356,7 @@ class CommonService {
 
   ///视频 - 获取视频详情
   static Future<VideoDetailWrap?> getVideoDetail(String id) async {
+    print(">>>>>>>>>>id:$id");
     if (DebugUtils.debug) {
       return await _jsonDecode(JsonStringConstants.video_detail)
           .then((value) => VideoDetailWrap.fromJson(value));
@@ -365,7 +366,7 @@ class CommonService {
         .then((value) => VideoDetailWrap.fromJson(value));
   }
 
-  ///视频 - 获取视频Url,url有大概1个小时的有效期，过期需要重新获取链接
+  ///视频 - 获取视频Url,url有大概1个小时的有效期，过期需要重新获取链接，可以通过自己拼接链接去safari上获取json中的url进行播放
   static Future<VideoUrlWrap?> getVideoUrl(String id) async {
     if (DebugUtils.debug) {
       return await _jsonDecode(JsonStringConstants.video_url)
