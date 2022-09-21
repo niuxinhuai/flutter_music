@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Action;
 import 'package:flutter/widgets.dart' hide Action;
+import 'package:flutter_music/widgets/image_group_animation.dart';
 
 /// 通用 Loading 页面
 class Loading extends StatelessWidget {
@@ -25,11 +26,12 @@ class Loading extends StatelessWidget {
         : Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation(
-                    color ?? Theme.of(context).primaryColor),
-                strokeWidth: strokeWidth ?? 4.0,
-              ),
+//              CircularProgressIndicator(
+//                valueColor: AlwaysStoppedAnimation(
+//                    color ?? Theme.of(context).primaryColor),
+//                strokeWidth: strokeWidth ?? 4.0,
+//              ),
+              ImageGroupAnimation(),
               if (text != null)
                 Padding(
                   padding: EdgeInsets.only(top: 10),
