@@ -24,7 +24,7 @@ class ImageItemWidget extends StatelessWidget {
     if (needAddParam! == true) {
       imgUrl = url! +
           (width != null
-              ? "?param=${width!}${height != null ? "y${height!}" : ""}"
+              ? "?param=${width!.toInt()}${height != null ? "y${height!.toInt()}" : ""}"
               : "");
     }
     int? cacheWidth = width != null ? width!.toInt() : null;

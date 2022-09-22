@@ -46,3 +46,49 @@ class SearchUtils {
     "声音": voice,
   };
 }
+
+class SearchSingerCategoryUtils {
+  ///type
+
+  ///全部
+  static const int total_type = -1;
+
+  ///男歌手
+  static const int man = 1;
+
+  ///女歌手
+  static const int women = 2;
+
+  ///乐队
+  static const int band = 3;
+
+  static const Map<String, int> typeMap = {"男": man, "女": women, "乐队/组合": band};
+
+  ///area
+
+  ///全部
+  static const int area_total = -1;
+
+  ///华语
+  static const int chinese = 7;
+
+  ///欧美
+  static const int us = 96;
+
+  ///日本
+  static const int japan = 8;
+
+  ///韩国
+  static const int korea = 16;
+
+  ///其他
+  static const int other = 0;
+
+  static const Map<String, int> areaMap = {
+    "华语": chinese,
+    "欧美": us,
+    "日本": japan,
+    "韩国": korea,
+    "其他": other
+  };
+}

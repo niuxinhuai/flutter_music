@@ -201,6 +201,12 @@ before: 分页参数,取上一页最后一项的 time 获取下一页数据(获�
   ///搜索-热搜榜
   static const String search_hot_detail = "/search/hot/detail";
 
+  ///搜索 - 话题榜
+  ///可选参数 : limit: 取出评论数量 , 默认为 20
+  //
+  //offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*20, 其中 20 为 limit 的值
+  static const String search_hot_topic = "/hot/topic";
+
   ///搜索-推荐
   static const String search_recommend = "/search/hot";
 
@@ -216,4 +222,33 @@ type: 搜索类型；默认为 1 即单曲 , 取值意义 : 1: 单曲, 10: 专�
   * */
   static String search_detail(String keywords, {int type = 1018}) =>
       "/search?keywords=$keywords&type=$type";
+
+  /*
+  * 歌手分类列表
+说明 : 调用此接口,可获取歌手分类列表
+
+可选参数 :
+
+limit : 返回数量 , 默认为 30
+
+offset : 偏移数量，用于分页 , 如 : 如 :( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0 initial: 按首字母索引查找参数,如 /artist/list?type=1&area=96&initial=b 返回内容将以 name 字段开头为 b 或者拼音开头为 b 为顺序排列, 热门传-1,#传 0
+
+type 取值:
+
+-1:全部
+1:男歌手
+2:女歌手
+3:乐队
+area 取值:
+
+-1:全部
+7华语
+96欧美
+8:日本
+16韩国
+0:其他
+  *
+  * */
+  static String singer_category(int type, int area) =>
+      "/artist/list?type=$type&area=$area";
 }

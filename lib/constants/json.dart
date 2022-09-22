@@ -100,9 +100,16 @@ class JsonStringConstants {
   ///搜索 - 热搜榜
   static const String search_hot_detail = "assets/json/search_hot_detail.json";
 
+  ///搜索 - 话题榜
+  static const String search_hot_topic = "assets/json/search_hot_topic.json";
+
   ///搜索 - 推荐
   static const String search_recommend = "assets/json/search_recommend.json";
 
   ///搜索 - 详情
   static const String search_detail = "assets/json/search_detail_1018.json";
+
+  ///搜索 - 歌手分类
+  static const String search_singer_category =
+      "assets/json/search_singer_category.json";
 }

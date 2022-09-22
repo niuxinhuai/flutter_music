@@ -9,6 +9,7 @@ import 'package:flutter_music/sections/podcast/page/catelist/page.dart';
 import 'package:flutter_music/sections/podcast/page/detail/page.dart';
 import 'package:flutter_music/sections/search/page/detail/page.dart';
 import 'package:flutter_music/sections/search/page/search/page.dart';
+import 'package:flutter_music/sections/search/page/singer_category/page.dart';
 import 'package:flutter_music/sections/square/page/edit/page.dart';
 import 'package:flutter_music/sections/square/page/page.dart';
 import 'package:flutter_music/sections/video/page/page.dart';
@@ -30,6 +31,7 @@ class RouterHelper {
     RouterKeys.video_detail: VideoDetailPage(),
     RouterKeys.search: SearchPage(),
     RouterKeys.search_detail: SearchDetailPage(),
+    RouterKeys.search_singer_category: SingerCategoryPage(),
   };
 }
 
@@ -70,6 +72,9 @@ class RouterKeys {
 
   //搜索详情
   static const search_detail = "search_detail";
+
+  //搜索-歌手分类
+  static const search_singer_category = "search_singer_category";
 
   //web
   static const web_view = "web_view";
