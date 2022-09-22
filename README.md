@@ -128,6 +128,25 @@ flutter 仿写网易云音乐
 ![IMG_0698.PNG](https://upload-images.jianshu.io/upload_images/2189604-778c295b5be807f0.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/320)
 
 
+####搜索页
+
+![IMG_0746.PNG](https://upload-images.jianshu.io/upload_images/2189604-2fc71d66b4b29a1f.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+搜索-歌手分类页
+
+![IMG_0747.PNG](https://upload-images.jianshu.io/upload_images/2189604-61f7fecf42de4c1b.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+
+搜索 - 详情页-综合页
+
+
+![IMG_0749.PNG](https://upload-images.jianshu.io/upload_images/2189604-56b81df6f9e8a7ab.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+![IMG_0750.PNG](https://upload-images.jianshu.io/upload_images/2189604-f3865e253c3f347e.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+![IMG_0751.PNG](https://upload-images.jianshu.io/upload_images/2189604-5b3d366bd4067ad3.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+
 
 #####下边上gif总体图，有点大，但是值得等待
 
