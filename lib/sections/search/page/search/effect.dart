@@ -6,9 +6,11 @@ import 'package:flutter_music/repository/database/common_database.dart';
 import 'package:flutter_music/repository/services/common_service.dart';
 import 'package:flutter_music/sections/search/models/search_default.dart';
 import 'package:flutter_music/sections/search/models/search_hot.dart';
+import 'package:flutter_music/sections/search/models/search_hot_topic.dart';
 import 'package:flutter_music/sections/search/models/search_recommend.dart';
 import 'package:flutter_music/sections/search/page/search/history/action.dart';
 import 'package:flutter_music/utils/time_utl.dart';
+import 'package:flutter_music/widgets/toast.dart';
 import 'action.dart';
 import 'state.dart';
 
@@ -17,6 +19,7 @@ Effect<SearchState>? buildEffect() {
     SearchAction.action: _onAction,
     Lifecycle.initState: _initState,
     SearchAction.onTapSearch: _onTapSearch,
+    SearchAction.onTapTopMenu: _onTapTopMenu,
   });
 }
 
@@ -35,13 +38,17 @@ void _initState(Action action, Context<SearchState> ctx) async {
       .toList();
 
   SearchHotWrap? hotWrap = await CommonService.getSearchHotData();
+  SearchHotTopicWrap? topicWrap = await CommonService.getSearchHotTopic();
   SearchRecommendWrap? wrap = await CommonService.getSearchRecommendHot();
   List<UserSearchLog> logs = await CommonDb.getAllSearchHistoryLog();
   if (hotWrap != null &&
       hotWrap.code == 200 &&
       wrap != null &&
-      wrap.code == 200) {
-    ctx.dispatch(SearchActionCreator.didFetchDataAction(hotWrap, wrap, logs));
+      wrap.code == 200 &&
+      topicWrap != null &&
+      topicWrap.code == 200) {
+    ctx.dispatch(
+        SearchActionCreator.didFetchDataAction(hotWrap, wrap, logs, topicWrap));
   }
 }
 
@@ -60,6 +67,16 @@ void _onTapSearch(Action action, Context<SearchState> ctx) {
       "hint": ctx.state.hintText
     }).then(
         (value) => ctx.dispatch(SearchHistoryActionCreator.onRefreshAction()));
+  }
+}
+
+///顶部分类点击
+void _onTapTopMenu(Action action, Context<SearchState> ctx) {
+  final String text = action.payload;
+  if (text == "歌手") {
+    ARouter.open(ctx.context, RouterKeys.search_singer_category);
+  } else {
+    Toast.toast(ctx.context, text);
   }
 }
 

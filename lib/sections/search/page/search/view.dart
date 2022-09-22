@@ -60,13 +60,21 @@ Widget _buildBody(
       _buildTop(state, dispatch, viewService),
       Expanded(
           child: SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             viewService.buildComponent('history'),
             viewService.buildComponent('recommend'),
-            viewService.buildComponent('hot'),
+            SingleChildScrollView(
+              padding: EdgeInsets.only(bottom: 30),
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  viewService.buildComponent('hot'),
+                  viewService.buildComponent('topic')
+                ],
+              ),
+            ),
           ],
         ),
       ))
@@ -90,18 +98,21 @@ Widget _buildTop(
 
 Widget _buildTopItem(SearchState state, Dispatch dispatch,
     ViewService viewService, SearchTopModel model) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Image.asset(
-        "assets/images/${model.imageNamed}",
-        color: Colors.red,
-      ),
-      Text(
-        model.text ?? "",
-        style: GpOtherTheme.size15(viewService.context)!
-            .copyWith(fontWeight: FontWeight.bold),
-      )
-    ],
+  return GestureDetector(
+    onTap: () => dispatch(SearchActionCreator.onTapTopMenuAction(model.text!)),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          "assets/images/${model.imageNamed}",
+          color: Colors.red,
+        ),
+        Text(
+          model.text ?? "",
+          style: GpOtherTheme.size15(viewService.context)!
+              .copyWith(fontWeight: FontWeight.bold),
+        )
+      ],
+    ),
   );
 }

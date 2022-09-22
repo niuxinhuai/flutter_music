@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter_music/sections/search/page/search/history/component.dart';
 import 'package:flutter_music/sections/search/page/search/hot/component.dart';
 import 'package:flutter_music/sections/search/page/search/recommend/component.dart';
+import 'package:flutter_music/sections/search/page/search/topic/component.dart';
 
 import 'effect.dart';
 import 'reducer.dart';
@@ -21,6 +22,7 @@ class SearchPage extends Page<SearchState, Map<String, dynamic>> {
                 "recommend":
                     SearchRecommendConnector() + SearchRecommendComponent(),
                 "hot": SearchHotConnector() + SearchHotComponent(),
+                "topic": SearchTopicConnector() + SearchTopicComponent(),
                 "history": SearchHistoryConnector() + SearchHistoryComponent(),
               }),
           middleware: <Middleware<SearchState>>[],

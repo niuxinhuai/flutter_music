@@ -3,6 +3,7 @@ import 'package:flutter_music/sections/search/models/search_default.dart';
 import 'package:flutter_music/sections/search/page/search/history/state.dart';
 import 'package:flutter_music/sections/search/page/search/hot/state.dart';
 import 'package:flutter_music/sections/search/page/search/recommend/state.dart';
+import 'package:flutter_music/sections/search/page/search/topic/state.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
 
 class SearchState implements Cloneable<SearchState> {
@@ -12,6 +13,7 @@ class SearchState implements Cloneable<SearchState> {
   List<SearchTopModel> items = [];
 
   SearchHotState? hotState;
+  SearchTopicState? topicState;
   SearchHistoryState? historyState;
   SearchRecommendState? recommendState;
 
@@ -23,6 +25,7 @@ class SearchState implements Cloneable<SearchState> {
       ..searchText = searchText
       ..items = items
       ..hotState = hotState
+      ..topicState = topicState
       ..historyState = historyState
       ..recommendState = recommendState;
   }
@@ -38,6 +41,7 @@ SearchState initState(Map<String, dynamic>? args) {
     ..loadingState = LoadingState.isLoading
     ..hintText = text
     ..hotState = SearchHotState()
+    ..topicState = SearchTopicState()
     ..historyState = SearchHistoryState()
     ..recommendState = SearchRecommendState();
 }
@@ -52,6 +56,19 @@ class SearchHotConnector extends ConnOp<SearchState, SearchHotState> {
   @override
   void set(SearchState state, SearchHotState subState) {
     state.hotState = subState;
+  }
+}
+
+///话题组件连接器
+class SearchTopicConnector extends ConnOp<SearchState, SearchTopicState> {
+  @override
+  SearchTopicState? get(SearchState? state) {
+    return state?.topicState;
+  }
+
+  @override
+  void set(SearchState state, SearchTopicState subState) {
+    state.topicState = subState;
   }
 }
 
