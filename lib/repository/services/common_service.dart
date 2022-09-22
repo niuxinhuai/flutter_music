@@ -20,8 +20,10 @@ import 'package:flutter_music/sections/podcast/models/personalize.dart';
 import 'package:flutter_music/sections/podcast/models/podcast.dart';
 import 'package:flutter_music/sections/search/models/search_default.dart';
 import 'package:flutter_music/sections/search/models/search_hot.dart';
+import 'package:flutter_music/sections/search/models/search_hot_topic.dart';
 import 'package:flutter_music/sections/search/models/search_recommend.dart';
 import 'package:flutter_music/sections/search/models/search_result.dart';
+import 'package:flutter_music/sections/search/models/singer_category.dart';
 import 'package:flutter_music/sections/square/models/catlist.dart';
 import 'package:flutter_music/sections/square/models/playlist.dart';
 import 'package:flutter_music/sections/square/models/recommend.dart';
@@ -421,6 +423,17 @@ class CommonService {
         .then((value) => SearchHotWrap.fromJson(value));
   }
 
+  ///搜索 - 话题榜
+  static Future<SearchHotTopicWrap?> getSearchHotTopic() async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.search_hot_topic)
+          .then((value) => SearchHotTopicWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.search_hot_topic)
+        .then((value) => SearchHotTopicWrap.fromJson(value));
+  }
+
   ///搜索 - 推荐列表
   static Future<SearchRecommendWrap?> getSearchRecommendHot() async {
     if (DebugUtils.debug) {
@@ -442,5 +455,16 @@ class CommonService {
 
     return await ServiceHelper.get(MusicUri.search_detail(keywords, type: type))
         .then((value) => SearchResultWrap.fromJson(value));
+  }
+
+  ///搜索 - 歌手分类
+  static Future<SearchSingerCategoryWrap?> getSearchSingerCategory(
+      int type, int area) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.search_singer_category)
+          .then((value) => SearchSingerCategoryWrap.fromJson(value));
+    }
+    return await ServiceHelper.get(MusicUri.singer_category(type, area))
+        .then((value) => SearchSingerCategoryWrap.fromJson(value));
   }
 }
