@@ -19,6 +19,24 @@ Map<String, dynamic> _$SearchResultWrapToJson(SearchResultWrap instance) =>
     };
 
 SearchResult _$SearchResultFromJson(Map json) => SearchResult()
+  ..songs = (json['songs'] as List<dynamic>?)
+      ?.map((e) => DailySongItem.fromJson(Map<String, dynamic>.from(e as Map)))
+      .toList()
+  ..playlists = (json['playlists'] as List<dynamic>?)
+      ?.map((e) => PlaylistStage.fromJson(Map<String, dynamic>.from(e as Map)))
+      .toList()
+  ..artists = (json['artists'] as List<dynamic>?)
+      ?.map((e) => ArtistsItem.fromJson(Map<String, dynamic>.from(e as Map)))
+      .toList()
+  ..albums = (json['albums'] as List<dynamic>?)
+      ?.map((e) => BoardListItem.fromJson(Map<String, dynamic>.from(e as Map)))
+      .toList()
+  ..sim_querys = (json['sim_querys'] as List<dynamic>?)
+      ?.map((e) => SimqueryItem.fromJson(Map<String, dynamic>.from(e as Map)))
+      .toList()
+  ..userprofiles = (json['userprofiles'] as List<dynamic>?)
+      ?.map((e) => PersonalizeDJ.fromJson(Map<String, dynamic>.from(e as Map)))
+      .toList()
   ..code = json['code'] as int?
   ..order = (json['order'] as List<dynamic>?)?.map((e) => e as String).toList()
   ..song = json['song'] == null
@@ -48,6 +66,12 @@ SearchResult _$SearchResultFromJson(Map json) => SearchResult()
 
 Map<String, dynamic> _$SearchResultToJson(SearchResult instance) =>
     <String, dynamic>{
+      'songs': instance.songs,
+      'playlists': instance.playlists,
+      'artists': instance.artists,
+      'albums': instance.albums,
+      'sim_querys': instance.sim_querys,
+      'userprofiles': instance.userprofiles,
       'code': instance.code,
       'order': instance.order,
       'song': instance.song,

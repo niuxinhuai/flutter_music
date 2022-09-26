@@ -1,4 +1,6 @@
 import 'package:flutter_music/models/common_model.dart';
+import 'package:flutter_music/sections/Leaderboard/models/leaderboard.dart';
+import 'package:flutter_music/sections/search/models/search_result.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'recommend.g.dart';
@@ -39,6 +41,17 @@ class DailySongItem {
   /// u64, 非零表示有MV ID
   int? mv;
 
+  int? mvid;
+
+  //歌手/艺人
+  List<ArtistsItem>? artists;
+  BoardListItem? album;
+  //歌词
+  DailyLyrics? lyrics;
+  //展开/闭合
+  @JsonKey(ignore: true)
+  bool open = false;
+
   //为1时显示vip
   int? fee;
 
@@ -57,6 +70,14 @@ class DailySongItem {
 
   String getSongString() {
     if (ar == null || ar?.isEmpty == true) {
+      if (artists != null && artists?.isNotEmpty == true) {
+        String named = artists!.map((e) => e.name ?? "").join("/");
+        if (album?.name != null && album?.name?.isNotEmpty == true) {
+          return named + " - ${album?.name ?? ""}";
+        }
+        return named;
+      }
+
       return "";
     }
     String named = ar!.map((e) => e.name ?? "").join(" | ");
@@ -118,16 +139,30 @@ class DailySongItem {
 
   ///是否存在mv
   bool hasMV() {
-    if (mv == null || mv == 0) {
-      return false;
+    if ((mv != null && mv != 0) || (mvid != null && mvid != 0)) {
+      return true;
     }
-    return true;
+
+    return false;
   }
 
   factory DailySongItem.fromJson(Map<String, dynamic> json) =>
       _$DailySongItemFromJson(json);
 
   toJson() => _$DailySongItemToJson(this);
+}
+
+///歌词
+@JsonSerializable()
+class DailyLyrics {
+  DailyLyrics();
+
+  String? txt;
+
+  factory DailyLyrics.fromJson(Map<String, dynamic> json) =>
+      _$DailyLyricsFromJson(json);
+
+  toJson() => _$DailyLyricsToJson(this);
 }
 
 ///作者

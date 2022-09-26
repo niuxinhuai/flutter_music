@@ -23,6 +23,20 @@ class SearchResultWrap {
 class SearchResult {
   SearchResult();
 
+  //分类下的数据
+  List<DailySongItem>? songs;
+
+  List<PlaylistStage>? playlists;
+
+  //歌手/艺人
+  List<ArtistsItem>? artists;
+
+  List<BoardListItem>? albums;
+
+  List<SimqueryItem>? sim_querys;
+
+  List<PersonalizeDJ>? userprofiles;
+
   int? code;
 
   //排序
