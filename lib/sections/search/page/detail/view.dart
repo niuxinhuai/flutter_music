@@ -2,6 +2,7 @@ import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/res/other_theme.dart';
+import 'package:flutter_music/sections/search/page/detail/simple/page.dart';
 import 'package:flutter_music/sections/search/page/detail/total/page.dart';
 import 'package:flutter_music/utils/search_util.dart';
 import 'package:flutter_music/widgets/appbar.dart';
@@ -52,8 +53,11 @@ Widget _buildBody(
   return TabBarSegmentController(
       useScaffold: false,
       tabTitles: SearchUtils.map.keys.toList(),
-      children: SearchUtils.map.values
-          .map((e) => SearchResultTotalPage()
-              .buildPage({"type": e, "text": state.text}))
-          .toList());
+      children: SearchUtils.map.values.map((e) {
+        if (e == SearchUtils.total) {
+          return SearchResultTotalPage()
+              .buildPage({"type": e, "text": state.text});
+        }
+        return SearchSimplePage().buildPage({"type": e, "text": state.text});
+      }).toList());
 }

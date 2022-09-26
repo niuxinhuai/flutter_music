@@ -39,9 +39,9 @@ class SearchUtils {
     "歌手": singer,
     "歌单": song_list,
     "用户": user,
-    "播客": mv,
+//    "播客": mv,
     "歌词": lyric,
-    "电台": dj,
+//    "电台": dj,
     "视频": video,
     "声音": voice,
   };

@@ -36,6 +36,7 @@ import 'package:flutter_music/sections/video/models/url.dart';
 import 'package:flutter_music/sections/village/models/category.dart';
 import 'package:flutter_music/sections/village/models/source.dart';
 import 'package:flutter_music/utils/debug_util.dart';
+import 'package:flutter_music/utils/search_util.dart';
 
 class CommonService {
   ///首页数据
@@ -450,6 +451,35 @@ class CommonService {
       String keywords, int type) async {
     if (DebugUtils.debug) {
       return await _jsonDecode(JsonStringConstants.search_detail)
+          .then((value) => SearchResultWrap.fromJson(value));
+    }
+
+    return await ServiceHelper.get(MusicUri.search_detail(keywords, type: type))
+        .then((value) => SearchResultWrap.fromJson(value));
+  }
+
+  ///搜索 - 详情 - 分类数据
+  static Future<SearchResultWrap?> getSearchDetailCategory(
+      String keywords, int type) async {
+    if (DebugUtils.debug) {
+      String jsonStr = "";
+      if (type == SearchUtils.single) {
+        jsonStr = JsonStringConstants.search_detail_single;
+      } else if (type == SearchUtils.song_list) {
+        jsonStr = JsonStringConstants.search_detail_playlist;
+      } else if (type == SearchUtils.album) {
+        jsonStr = JsonStringConstants.search_detail_album;
+      } else if (type == SearchUtils.singer) {
+        jsonStr = JsonStringConstants.search_detail_singer;
+      } else if (type == SearchUtils.user) {
+        jsonStr = JsonStringConstants.search_detail_user;
+      } else if (type == SearchUtils.lyric) {
+        jsonStr = JsonStringConstants.search_detail_lyric;
+      } else if (type == SearchUtils.video) {
+        jsonStr = JsonStringConstants.search_detail_video;
+      }
+//      print(">>>>>>>>>type:$type  ...json:$jsonStr");
+      return await _jsonDecode(jsonStr)
           .then((value) => SearchResultWrap.fromJson(value));
     }
 

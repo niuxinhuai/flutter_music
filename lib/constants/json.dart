@@ -109,6 +109,32 @@ class JsonStringConstants {
   ///搜索 - 详情
   static const String search_detail = "assets/json/search_detail_1018.json";
 
+  ///搜索 - 详情 - 单曲
+  static const String search_detail_single = "assets/json/search_detail_1.json";
+
+  ///搜索 - 详情 - 专辑
+  static const String search_detail_album = "assets/json/search_detail_10.json";
+
+  ///搜索 - 详情 - 歌手
+  static const String search_detail_singer =
+      "assets/json/search_detail_100.json";
+
+  ///搜索 - 详情 - 歌手
+  static const String search_detail_user =
+      "assets/json/search_detail_1002.json";
+
+  ///搜索 - 详情 - 歌词
+  static const String search_detail_lyric =
+      "assets/json/search_detail_1006.json";
+
+  ///搜索 - 详情 - 视频
+  static const String search_detail_video =
+      "assets/json/search_detail_1014.json";
+
+  ///搜索 - 详情 - 歌单
+  static const String search_detail_playlist =
+      "assets/json/search_detail_1000.json";
+
   ///搜索 - 歌手分类
   static const String search_singer_category =
       "assets/json/search_singer_category.json";
