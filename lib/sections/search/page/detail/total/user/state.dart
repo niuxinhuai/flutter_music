@@ -3,10 +3,13 @@ import 'package:flutter_music/sections/search/models/search_result.dart';
 
 class UserState implements Cloneable<UserState> {
   SearchResultItem? item;
+  String? searchKey;
 
   @override
   UserState clone() {
-    return UserState()..item = item;
+    return UserState()
+      ..item = item
+      ..searchKey = searchKey;
   }
 }
 

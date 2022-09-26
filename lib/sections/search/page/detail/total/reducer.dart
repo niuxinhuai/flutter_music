@@ -19,11 +19,21 @@ SearchResultTotalState _didFetchData(
   newState.loadingState = LoadingState.success;
   newState.wrap = action.payload;
   newState.songState?.item = newState.wrap?.result?.song;
+  newState.songState?.searchkey = newState.text;
+
   newState.playListState?.item = newState.wrap?.result?.playList;
+  newState.playListState?.searchKey = newState.text;
+
   newState.artistState?.item = newState.wrap?.result?.artist;
+
   newState.albumState?.item = newState.wrap?.result?.album;
+  newState.albumState?.searchKey = newState.text;
+
   newState.simQueryState?.item = newState.wrap?.result?.sim_query;
+
   newState.userState?.item = newState.wrap?.result?.user;
+  newState.userState?.searchKey = newState.text;
+
   return newState;
 }
 

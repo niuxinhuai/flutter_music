@@ -9,5 +9,6 @@ Widget buildView(
     SingerState state, Dispatch dispatch, ViewService viewService) {
   return SearchTotalSongWidget(
     item: state.item,
+    searchKey: state.searchkey,
   );
 }
