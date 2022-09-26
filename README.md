@@ -146,6 +146,30 @@ flutter 仿写网易云音乐
 
 ![IMG_0751.PNG](https://upload-images.jianshu.io/upload_images/2189604-5b3d366bd4067ad3.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
 
+![IMG_0753.PNG](https://upload-images.jianshu.io/upload_images/2189604-82a23a3b4daf95b3.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+![IMG_0754.PNG](https://upload-images.jianshu.io/upload_images/2189604-75ba0ac58ff21dfb.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+
+![IMG_0755.PNG](https://upload-images.jianshu.io/upload_images/2189604-16bfdf49d5457977.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+
+
+![IMG_0756.PNG](https://upload-images.jianshu.io/upload_images/2189604-cf3ae2df37a761d8.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+
+
+![IMG_0757.PNG](https://upload-images.jianshu.io/upload_images/2189604-563b2f021adb1c9b.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+
+![IMG_0758.PNG](https://upload-images.jianshu.io/upload_images/2189604-972b5a022649a2b8.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+
+
+![IMG_0759.PNG](https://upload-images.jianshu.io/upload_images/2189604-48e96505c1f49646.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
+
+
+![IMG_0760.PNG](https://upload-images.jianshu.io/upload_images/2189604-929d4f768d9f9bdb.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/220)
 
 
 #####下边上gif总体图，有点大，但是值得等待
