@@ -21,8 +21,10 @@ import 'package:flutter_music/sections/podcast/models/podcast.dart';
 import 'package:flutter_music/sections/search/models/search_default.dart';
 import 'package:flutter_music/sections/search/models/search_hot.dart';
 import 'package:flutter_music/sections/search/models/search_hot_topic.dart';
+import 'package:flutter_music/sections/search/models/search_multimatch.dart';
 import 'package:flutter_music/sections/search/models/search_recommend.dart';
 import 'package:flutter_music/sections/search/models/search_result.dart';
+import 'package:flutter_music/sections/search/models/search_voice.dart';
 import 'package:flutter_music/sections/search/models/singer_category.dart';
 import 'package:flutter_music/sections/square/models/catlist.dart';
 import 'package:flutter_music/sections/square/models/playlist.dart';
@@ -477,7 +479,10 @@ class CommonService {
         jsonStr = JsonStringConstants.search_detail_lyric;
       } else if (type == SearchUtils.video) {
         jsonStr = JsonStringConstants.search_detail_video;
+      } else if (type == SearchUtils.voice) {
+        jsonStr = JsonStringConstants.search_detail_voice;
       }
+
 //      print(">>>>>>>>>type:$type  ...json:$jsonStr");
       return await _jsonDecode(jsonStr)
           .then((value) => SearchResultWrap.fromJson(value));
@@ -485,6 +490,17 @@ class CommonService {
 
     return await ServiceHelper.get(MusicUri.search_detail(keywords, type: type))
         .then((value) => SearchResultWrap.fromJson(value));
+  }
+
+  ///搜索 - 详情 - 声音
+  static Future<SearchVoiceWrap?> getSearchDetailVoice(
+      String keywords, int type) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.search_detail_voice)
+          .then((value) => SearchVoiceWrap.fromJson(value));
+    }
+    return await ServiceHelper.get(MusicUri.search_detail(keywords, type: type))
+        .then((value) => SearchVoiceWrap.fromJson(value));
   }
 
   ///搜索 - 歌手分类
@@ -496,5 +512,16 @@ class CommonService {
     }
     return await ServiceHelper.get(MusicUri.singer_category(type, area))
         .then((value) => SearchSingerCategoryWrap.fromJson(value));
+  }
+
+  ///搜索 - 搜索多重匹配
+  static Future<SearchMultimatchWrap?> getSearchMultimatch(
+      String keyword) async {
+    if (DebugUtils.debug) {
+      return await _jsonDecode(JsonStringConstants.search_multimatch)
+          .then((value) => SearchMultimatchWrap.fromJson(value));
+    }
+    return await ServiceHelper.get(MusicUri.search_multimatch(keyword))
+        .then((value) => SearchMultimatchWrap.fromJson(value));
   }
 }

@@ -15,9 +15,12 @@ Reducer<SearchResultTotalState>? buildReducer() {
 
 SearchResultTotalState _didFetchData(
     SearchResultTotalState state, Action action) {
+  final Tuple2 tuple2 = action.payload;
   final SearchResultTotalState newState = state.clone();
   newState.loadingState = LoadingState.success;
-  newState.wrap = action.payload;
+  newState.wrap = tuple2.i0;
+  newState.multimatchWrap = tuple2.i1;
+
   newState.songState?.item = newState.wrap?.result?.song;
   newState.songState?.searchkey = newState.text;
 

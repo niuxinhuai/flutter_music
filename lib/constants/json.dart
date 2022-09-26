@@ -135,7 +135,14 @@ class JsonStringConstants {
   static const String search_detail_playlist =
       "assets/json/search_detail_1000.json";
 
+  ///搜索 - 详情 - 声音
+  static const String search_detail_voice =
+      "assets/json/search_detail_2000.json";
+
   ///搜索 - 歌手分类
   static const String search_singer_category =
       "assets/json/search_singer_category.json";
+
+  ///搜索 - 歌手分类
+  static const String search_multimatch = "assets/json/search_multimatch.json";
 }

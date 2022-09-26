@@ -8,6 +8,7 @@ import 'package:flutter_music/sections/search/widget/lyric_list.dart';
 import 'package:flutter_music/sections/search/widget/playlist_list.dart';
 import 'package:flutter_music/sections/search/widget/singer_list.dart';
 import 'package:flutter_music/sections/search/widget/user_list.dart';
+import 'package:flutter_music/sections/search/widget/voice_list.dart';
 import 'package:flutter_music/utils/search_util.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
 
@@ -39,6 +40,7 @@ Widget _buildBody(
   bool isSinger = state.type == SearchUtils.singer;
   bool isUser = state.type == SearchUtils.user;
   bool isLyric = state.type == SearchUtils.lyric;
+  bool isVoice = state.type == SearchUtils.voice;
   if (isSingle) {
     return _buildSearchSinger(state, dispatch, viewService);
   } else if (isPlayList) {
@@ -64,6 +66,11 @@ Widget _buildBody(
   } else if (isLyric) {
     return SearchLyricWidget(
       songs: state.wrap?.result?.songs,
+      searchKey: state.text,
+    );
+  } else if (isVoice) {
+    return SearchVoiceWidget(
+      wrap: state.voiceWrap,
       searchKey: state.text,
     );
   }

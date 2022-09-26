@@ -6,12 +6,14 @@ class CustomSearchText extends StatelessWidget {
   final String? searchKey;
   final int? fontSize;
   final Color? fontColor;
+  final int? maxLines;
 
   CustomSearchText(
       {this.searchContent,
       this.searchKey,
       this.fontSize = 17,
-      this.fontColor = const Color(0xff3c3c3c)});
+      this.fontColor = const Color(0xff3c3c3c),
+      this.maxLines = 200});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,6 @@ class CustomSearchText extends StatelessWidget {
         softWrap: true,
         textAlign: TextAlign.left,
         overflow: TextOverflow.ellipsis,
-        maxLines: 200);
+        maxLines: maxLines);
   }
 }

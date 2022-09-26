@@ -1,5 +1,6 @@
 import 'package:fish_redux/fish_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_music/sections/search/widget/multimatch.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
 
 import 'action.dart';
@@ -23,9 +24,20 @@ Widget _buildBody(
     padding: EdgeInsets.only(bottom: 30),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: state.wrap!.result!.order!
-          .map((e) => viewService.buildComponent(e))
-          .toList(),
+      children: [
+        if (state.multimatchWrap?.result?.artist != null &&
+            state.multimatchWrap?.result?.artist?.isNotEmpty == true)
+          SearchMultimatchWidget(
+            wrap: state.multimatchWrap,
+            searchKey: state.text,
+          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: state.wrap!.result!.order!
+              .map((e) => viewService.buildComponent(e))
+              .toList(),
+        )
+      ],
     ),
   );
 }

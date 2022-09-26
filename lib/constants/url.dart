@@ -251,4 +251,8 @@ area 取值:
   * */
   static String singer_category(int type, int area) =>
       "/artist/list?type=$type&area=$area";
+
+  ///搜索 - 多重匹配
+  static String search_multimatch(String keyword) =>
+      "/search/multimatch?keywords=$keyword";
 }

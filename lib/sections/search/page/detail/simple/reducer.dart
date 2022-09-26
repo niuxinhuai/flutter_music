@@ -9,6 +9,7 @@ Reducer<SearchSimpleState>? buildReducer() {
     <Object, Reducer<SearchSimpleState>>{
       SearchSimpleAction.action: _onAction,
       SearchSimpleAction.didFetchData: _didFetchData,
+      SearchSimpleAction.didFetchVoiceData: _didFetchVoiceData,
     },
   );
 }
@@ -16,6 +17,13 @@ Reducer<SearchSimpleState>? buildReducer() {
 SearchSimpleState _didFetchData(SearchSimpleState state, Action action) {
   final SearchSimpleState newState = state.clone();
   newState.wrap = action.payload;
+  newState.loadingState = LoadingState.success;
+  return newState;
+}
+
+SearchSimpleState _didFetchVoiceData(SearchSimpleState state, Action action) {
+  final SearchSimpleState newState = state.clone();
+  newState.voiceWrap = action.payload;
   newState.loadingState = LoadingState.success;
   return newState;
 }

@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter_music/sections/search/models/search_multimatch.dart';
 import 'package:flutter_music/sections/search/models/search_result.dart';
 import 'package:flutter_music/sections/search/page/detail/total/album/state.dart';
 import 'package:flutter_music/sections/search/page/detail/total/artist/state.dart';
@@ -14,6 +15,7 @@ class SearchResultTotalState implements Cloneable<SearchResultTotalState> {
   int? type;
   String? text;
   SearchResultWrap? wrap;
+  SearchMultimatchWrap? multimatchWrap;
 
   SingerState? songState;
   PlaylistState? playListState;
@@ -29,6 +31,7 @@ class SearchResultTotalState implements Cloneable<SearchResultTotalState> {
       ..type = type
       ..text = text
       ..wrap = wrap
+      ..multimatchWrap = multimatchWrap
       ..songState = songState
       ..playListState = playListState
       ..artistState = artistState
