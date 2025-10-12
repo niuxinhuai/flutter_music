@@ -55,6 +55,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    print(">>>>视频:$url");
     return GestureDetector(
       onTap: () {
         if (widget.onTapVideo != null) {

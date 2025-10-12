@@ -46,6 +46,9 @@ dependencies:
     #下拉刷新
   pull_to_refresh: ^2.0.0
 
+#  hello:
+#    path: /Users/niuxinhuai/Desktop/plugin_test/hello
+
     #json库
   json_annotation: ^4.1.0
 

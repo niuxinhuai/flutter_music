@@ -46,7 +46,7 @@ Widget _buildBannerItem(ViewService viewService, BuildContext context,
           url: banner.pic,
           width: size - 30,
           fit: BoxFit.fill,
-          needAddParam: true,
+          needAddParam: false,
         ),
         Positioned(
             bottom: 0,

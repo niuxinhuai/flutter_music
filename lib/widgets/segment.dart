@@ -90,6 +90,7 @@ class _TabBarSegmentControllerState extends State<TabBarSegmentController>
                   onTap: _segmentButtonDidClick,
                   isScrollable: widget.tabBarIsScrollable,
                   indicator: widget.decoration,
+                  indicatorSize: TabBarIndicatorSize.label,
                 ),
           actions: widget.actions == null ? [] : widget.actions,
         ),
@@ -116,6 +117,7 @@ class _TabBarSegmentControllerState extends State<TabBarSegmentController>
             onTap: _segmentButtonDidClick,
             isScrollable: widget.tabBarIsScrollable,
             indicator: widget.decoration,
+            indicatorSize: TabBarIndicatorSize.label,
           ),
         ),
         Expanded(
