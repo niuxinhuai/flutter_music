@@ -2,7 +2,7 @@
 
 ## Dart 与 Flutter
 
-- 维持 `pubspec.yaml` 中声明的 Flutter/Dart SDK 兼容范围，当前目标为 Flutter 3.29.3 / Dart 3.7.2。
+- 维持 `pubspec.yaml` 中声明的 Flutter/Dart SDK 兼容范围，当前目标为 Flutter 3.41.9 / Dart 3.11.5。
 - 默认遵循 `analysis_options.yaml` 引入的 `flutter_lints`。
 - 文件和目录命名优先使用小写下划线；已有历史目录如 `Leaderboard` 不在无关改动中重命名。
 - 优先使用项目已有 widget、颜色、主题、路由和工具类。

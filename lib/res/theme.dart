@@ -13,7 +13,9 @@ ThemeData getAppTheme({bool isDarkMode = false}) {
     unselectedWidgetColor: CommonColors.disableColor,
     cardColor: CommonColors.foregroundColor,
     hintColor: CommonColors.textColor999,
-    bottomAppBarTheme: BottomAppBarTheme(color: CommonColors.foregroundColor),
+    bottomAppBarTheme: BottomAppBarThemeData(
+      color: CommonColors.foregroundColor,
+    ),
     canvasColor: CommonColors.backgroundColor,
     //InkWell按下效果
     highlightColor: CommonColors.keyboardPressBgColor,
@@ -65,7 +67,7 @@ ThemeData getAppTheme({bool isDarkMode = false}) {
           isDarkMode ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
     ),
 
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
       indicatorSize: TabBarIndicatorSize.tab,
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(color: CommonColors.secondary, width: 2),
@@ -115,7 +117,7 @@ ThemeData getAppTheme({bool isDarkMode = false}) {
       opacity: 1.0,
       size: 24.0,
     ),
-    dialogTheme: DialogTheme(
+    dialogTheme: DialogThemeData(
       backgroundColor: CommonColors.foregroundColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),

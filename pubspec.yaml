@@ -8,8 +8,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.7.2
-  flutter: ">=3.29.3"
+  sdk: ">=3.11.5 <4.0.0"
+  flutter: ">=3.41.9"
 
 dependencies:
   flutter:
@@ -51,7 +51,7 @@ dependencies:
 #    path: /Users/niuxinhuai/Desktop/plugin_test/hello
 
     #json库
-  json_annotation: ^4.1.0
+  json_annotation: ^4.9.0
 
     #图片缓存
   cached_network_image: ^3.4.1
@@ -86,17 +86,21 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   #自动生成代码
-  source_gen: ^1.2.2
+  source_gen: ^2.0.0
   #自动生成代码
-  build_runner: ^2.1.11
+  build_runner: ^2.5.4
   #json解析
-  json_serializable: ^5.0.2
+  json_serializable: ^6.9.5
 
 
 dependency_overrides:
-  #接口缓存，等这个库的json_serializable依赖更新到5.0再切回来
+  # dio_http_cache 的 git 版本仍声明 json_serializable ^5.0.0，
+  # Flutter 3.41.9 / Dart 3.11.5 下统一使用新版代码生成链。
+  json_serializable: ^6.9.5
+
+  #接口缓存，等这个库的json_serializable依赖更新到6.x再切回来
   dio_http_cache:
     git: git@github.com:uquabc/dio-http-cache.git
 

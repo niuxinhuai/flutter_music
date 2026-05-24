@@ -6,6 +6,10 @@
 build/
 # Flutter applications should check in pubspec.lock for reproducible CI builds.
 
+# FVM SDK symlink/cache. Keep project version files committed.
+.fvm/flutter_sdk
+.fvm/flutter_sdk/
+
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
 doc/api/
