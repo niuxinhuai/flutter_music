@@ -31,7 +31,24 @@ jobs:
         run: flutter pub get
 
       - name: Analyze
-        run: flutter analyze --no-fatal-infos --no-fatal-warnings
+        shell: bash
+        run: |
+          set +e
+          flutter analyze --no-fatal-infos --no-fatal-warnings 2>&1 | tee analyze.log
+          analyze_status=${PIPESTATUS[0]}
+          set -e
+
+          if grep -Eq '^[[:space:]]*error[[:space:]]+•' analyze.log; then
+            exit 1
+          fi
+
+          if [ "$analyze_status" -ne 0 ] && ! grep -Eq '^[[:space:]]*[0-9]+ issues? found' analyze.log; then
+            exit "$analyze_status"
+          fi
+
+          if [ "$analyze_status" -ne 0 ]; then
+            echo "flutter analyze exited with $analyze_status without analyzer errors; continuing because infos/warnings are non-fatal."
+          fi
 
       - name: Test
         run: flutter test

@@ -4,8 +4,7 @@
 .dart_tool/
 .packages
 build/
-# If you're building an application, you may want to check-in your pubspec.lock
-pubspec.lock
+# Flutter applications should check in pubspec.lock for reproducible CI builds.
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
