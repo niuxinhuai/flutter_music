@@ -7,10 +7,12 @@ enum VideoDetailAction {
   action,
   onTapError,
   onPlayerProgress,
+  onTapDownload,
   onTapBottomCommentFloor,
   didPlayerProgress,
+  didUpdatePlaybackUrl,
   didError,
-  didFetchData
+  didFetchData,
 }
 
 class VideoDetailActionCreator {
@@ -23,26 +25,43 @@ class VideoDetailActionCreator {
   }
 
   static Action onPlayerProgressAction(double progress, Duration position) {
-    return Action(VideoDetailAction.onPlayerProgress,
-        payload: Tuple2(progress, position));
+    return Action(
+      VideoDetailAction.onPlayerProgress,
+      payload: Tuple2(progress, position),
+    );
   }
 
   static Action onTapBottomCommentFloorAction() {
     return const Action(VideoDetailAction.onTapBottomCommentFloor);
   }
 
+  static Action onTapDownloadAction() {
+    return const Action(VideoDetailAction.onTapDownload);
+  }
+
   static Action didPlayerProgressAction(double progress, Duration position) {
-    return Action(VideoDetailAction.didPlayerProgress,
-        payload: Tuple2(progress, position));
+    return Action(
+      VideoDetailAction.didPlayerProgress,
+      payload: Tuple2(progress, position),
+    );
   }
 
   static Action didErrorAction() {
     return const Action(VideoDetailAction.didError);
   }
 
-  static Action didFetchDataAction(VideoDetailWrap detailWrap,
-      VideoUrlWrap urlWrap, VideoDetailInfoWrap infoWrap) {
-    return Action(VideoDetailAction.didFetchData,
-        payload: Tuple3(detailWrap, urlWrap, infoWrap));
+  static Action didUpdatePlaybackUrlAction(String url) {
+    return Action(VideoDetailAction.didUpdatePlaybackUrl, payload: url);
+  }
+
+  static Action didFetchDataAction(
+    VideoDetailWrap detailWrap,
+    VideoUrlWrap urlWrap,
+    VideoDetailInfoWrap infoWrap,
+  ) {
+    return Action(
+      VideoDetailAction.didFetchData,
+      payload: Tuple3(detailWrap, urlWrap, infoWrap),
+    );
   }
 }

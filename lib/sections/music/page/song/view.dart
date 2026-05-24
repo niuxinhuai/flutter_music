@@ -15,31 +15,34 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(
-    AudioPlayerState state, Dispatch dispatch, ViewService viewService) {
+  AudioPlayerState state,
+  Dispatch dispatch,
+  ViewService viewService,
+) {
   return Container(
     color: Colors.white,
     child: Stack(
       children: [
         ConstrainedBox(
           constraints: BoxConstraints.expand(),
-          child: Image.network(
-            state.imageUrl ?? "",
-            fit: BoxFit.fill,
-          ),
+          child: Image.network(state.imageUrl ?? "", fit: BoxFit.fill),
         ),
         EffectWidget(),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: _buildAppbar(state, dispatch, viewService),
           body: _buildBody(state, dispatch, viewService),
-        )
+        ),
       ],
     ),
   );
 }
 
 PreferredSizeWidget _buildAppbar(
-    AudioPlayerState state, Dispatch dispatch, ViewService viewService) {
+  AudioPlayerState state,
+  Dispatch dispatch,
+  ViewService viewService,
+) {
   return GpAppBar(
     elevation: 0,
     backgroundColor: Colors.transparent,
@@ -67,8 +70,9 @@ PreferredSizeWidget _buildAppbar(
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
-            style: GpOtherTheme.size15(viewService.context)!
-                .copyWith(color: CommonColors.onPrimaryTextColor),
+            style: GpOtherTheme.size15(
+              viewService.context,
+            )!.copyWith(color: CommonColors.onPrimaryTextColor),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -81,23 +85,26 @@ PreferredSizeWidget _buildAppbar(
                   textAlign: TextAlign.left,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  style: GpOtherTheme.size15(viewService.context)!
-                      .copyWith(color: CommonColors.onPrimaryTextColor),
+                  style: GpOtherTheme.size15(
+                    viewService.context,
+                  )!.copyWith(color: CommonColors.onPrimaryTextColor),
                 ),
               ),
               Container(
                 padding: EdgeInsets.only(left: 3, right: 3, top: 1, bottom: 2),
                 decoration: BoxDecoration(
-                    border: Border.all(color: CommonColors.textColor999),
-                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                  border: Border.all(color: CommonColors.textColor999),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
                 child: Text(
                   '关注',
-                  style: GpOtherTheme.size13(viewService.context)!
-                      .copyWith(color: CommonColors.textColor999, fontSize: 9),
+                  style: GpOtherTheme.size13(
+                    viewService.context,
+                  )!.copyWith(color: CommonColors.textColor999, fontSize: 9),
                 ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     ),
@@ -107,15 +114,16 @@ PreferredSizeWidget _buildAppbar(
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-//                    color: Colors.red,
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              border: Border.all(color: CommonColors.textColor999)),
+            //                    color: Colors.red,
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            border: Border.all(color: CommonColors.textColor999),
+          ),
           child: UnconstrainedBox(
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(15.0)),
               child: CachedNetworkImage(
                 imageUrl: state.imageUrl ?? "",
-//                    fit: BoxFit.fitWidth,
+                //                    fit: BoxFit.fitWidth,
                 width: 30.0,
               ),
             ),
@@ -124,7 +132,7 @@ PreferredSizeWidget _buildAppbar(
       ),
       UnconstrainedBox(
         child: Container(
-//                color: Colors.red,
+          //                color: Colors.red,
           margin: EdgeInsets.only(left: 5, right: 15),
           width: 30,
           child: Image.asset(
@@ -139,27 +147,39 @@ PreferredSizeWidget _buildAppbar(
 }
 
 Widget _buildBody(
-    AudioPlayerState state, Dispatch dispatch, ViewService viewService) {
+  AudioPlayerState state,
+  Dispatch dispatch,
+  ViewService viewService,
+) {
   double width = MediaQuery.of(viewService.context).size.width;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Expanded(
-          child: GestureDetector(
-        onTap: () => dispatch(AudioPlayerActionCreator.didTapShowLyricAction()),
-        child: state.showLyric!
-            ? AudioLyricWidget(
-                songLyric: state.songLyric,
-              )
-            : SongNormalWidget(
-                imageUrl: state.imageUrl,
-                width: width,
-              ),
-      )),
+        child: GestureDetector(
+          onTap:
+              () => dispatch(AudioPlayerActionCreator.didTapShowLyricAction()),
+          child:
+              state.showLyric!
+                  ? AudioLyricWidget(songLyric: state.songLyric)
+                  : SongNormalWidget(
+                    imageUrl: state.imageUrl,
+                    width: width,
+                    onTapDownload:
+                        () => dispatch(
+                          AudioPlayerActionCreator.onTapDownloadAction(),
+                        ),
+                  ),
+        ),
+      ),
       if (state.url != null)
         AudioControl(
           url: state.url,
-        )
+          id: state.id,
+          name: state.name,
+          singer: state.singer,
+          imageUrl: state.imageUrl,
+        ),
     ],
   );
 }

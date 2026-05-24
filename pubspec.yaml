@@ -18,7 +18,7 @@ dependencies:
   cupertino_icons: ^1.0.8
 
     #网络
-  dio: ^4.0.6
+  dio: ^5.9.2
 
 #  flutter_pdfview: ^1.2.0
   path_provider: ^2.1.5
@@ -32,7 +32,7 @@ dependencies:
   shared_preferences: ^2.5.3
 
     #接口缓存
-  dio_http_cache: ^0.3.0
+  dio_cache_interceptor: ^4.0.3
 
   #sqflite
   sqflite: ^2.4.2
@@ -51,7 +51,7 @@ dependencies:
 #    path: /Users/niuxinhuai/Desktop/plugin_test/hello
 
     #json库
-  json_annotation: ^4.9.0
+  json_annotation: ^4.12.0
 
     #图片缓存
   cached_network_image: ^3.4.1
@@ -76,6 +76,7 @@ dependencies:
 
   #国际化、日期等
   intl: ^0.20.2
+  http_cache_file_store: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -88,21 +89,14 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
   #自动生成代码
-  source_gen: ^2.0.0
+  source_gen: ^4.2.3
   #自动生成代码
-  build_runner: ^2.5.4
+  build_runner: ^2.15.0
   #json解析
-  json_serializable: ^6.9.5
+  json_serializable: ^6.14.0
 
 
 dependency_overrides:
-  # dio_http_cache 的 git 版本仍声明 json_serializable ^5.0.0，
-  # Flutter 3.41.9 / Dart 3.11.5 下统一使用新版代码生成链。
-  json_serializable: ^6.9.5
-
-  #接口缓存，等这个库的json_serializable依赖更新到6.x再切回来
-  dio_http_cache:
-    git: git@github.com:uquabc/dio-http-cache.git
 
   fish_redux:
     git: git@github.com:leftcoding/fish-redux.git

@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/res/other_theme.dart';
+import 'package:flutter_music/utils/local_media_store.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
@@ -24,19 +27,47 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url!));
-    _controller?.initialize().then((value) {
-      // 确保在初始化视频后显示第一帧，直至在按下播放按钮。
-      if (mounted) {
-        setState(() {
-          if (widget.position != null) {
-            _controller?.seekTo(widget.position!);
+    _initController();
+  }
+
+  @override
+  void didUpdateWidget(covariant VideoPlayerWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.url != oldWidget.url) {
+      _controller?.dispose();
+      _controller = null;
+      _initController();
+    }
+  }
+
+  void _initController() {
+    final playUrl = widget.url;
+    if (playUrl == null || playUrl.isEmpty) {
+      return;
+    }
+    _controller =
+        LocalMediaStore.isLocalPath(playUrl)
+            ? VideoPlayerController.file(File(playUrl))
+            : VideoPlayerController.networkUrl(Uri.parse(playUrl));
+    _controller
+        ?.initialize()
+        .then((value) {
+          // 确保在初始化视频后显示第一帧，直至在按下播放按钮。
+          if (mounted) {
+            setState(() {
+              if (widget.position != null) {
+                _controller?.seekTo(widget.position!);
+              }
+              _controller?.play();
+              _controller?.setLooping(true);
+            });
           }
-          _controller?.play();
-          _controller?.setLooping(true);
+        })
+        .catchError((e) {
+          if (mounted) {
+            setState(() {});
+          }
         });
-      }
-    });
 
     _controller?.addListener(() {
       if (_controller?.value.position != null &&
@@ -56,7 +87,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print(">>>>视频:$url");
+    print(">>>>视频:${widget.url ?? url}");
     return GestureDetector(
       onTap: () {
         if (widget.onTapVideo != null) {
@@ -75,7 +106,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         color: Colors.black,
         child: Center(
           child:
-              _controller!.value.isInitialized
+              _controller?.value.isInitialized == true
                   ? Stack(
                     children: [
                       Center(

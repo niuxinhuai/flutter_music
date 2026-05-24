@@ -4,22 +4,22 @@ import 'action.dart';
 import 'state.dart';
 
 Reducer<AudioPlayerState>? buildReducer() {
-  return asReducer(
-    <Object, Reducer<AudioPlayerState>>{
-      AudioPlayerAction.action: _onAction,
-      AudioPlayerAction.didFetchData: _didFetchData,
-      AudioPlayerAction.didTapShowLyric: _didTapShowLyric,
-    },
-  );
+  return asReducer(<Object, Reducer<AudioPlayerState>>{
+    AudioPlayerAction.action: _onAction,
+    AudioPlayerAction.didFetchData: _didFetchData,
+    AudioPlayerAction.didTapShowLyric: _didTapShowLyric,
+    AudioPlayerAction.didUpdatePlaybackUrl: _didUpdatePlaybackUrl,
+  });
 }
 
 AudioPlayerState _didFetchData(AudioPlayerState state, Action action) {
-  final Tuple2 tuple2 = action.payload;
+  final Tuple3 tuple3 = action.payload;
   final AudioPlayerState newState = state.clone();
-  newState.songWrap = tuple2.i0;
-  newState.songLyric = tuple2.i1;
+  newState.songWrap = tuple3.i0;
+  newState.songLyric = tuple3.i1;
   if (newState.songWrap?.data?.isNotEmpty == true) {
-    newState.url = newState.songWrap?.data?.first.url;
+    newState.sourceUrl = newState.songWrap?.data?.first.url;
+    newState.url = tuple3.i2 ?? newState.sourceUrl;
   }
   return newState;
 }
@@ -32,5 +32,11 @@ AudioPlayerState _didTapShowLyric(AudioPlayerState state, Action action) {
 
 AudioPlayerState _onAction(AudioPlayerState state, Action action) {
   final AudioPlayerState newState = state.clone();
+  return newState;
+}
+
+AudioPlayerState _didUpdatePlaybackUrl(AudioPlayerState state, Action action) {
+  final AudioPlayerState newState = state.clone();
+  newState.url = action.payload;
   return newState;
 }

@@ -7,6 +7,7 @@ import 'package:flutter_music/widgets/loading_wrap.dart';
 class VideoDetailState implements Cloneable<VideoDetailState> {
   String? vid;
   String? url;
+  String? sourceUrl;
 
   LoadingState? loadingState;
   VideoDetailWrap? detailWrap;
@@ -20,6 +21,7 @@ class VideoDetailState implements Cloneable<VideoDetailState> {
     return VideoDetailState()
       ..vid = vid
       ..url = url
+      ..sourceUrl = sourceUrl
       ..loadingState = loadingState
       ..detailWrap = detailWrap
       ..urlWrap = urlWrap

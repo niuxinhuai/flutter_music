@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="music_widget_cover">歌曲封面</string>
+    <string name="music_widget_previous">上一首</string>
+    <string name="music_widget_play_pause">播放或暂停</string>
+    <string name="music_widget_next">下一首</string>
+</resources>

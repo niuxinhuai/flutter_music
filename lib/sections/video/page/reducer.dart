@@ -5,14 +5,13 @@ import 'action.dart';
 import 'state.dart';
 
 Reducer<VideoDetailState>? buildReducer() {
-  return asReducer(
-    <Object, Reducer<VideoDetailState>>{
-      VideoDetailAction.action: _onAction,
-      VideoDetailAction.didError: _didError,
-      VideoDetailAction.didFetchData: _didFetchData,
-      VideoDetailAction.didPlayerProgress: _didPlayerProgress,
-    },
-  );
+  return asReducer(<Object, Reducer<VideoDetailState>>{
+    VideoDetailAction.action: _onAction,
+    VideoDetailAction.didError: _didError,
+    VideoDetailAction.didFetchData: _didFetchData,
+    VideoDetailAction.didPlayerProgress: _didPlayerProgress,
+    VideoDetailAction.didUpdatePlaybackUrl: _didUpdatePlaybackUrl,
+  });
 }
 
 VideoDetailState _didFetchData(VideoDetailState state, Action action) {
@@ -22,12 +21,16 @@ VideoDetailState _didFetchData(VideoDetailState state, Action action) {
   newState.detailWrap = tuple3.i0;
   newState.urlWrap = tuple3.i1;
   newState.infoWrap = tuple3.i2;
-  String? url = newState.urlWrap?.urls?.first.url;
+  String? url =
+      newState.urlWrap?.urls?.isNotEmpty == true
+          ? newState.urlWrap?.urls?.first.url
+          : null;
 
   ///url被转义的特殊字符处理
   if (url != null && url.contains("amp;")) {
     url = url.replaceAll("amp;", "");
   }
+  newState.sourceUrl = url;
   newState.url = url;
   return newState;
 }
@@ -48,5 +51,11 @@ VideoDetailState _didError(VideoDetailState state, Action action) {
 
 VideoDetailState _onAction(VideoDetailState state, Action action) {
   final VideoDetailState newState = state.clone();
+  return newState;
+}
+
+VideoDetailState _didUpdatePlaybackUrl(VideoDetailState state, Action action) {
+  final VideoDetailState newState = state.clone();
+  newState.url = action.payload;
   return newState;
 }

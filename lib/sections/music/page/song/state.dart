@@ -10,6 +10,7 @@ class AudioPlayerState implements Cloneable<AudioPlayerState> {
   SongWrap? songWrap;
   SongLyric? songLyric;
   String? url;
+  String? sourceUrl;
   bool? showLyric;
 
   @override
@@ -22,6 +23,7 @@ class AudioPlayerState implements Cloneable<AudioPlayerState> {
       ..songWrap = songWrap
       ..songLyric = songLyric
       ..url = url
+      ..sourceUrl = sourceUrl
       ..showLyric = showLyric;
   }
 }

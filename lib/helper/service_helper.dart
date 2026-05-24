@@ -1,17 +1,40 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:dio_http_cache/dio_http_cache.dart';
+import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:flutter_music/constants/url.dart';
 import 'package:flutter_music/helper/user.dart';
+import 'package:http_cache_file_store/http_cache_file_store.dart';
 //import 'package:flutter_wanandroid/helper/user.dart';
 
 class ServiceHelper {
-  static final Dio _dio = Dio(BaseOptions(
+  static final CacheStore _cacheStore = FileCacheStore(_cacheDirectoryPath());
+
+  static final CacheOptions _cacheOptions = CacheOptions(
+    store: _cacheStore,
+    hitCacheOnErrorCodes: const [500, 502, 503, 504],
+    hitCacheOnNetworkFailure: true,
+    allowPostMethod: true,
+  );
+
+  static final Dio _dio = Dio(
+    BaseOptions(
       baseUrl: UrlConstants.baseUrl,
-      connectTimeout: 30000,
-      receiveTimeout: 30000,
-      contentType: "application/x-www-form-urlencoded; charset=utf-8"));
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
+      contentType: "application/x-www-form-urlencoded; charset=utf-8",
+    ),
+  );
+
+  static ServiceHelper? _instance;
+
+  ServiceHelper._() {
+    _dio.interceptors.add(DioCacheInterceptor(options: _cacheOptions));
+  }
+
+  static void _ensureInitialized() {
+    _instance ??= ServiceHelper._();
+  }
 
   static Future<T> post<T>(
     String path, {
@@ -21,13 +44,16 @@ class ServiceHelper {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) {
+    _ensureInitialized();
     return _dio
-        .post<T>(path,
-            options: options ?? _getOptions(),
-            data: data,
-            cancelToken: cancelToken,
-            onSendProgress: onSendProgress,
-            onReceiveProgress: onReceiveProgress)
+        .post<T>(
+          path,
+          options: options ?? _getOptions(),
+          data: data,
+          cancelToken: cancelToken,
+          onSendProgress: onSendProgress,
+          onReceiveProgress: onReceiveProgress,
+        )
         .then((value) => value.data!);
   }
 
@@ -38,12 +64,15 @@ class ServiceHelper {
     CancelToken? cancelToken,
     ProgressCallback? onReceiveProgress,
   }) {
+    _ensureInitialized();
     return _dio
-        .get<T>(path,
-            queryParameters: queryParameters,
-            options: options ?? _getOptions(),
-            cancelToken: cancelToken,
-            onReceiveProgress: onReceiveProgress)
+        .get<T>(
+          path,
+          queryParameters: queryParameters,
+          options: options ?? _getOptions(),
+          cancelToken: cancelToken,
+          onReceiveProgress: onReceiveProgress,
+        )
         .then((value) => value.data!);
   }
 
@@ -57,16 +86,21 @@ class ServiceHelper {
     data,
     Options? options,
   }) {
-    return _dio.download(urlPath!, savePath,
-        onReceiveProgress: onReceiveProgress,
-        queryParameters: queryParameters,
-        cancelToken: cancelToken,
-        lengthHeader: lengthHeader,
-        data: data,
-        options: options);
+    _ensureInitialized();
+    return _dio.download(
+      urlPath!,
+      savePath,
+      onReceiveProgress: onReceiveProgress,
+      queryParameters: queryParameters,
+      cancelToken: cancelToken,
+      lengthHeader: lengthHeader,
+      data: data,
+      options: options,
+    );
   }
 
   static Future<T> upload<T>(String urlPath, Map<String, dynamic> data) {
+    _ensureInitialized();
     var formData = FormData.fromMap(data);
     return _dio.post<T>(urlPath, data: formData).then((value) => value.data!);
   }
@@ -81,7 +115,35 @@ class ServiceHelper {
   }
 
   static Options? buildCacheOption(Duration duration, String cacheKey) {
-    return buildCacheOptions(duration,
-        subKey: cacheKey, options: _getOptions());
+    final cacheOptions = _cacheOptions.copyWith(
+      maxStale: duration,
+      keyBuilder: ({required url, headers, body}) {
+        final keyUrl = Uri(
+          scheme: 'flutter-music-cache',
+          host: 'request',
+          pathSegments: <String>[cacheKey, url.toString()],
+        );
+        return CacheOptions.defaultCacheKeyBuilder(
+          url: keyUrl,
+          headers: headers,
+          body: body,
+        );
+      },
+    );
+    final options = _getOptions() ?? Options();
+    return Options(
+      headers: options.headers,
+      extra: <String, dynamic>{...?options.extra, ...cacheOptions.toExtra()},
+    );
+  }
+
+  static String _cacheDirectoryPath() {
+    final directory = Directory(
+      '${Directory.systemTemp.path}/flutter_music_http_cache',
+    );
+    if (!directory.existsSync()) {
+      directory.createSync(recursive: true);
+    }
+    return directory.path;
   }
 }
