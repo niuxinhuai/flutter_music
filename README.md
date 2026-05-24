@@ -7,6 +7,12 @@ flutter 仿写网易云音乐
 
 * [项目地址](https://github.com/niuxinhuai/flutter_music)
 
+## 开发与 AI 协作
+
+- AI/自动化工具入口：[AGENTS.md](AGENTS.md)
+- AI 协作流程：[docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md)
+- 项目代码规范：[docs/PROJECT_STANDARDS.md](docs/PROJECT_STANDARDS.md)
+
 #####先上效果图
 ##发现页
 
