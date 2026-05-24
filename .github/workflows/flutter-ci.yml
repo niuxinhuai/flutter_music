@@ -38,7 +38,7 @@ jobs:
           analyze_status=${PIPESTATUS[0]}
           set -e
 
-          if grep -Eq '^[[:space:]]*error[[:space:]]+•' analyze.log; then
+          if grep -E '^[[:space:]]*error[[:space:]]+•' analyze.log; then
             exit 1
           fi
 
