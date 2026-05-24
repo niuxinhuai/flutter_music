@@ -9,8 +9,12 @@ class DetailUserFocusWidget extends StatefulWidget {
   String? name;
   bool? hasFocus;
 
-  DetailUserFocusWidget(
-      {this.avatarUrl, this.bottomUrl, this.name, this.hasFocus = false});
+  DetailUserFocusWidget({
+    this.avatarUrl,
+    this.bottomUrl,
+    this.name,
+    this.hasFocus = false,
+  });
 
   @override
   _DetailUserFocusWidgetState createState() => _DetailUserFocusWidgetState();
@@ -45,18 +49,19 @@ class _DetailUserFocusWidgetState extends State<DetailUserFocusWidget> {
               Positioned(
                 bottom: 0,
                 right: 0,
-                child: widget.bottomUrl != null
-                    ? CachedNetworkImage(
-                        imageUrl: widget.bottomUrl!,
-                        width: 14,
-                        height: 14,
-                      )
-                    : Image.asset(
-                        "assets/images/cm2_icn_daren~iphone.png",
-                        width: 14,
-                        height: 14,
-                      ),
-              )
+                child:
+                    widget.bottomUrl != null
+                        ? CachedNetworkImage(
+                          imageUrl: widget.bottomUrl!,
+                          width: 14,
+                          height: 14,
+                        )
+                        : Image.asset(
+                          "assets/images/cm2_icn_daren~iphone.png",
+                          width: 14,
+                          height: 14,
+                        ),
+              ),
             ],
           ),
           Text(
@@ -65,10 +70,11 @@ class _DetailUserFocusWidgetState extends State<DetailUserFocusWidget> {
             maxLines: 1,
             textAlign: TextAlign.left,
             overflow: TextOverflow.ellipsis,
-            style: GpOtherTheme.size12(context)!
-                .copyWith(color: CommonColors.textColor999, fontSize: 13),
+            style: GpOtherTheme.size12(
+              context,
+            )!.copyWith(color: CommonColors.textColor999, fontSize: 13),
           ),
-          if (widget.hasFocus == false) _buildFocusWidget()
+          if (widget.hasFocus == false) _buildFocusWidget(),
         ],
       ),
     );
@@ -77,21 +83,19 @@ class _DetailUserFocusWidgetState extends State<DetailUserFocusWidget> {
   Widget _buildFocusWidget() {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.3),
-          borderRadius: BorderRadius.all(Radius.circular(12.0))),
+        color: Colors.white.withValues(alpha: 0.3),
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+      ),
       padding: EdgeInsets.only(left: 4, right: 8, top: 3, bottom: 3),
       child: Row(
         children: [
-          Icon(
-            Icons.add,
-            color: Colors.white,
-            size: 14,
-          ),
+          Icon(Icons.add, color: Colors.white, size: 14),
           Text(
             "关注",
-            style: GpOtherTheme.size12(context)!
-                .copyWith(fontSize: 10, color: CommonColors.onPrimaryTextColor),
-          )
+            style: GpOtherTheme.size12(
+              context,
+            )!.copyWith(fontSize: 10, color: CommonColors.onPrimaryTextColor),
+          ),
         ],
       ),
     );

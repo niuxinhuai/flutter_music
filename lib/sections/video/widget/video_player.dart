@@ -24,7 +24,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(widget.url!);
+    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.url!));
     _controller?.initialize().then((value) {
       // 确保在初始化视频后显示第一帧，直至在按下播放按钮。
       if (mounted) {
@@ -42,11 +42,12 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       if (_controller?.value.position != null &&
           _controller?.value.duration != null &&
           _controller!.value.duration.inMilliseconds != 0) {
-        double v = _controller!.value.position.inMilliseconds *
+        double v =
+            _controller!.value.position.inMilliseconds *
             1.0 /
             _controller!.value.duration.inMilliseconds *
             1.0;
-        if (widget.call != null && v != double.nan && v <= 1.0) {
+        if (widget.call != null && !v.isNaN && v <= 1.0) {
           widget.call!(v, _controller!.value.position);
         }
       }
@@ -73,33 +74,35 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       child: Container(
         color: Colors.black,
         child: Center(
-          child: _controller!.value.isInitialized
-              ? Stack(
-                  children: [
-                    Center(
-                      child: AspectRatio(
-                        aspectRatio: _controller!.value.aspectRatio,
-                        child: VideoPlayer(_controller!),
-                      ),
-                    ),
-                    if (_controller!.value.isPlaying == false)
+          child:
+              _controller!.value.isInitialized
+                  ? Stack(
+                    children: [
                       Center(
-                        child: Image.asset(
-                          "assets/images/cm6_square_feed_video~iphone.png",
-                          width: 70,
-                          height: 70,
-                          fit: BoxFit.fitWidth,
+                        child: AspectRatio(
+                          aspectRatio: _controller!.value.aspectRatio,
+                          child: VideoPlayer(_controller!),
                         ),
                       ),
-                  ],
-                )
-              : Container(
-                  child: Text(
-                    "无法播放视频时，网页调用$url,将json复制到assets下的video_url中",
-                    style: GpOtherTheme.size17(context)!
-                        .copyWith(color: CommonColors.onPrimaryTextColor),
+                      if (_controller!.value.isPlaying == false)
+                        Center(
+                          child: Image.asset(
+                            "assets/images/cm6_square_feed_video~iphone.png",
+                            width: 70,
+                            height: 70,
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                    ],
+                  )
+                  : Container(
+                    child: Text(
+                      "无法播放视频时，网页调用$url,将json复制到assets下的video_url中",
+                      style: GpOtherTheme.size17(
+                        context,
+                      )!.copyWith(color: CommonColors.onPrimaryTextColor),
+                    ),
                   ),
-                ),
         ),
       ),
     );

@@ -24,8 +24,8 @@ class CustomRefreshIndicator extends StatelessWidget {
     this.child,
     this.header,
     this.footer,
-    this.enablePullDown: false, //是否显示头部刷新控件,默认为false
-    this.enablePullUp: true, // 是否显示底部刷新控件，默认true
+    this.enablePullDown = false, //是否显示头部刷新控件,默认为false
+    this.enablePullUp = true, // 是否显示底部刷新控件，默认true
     this.onRefresh,
     this.onLoading,
     this.scrollDirection,
@@ -37,7 +37,8 @@ class CustomRefreshIndicator extends StatelessWidget {
       enablePullDown: enablePullDown,
       enablePullUp: enablePullUp,
       header: header ?? WaterDropHeader(),
-      footer: footer ??
+      footer:
+          footer ??
           CustomFooter(
             builder: (BuildContext context, LoadStatus? mode) {
               Widget body;
@@ -51,7 +52,7 @@ class CustomRefreshIndicator extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     CupertinoActivityIndicator(),
-                    Text("等待才有期待")
+                    Text("等待才有期待"),
                   ],
                 );
               } else if (mode == LoadStatus.failed) {
@@ -70,10 +71,7 @@ class CustomRefreshIndicator extends StatelessWidget {
                   style: GpOtherTheme.size13Grey(context),
                 );
               }
-              return Container(
-                height: 55.0,
-                child: Center(child: body),
-              );
+              return Container(height: 55.0, child: Center(child: body));
             },
           ),
       controller: controller!,

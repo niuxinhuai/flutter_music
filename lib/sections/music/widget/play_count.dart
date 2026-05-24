@@ -14,20 +14,18 @@ class PlayCountWidget extends StatelessWidget {
       padding: const EdgeInsets.only(left: 4, right: 4),
       margin: const EdgeInsets.only(right: 4, top: 3),
       decoration: BoxDecoration(
-          color: Color(0xFF848484).withOpacity(0.5),
-          borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        color: Color(0xFF848484).withValues(alpha: 0.5),
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
       child: Row(
         children: [
-          Icon(
-            Icons.play_arrow,
-            color: Colors.white,
-            size: 19,
-          ),
+          Icon(Icons.play_arrow, color: Colors.white, size: 19),
           Text(
             MathUtils.getPlayNumberStr(count ?? 0),
-            style: GpOtherTheme.size13(context)!
-                .copyWith(color: CommonColors.onPrimaryTextColor, fontSize: 12),
-          )
+            style: GpOtherTheme.size13(
+              context,
+            )!.copyWith(color: CommonColors.onPrimaryTextColor, fontSize: 12),
+          ),
         ],
       ),
     );

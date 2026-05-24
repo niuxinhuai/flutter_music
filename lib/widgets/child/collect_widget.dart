@@ -9,11 +9,12 @@ class CollectWidget extends StatefulWidget {
   final bool? showRedBg;
   final VoidCallback? callback;
 
-  CollectWidget(
-      {this.hasCollect = false,
-      this.collectCount,
-      this.showRedBg = true,
-      this.callback});
+  CollectWidget({
+    this.hasCollect = false,
+    this.collectCount,
+    this.showRedBg = true,
+    this.callback,
+  });
 
   @override
   _CollectWidgetState createState() => _CollectWidgetState();
@@ -30,10 +31,12 @@ class _CollectWidgetState extends State<CollectWidget> {
       },
       child: Container(
         decoration: BoxDecoration(
-            color: widget.showRedBg == true
-                ? Colors.red
-                : Colors.white.withOpacity(0.2),
-            borderRadius: BorderRadius.all(Radius.circular(22.0))),
+          color:
+              widget.showRedBg == true
+                  ? Colors.red
+                  : Colors.white.withValues(alpha: 0.2),
+          borderRadius: BorderRadius.all(Radius.circular(22.0)),
+        ),
         padding: EdgeInsets.only(top: 8, bottom: 8, left: 18, right: 18),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -45,9 +48,10 @@ class _CollectWidgetState extends State<CollectWidget> {
             ),
             Text(
               "收藏(${MathUtils.getPlayNumberStr(widget.collectCount ?? 0)})",
-              style: GpOtherTheme.size15(context)!
-                  .copyWith(color: CommonColors.onPrimaryTextColor),
-            )
+              style: GpOtherTheme.size15(
+                context,
+              )!.copyWith(color: CommonColors.onPrimaryTextColor),
+            ),
           ],
         ),
       ),

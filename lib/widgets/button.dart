@@ -10,27 +10,30 @@ class GpButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final Size? minimumSize;
 
-  const GpButton(
-      {required this.child,
-      required this.onPressed,
-      this.buttonStyle,
-      this.textStyle,
-      this.isSmall = false,
-      this.padding,
-      this.minimumSize = const Size(0, 0)});
+  const GpButton({
+    required this.child,
+    required this.onPressed,
+    this.buttonStyle,
+    this.textStyle,
+    this.isSmall = false,
+    this.padding,
+    this.minimumSize = const Size(0, 0),
+  });
 
   @override
   Widget build(BuildContext context) {
     double fontSize = isSmall ? 13 : 17;
-    TextStyle buttonTextStyle =
-        (textStyle ?? Theme.of(context).textTheme.button!)
-            .copyWith(fontSize: fontSize);
+    TextStyle buttonTextStyle = (textStyle ??
+            Theme.of(context).textTheme.labelLarge!)
+        .copyWith(fontSize: fontSize);
 
-    var finalPadding = padding ??
+    var finalPadding =
+        padding ??
         (isSmall
             ? EdgeInsets.symmetric(vertical: 6, horizontal: 12)
             : EdgeInsets.symmetric(vertical: 10, horizontal: 16));
-    var finalButtonStyle = buttonStyle ??
+    var finalButtonStyle =
+        buttonStyle ??
         _defaultBtnStyle(
           primary: Theme.of(context).colorScheme.primary,
           onPrimary: Theme.of(context).colorScheme.onPrimary,
@@ -40,10 +43,11 @@ class GpButton extends StatelessWidget {
       onPressed: onPressed,
       child: child,
       style: finalButtonStyle.copyWith(
-          textStyle: MaterialStateProperty.all(buttonTextStyle),
-          padding: MaterialStateProperty.all(finalPadding),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          minimumSize: MaterialStateProperty.all(minimumSize)),
+        textStyle: WidgetStateProperty.all(buttonTextStyle),
+        padding: WidgetStateProperty.all(finalPadding),
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        minimumSize: WidgetStateProperty.all(minimumSize),
+      ),
     );
   }
 }
@@ -64,13 +68,14 @@ class GpGreenCornerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? textStyle = Theme.of(context).textTheme.button;
+    final TextStyle? textStyle = Theme.of(context).textTheme.labelLarge;
     return GpButton(
       child: child,
       onPressed: onPressed,
       buttonStyle: _defaultCornerBtnStyle(
-          primary: Theme.of(context).primaryColor,
-          onPrimary: Theme.of(context).colorScheme.onPrimary),
+        primary: Theme.of(context).primaryColor,
+        onPrimary: Theme.of(context).colorScheme.onPrimary,
+      ),
       padding: padding,
       textStyle: textStyle,
       isSmall: isSmall,
@@ -93,12 +98,14 @@ class GPRedCornerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle? textStyle = Theme.of(context).textTheme.button;
+    final TextStyle? textStyle = Theme.of(context).textTheme.labelLarge;
     return GpButton(
       child: child,
       onPressed: onPressed,
       buttonStyle: _defaultCornerBtnStyle(
-          primary: Colors.red, onPrimary: CommonColors.onPrimaryTextColor),
+        primary: Colors.red,
+        onPrimary: CommonColors.onPrimaryTextColor,
+      ),
       padding: padding,
       textStyle: textStyle,
       isSmall: isSmall!,
@@ -107,56 +114,57 @@ class GPRedCornerButton extends StatelessWidget {
 }
 
 ///矩形按钮
-ButtonStyle _defaultBtnStyle(
-    {required Color primary,
-    required Color onPrimary,
-    OutlinedBorder? shape,
-    Color? disableColor,
-    Color? onDisableColor}) {
+ButtonStyle _defaultBtnStyle({
+  required Color primary,
+  required Color onPrimary,
+  OutlinedBorder? shape,
+  Color? disableColor,
+  Color? onDisableColor,
+}) {
   return ButtonStyle(
-      backgroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.disabled)) {
-          return disableColor ?? CommonColors.disableColor;
-        } else {
-          return primary;
-        }
-      }),
-      foregroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.disabled)) {
-          return onDisableColor ?? onPrimary;
-        } else {
-          return onPrimary;
-        }
-      }),
-      shape: MaterialStateProperty.all(shape ??
+    backgroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.disabled)) {
+        return disableColor ?? CommonColors.disableColor;
+      } else {
+        return primary;
+      }
+    }),
+    foregroundColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.disabled)) {
+        return onDisableColor ?? onPrimary;
+      } else {
+        return onPrimary;
+      }
+    }),
+    shape: WidgetStateProperty.all(
+      shape ??
           RoundedRectangleBorder(
-            side: BorderSide(
-              width: 0,
-              style: BorderStyle.none,
-            ),
+            side: BorderSide(width: 0, style: BorderStyle.none),
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
-          )),
-      elevation: MaterialStateProperty.all(0));
+          ),
+    ),
+    elevation: WidgetStateProperty.all(0),
+  );
 }
 
 ///圆角按钮
-ButtonStyle _defaultCornerBtnStyle(
-    {required Color primary,
-    required Color onPrimary,
-    OutlinedBorder? shape,
-    Color? disableColor,
-    Color? onDisableColor}) {
+ButtonStyle _defaultCornerBtnStyle({
+  required Color primary,
+  required Color onPrimary,
+  OutlinedBorder? shape,
+  Color? disableColor,
+  Color? onDisableColor,
+}) {
   return _defaultBtnStyle(
-      primary: primary,
-      onPrimary: onPrimary,
-      shape: shape ??
-          RoundedRectangleBorder(
-            side: BorderSide(
-              width: 0,
-              style: BorderStyle.none,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(23.0)),
-          ),
-      disableColor: disableColor,
-      onDisableColor: onDisableColor);
+    primary: primary,
+    onPrimary: onPrimary,
+    shape:
+        shape ??
+        RoundedRectangleBorder(
+          side: BorderSide(width: 0, style: BorderStyle.none),
+          borderRadius: BorderRadius.all(Radius.circular(23.0)),
+        ),
+    disableColor: disableColor,
+    onDisableColor: onDisableColor,
+  );
 }

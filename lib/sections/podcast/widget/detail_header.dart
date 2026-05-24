@@ -43,23 +43,21 @@ class DetailHeaderWidget extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(
-            child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: [
-                  0,
-                  0.6,
-                  1
-                ],
+                stops: [0, 0.6, 1],
                 colors: [
                   Colors.transparent,
-                  Colors.white.withOpacity(0.5),
-                  Colors.white
-                ]),
+                  Colors.white.withValues(alpha: 0.5),
+                  Colors.white,
+                ],
+              ),
+            ),
           ),
-        )),
+        ),
         Container(
           padding: EdgeInsets.only(left: 15, right: 15, top: 20),
           child: Column(
@@ -81,58 +79,56 @@ class DetailHeaderWidget extends StatelessWidget {
                         ),
                       ),
                       Positioned.fill(
-                          child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          if (wrap?.data?.icon != null)
-                            _buildIcon(wrap!.data!.icon!, context),
-                          if (wrap?.data?.icon == null)
-                            Container(
-                              width: 20,
-                              height: 0,
-                            ),
-                          PlayCountWidget(
-                            count: itemPlayCount,
-                          )
-                        ],
-                      ))
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            if (wrap?.data?.icon != null)
+                              _buildIcon(wrap!.data!.icon!, context),
+                            if (wrap?.data?.icon == null)
+                              Container(width: 20, height: 0),
+                            PlayCountWidget(count: itemPlayCount),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   Expanded(
-                      child: Container(
-                    padding: EdgeInsets.only(left: 15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              wrap?.data?.name ?? "",
-                              softWrap: true,
-                              textAlign: TextAlign.left,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                              style: GpOtherTheme.size17(context)!.copyWith(
-                                  color: CommonColors.onPrimaryTextColor),
-                            ),
-                            if (wrap?.data?.dj != null) _buildUser(context),
-                          ],
-                        ),
-                        if (models.isNotEmpty == true)
-                          _buildIndicator(context, models),
-                      ],
+                    child: Container(
+                      padding: EdgeInsets.only(left: 15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                wrap?.data?.name ?? "",
+                                softWrap: true,
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                                style: GpOtherTheme.size17(context)!.copyWith(
+                                  color: CommonColors.onPrimaryTextColor,
+                                ),
+                              ),
+                              if (wrap?.data?.dj != null) _buildUser(context),
+                            ],
+                          ),
+                          if (models.isNotEmpty == true)
+                            _buildIndicator(context, models),
+                        ],
+                      ),
                     ),
-                  ))
+                  ),
                 ],
               ),
               _buildDetail(context),
               _buildBottomCount(context),
             ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -141,12 +137,14 @@ class DetailHeaderWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(left: 5, right: 5, top: 2, bottom: 2),
       decoration: BoxDecoration(
-          color: HexColor(icon.color!),
-          borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        color: HexColor(icon.color!),
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+      ),
       child: Text(
         icon.value ?? "",
-        style: GpOtherTheme.size12(context)!
-            .copyWith(color: CommonColors.onPrimaryTextColor, fontSize: 10),
+        style: GpOtherTheme.size12(
+          context,
+        )!.copyWith(color: CommonColors.onPrimaryTextColor, fontSize: 10),
       ),
     );
   }
@@ -162,7 +160,9 @@ class DetailHeaderWidget extends StatelessWidget {
   }
 
   Widget _buildIndicator(
-      BuildContext context, List<DetailIndicatorModel> models) {
+    BuildContext context,
+    List<DetailIndicatorModel> models,
+  ) {
     return Container(
       height: 30,
       child: ListView(
@@ -177,21 +177,23 @@ class DetailHeaderWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(right: 5),
       decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.2),
-          borderRadius: BorderRadius.all(Radius.circular(3.0))),
+        color: Colors.white.withValues(alpha: 0.2),
+        borderRadius: BorderRadius.all(Radius.circular(3.0)),
+      ),
       padding: EdgeInsets.all(6.0),
       child: Row(
         children: [
           Text(
             model.title ?? "",
-            style: GpOtherTheme.size12(context)!
-                .copyWith(color: CommonColors.onPrimaryTextColor),
+            style: GpOtherTheme.size12(
+              context,
+            )!.copyWith(color: CommonColors.onPrimaryTextColor),
           ),
           Icon(
             Icons.arrow_forward_ios,
             size: 10,
             color: CommonColors.textColorDDD,
-          )
+          ),
         ],
       ),
     );
@@ -208,20 +210,22 @@ class DetailHeaderWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(
-                child: Text(
-              wrap?.data?.desc ?? "",
-              maxLines: 3,
-              softWrap: true,
-              textAlign: TextAlign.left,
-              overflow: TextOverflow.ellipsis,
-              style: GpOtherTheme.size13(context)!
-                  .copyWith(color: CommonColors.textColorDDD),
-            )),
+              child: Text(
+                wrap?.data?.desc ?? "",
+                maxLines: 3,
+                softWrap: true,
+                textAlign: TextAlign.left,
+                overflow: TextOverflow.ellipsis,
+                style: GpOtherTheme.size13(
+                  context,
+                )!.copyWith(color: CommonColors.textColorDDD),
+              ),
+            ),
             Icon(
               Icons.arrow_forward_ios,
               color: CommonColors.textColorDDD,
               size: 14,
-            )
+            ),
           ],
         ),
       ),
@@ -234,13 +238,9 @@ class DetailHeaderWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          ShareWidget(
-            count: wrap?.data?.shareCount ?? 0,
-          ),
+          ShareWidget(count: wrap?.data?.shareCount ?? 0),
           CommentWidget(count: wrap?.data?.commentCount ?? 0),
-          CollectWidget(
-            collectCount: wrap?.data?.subCount ?? 0,
-          ),
+          CollectWidget(collectCount: wrap?.data?.subCount ?? 0),
         ],
       ),
     );
@@ -250,20 +250,21 @@ class DetailHeaderWidget extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     showModalBottomSheet(
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext context) {
-          return PodcastHeaderSheetWidget(
-            wrap: wrap,
-            size: size,
-            popBack: () {
-              Navigator.pop(context);
-            },
-            collectBack: () {
-              Navigator.pop(context);
-            },
-          );
-        },
-        backgroundColor: Colors.transparent);
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext context) {
+        return PodcastHeaderSheetWidget(
+          wrap: wrap,
+          size: size,
+          popBack: () {
+            Navigator.pop(context);
+          },
+          collectBack: () {
+            Navigator.pop(context);
+          },
+        );
+      },
+      backgroundColor: Colors.transparent,
+    );
   }
 }

@@ -25,7 +25,8 @@ class _ToplistItemWidgetState extends State<ToplistItemWidget> {
   void initState() {
     super.initState();
 
-    hasHeader = widget.item!.uiElement?.mainTitle != null &&
+    hasHeader =
+        widget.item!.uiElement?.mainTitle != null &&
         widget.item!.uiElement?.mainTitle?.title != null;
   }
 
@@ -48,9 +49,10 @@ class _ToplistItemWidgetState extends State<ToplistItemWidget> {
                   if (widget.item?.uiElement?.mainTitle?.titleDesc != null)
                     Text(
                       widget.item?.uiElement?.mainTitle?.titleDesc ?? "",
-                      style: GpOtherTheme.size13(context)!
-                          .copyWith(color: CommonColors.textColor999),
-                    )
+                      style: GpOtherTheme.size13(
+                        context,
+                      )!.copyWith(color: CommonColors.textColor999),
+                    ),
                 ],
               ),
             ),
@@ -58,11 +60,17 @@ class _ToplistItemWidgetState extends State<ToplistItemWidget> {
               widget.item?.resources?.isNotEmpty == true)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: widget.item!.resources!
-                  .map((e) => _buildItem(
-                      context, e, widget.item!.resources!.indexOf(e)))
-                  .toList(),
-            )
+              children:
+                  widget.item!.resources!
+                      .map(
+                        (e) => _buildItem(
+                          context,
+                          e,
+                          widget.item!.resources!.indexOf(e),
+                        ),
+                      )
+                      .toList(),
+            ),
         ],
       ),
     );
@@ -73,26 +81,31 @@ class _ToplistItemWidgetState extends State<ToplistItemWidget> {
       children: [
         Text(
           widget.item?.uiElement?.mainTitle?.title ?? "",
-          style: GpOtherTheme.size15(context)!
-              .copyWith(fontWeight: FontWeight.bold, fontSize: 20),
+          style: GpOtherTheme.size15(
+            context,
+          )!.copyWith(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         Padding(
           padding: EdgeInsets.only(left: 5),
           child: Icon(Icons.arrow_forward_ios),
-        )
+        ),
       ],
     );
   }
 
   Widget _buildItem(
-      BuildContext context, ResourcesItem resourcesItem, int index) {
+    BuildContext context,
+    ResourcesItem resourcesItem,
+    int index,
+  ) {
     return Padding(
       padding: EdgeInsets.only(bottom: 10),
       child: GestureDetector(
         onTap: () {
           if (widget.dispatch != null) {
             widget.dispatch!(
-                HomeMusicActionCreator.onTapToplistItemAction(resourcesItem));
+              HomeMusicActionCreator.onTapToplistItemAction(resourcesItem),
+            );
           }
         },
         child: Row(
@@ -107,36 +120,39 @@ class _ToplistItemWidgetState extends State<ToplistItemWidget> {
               padding: EdgeInsets.only(left: 10, right: 10),
               child: Text(
                 "${index + 1}",
-                style: GpOtherTheme.size15(context)!
-                    .copyWith(fontWeight: FontWeight.bold),
+                style: GpOtherTheme.size15(
+                  context,
+                )!.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
             Expanded(
-                child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    resourcesItem.uiElement?.mainTitle?.title ?? "",
-                    softWrap: true,
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: GpOtherTheme.size17(context),
-                  ),
-                  Text(
-                    _getNamed(resourcesItem),
-                    softWrap: true,
-                    textAlign: TextAlign.left,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: GpOtherTheme.size13(context)!
-                        .copyWith(color: CommonColors.textColor999),
-                  )
-                ],
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      resourcesItem.uiElement?.mainTitle?.title ?? "",
+                      softWrap: true,
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: GpOtherTheme.size17(context),
+                    ),
+                    Text(
+                      _getNamed(resourcesItem),
+                      softWrap: true,
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: GpOtherTheme.size13(
+                        context,
+                      )!.copyWith(color: CommonColors.textColor999),
+                    ),
+                  ],
+                ),
               ),
-            )),
-            _buildIndicator(resourcesItem)
+            ),
+            _buildIndicator(resourcesItem),
           ],
         ),
       ),
@@ -163,22 +179,28 @@ class _ToplistItemWidgetState extends State<ToplistItemWidget> {
     String named = resourcesItem.uiElement?.labelText?.text ?? "";
 
     Color indicatorColor = Colors.red;
-    if (ColorUtils.colorMap()
-        .containsKey(resourcesItem.uiElement?.labelText?.textColor ?? "")) {
-      indicatorColor = ColorUtils.colorMap()[
-          resourcesItem.uiElement!.labelText?.textColor!]!;
+    if (ColorUtils.colorMap().containsKey(
+      resourcesItem.uiElement?.labelText?.textColor ?? "",
+    )) {
+      indicatorColor =
+          ColorUtils.colorMap()[resourcesItem
+              .uiElement!
+              .labelText
+              ?.textColor!]!;
     }
 
     return Container(
       padding: EdgeInsets.only(left: 2, top: 2, bottom: 2, right: 2),
       margin: EdgeInsets.only(left: 15),
       decoration: BoxDecoration(
-          color: indicatorColor.withOpacity(0.1),
-          borderRadius: BorderRadius.all(Radius.circular(4.0))),
+        color: indicatorColor.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+      ),
       child: Text(
         resourcesItem.uiElement?.labelText?.text ?? "",
-        style: GpOtherTheme.size12(context)!
-            .copyWith(color: indicatorColor, fontWeight: FontWeight.bold),
+        style: GpOtherTheme.size12(
+          context,
+        )!.copyWith(color: indicatorColor, fontWeight: FontWeight.bold),
       ),
     );
   }

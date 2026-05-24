@@ -15,7 +15,10 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(
-    VideoWaterfallState state, Dispatch dispatch, ViewService viewService) {
+  VideoWaterfallState state,
+  Dispatch dispatch,
+  ViewService viewService,
+) {
   return LoadingWrap(
     loadingState: state.loadingState,
     successChild: Builder(
@@ -28,28 +31,37 @@ Widget buildView(
 }
 
 Widget _buildBody(
-    VideoWaterfallState state, Dispatch dispatch, ViewService viewService) {
+  VideoWaterfallState state,
+  Dispatch dispatch,
+  ViewService viewService,
+) {
   return CustomRefreshIndicator(
-      controller: state.refreshController,
-      enablePullUp: true,
-      enablePullDown: true,
-      onRefresh: () => dispatch(VideoWaterfallActionCreator.onRefreshAction()),
-      onLoading: () => dispatch(VideoWaterfallActionCreator.onLoadingAction()),
-      child: SingleChildScrollView(
-          padding:
-              const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-          child: StaggeredGrid.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            children: state.items!
+    controller: state.refreshController,
+    enablePullUp: true,
+    enablePullDown: true,
+    onRefresh: () => dispatch(VideoWaterfallActionCreator.onRefreshAction()),
+    onLoading: () => dispatch(VideoWaterfallActionCreator.onLoadingAction()),
+    child: SingleChildScrollView(
+      padding: const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+      child: StaggeredGrid.count(
+        crossAxisCount: 2,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        children:
+            state.items!
                 .map((e) => _buildItem(state, dispatch, viewService, e))
                 .toList(),
-          )));
+      ),
+    ),
+  );
 }
 
-Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
-    ViewService viewService, VideoSourceItem item) {
+Widget _buildItem(
+  VideoWaterfallState state,
+  Dispatch dispatch,
+  ViewService viewService,
+  VideoSourceItem item,
+) {
   double width = MediaQuery.of(viewService.context).size.width;
   double imageWidth = (width - 3 * 10) / 2.0;
   double radio = (item.data?.height ?? 0.0) / (item.data?.width ?? 1.0);
@@ -59,8 +71,9 @@ Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
     child: Container(
       width: imageWidth,
       decoration: BoxDecoration(
-          color: CommonColors.foregroundColor,
-          borderRadius: const BorderRadius.all(Radius.circular(8.0))),
+        color: CommonColors.foregroundColor,
+        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -68,7 +81,7 @@ Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
             children: [
               ImageItemWidget(
                 url: item.data?.coverUrl,
-//                fit: BoxFit.fitWidth,
+                //                fit: BoxFit.fitWidth,
                 width: imageWidth,
                 height: imageHeight,
               ),
@@ -80,9 +93,11 @@ Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
                     width: 20,
                     height: 20,
                     decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.3),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10.0))),
+                      color: Colors.black.withValues(alpha: 0.3),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(10.0),
+                      ),
+                    ),
                     alignment: Alignment.center,
                     child: const Icon(
                       Icons.play_arrow,
@@ -90,7 +105,7 @@ Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
                       size: 15,
                     ),
                   ),
-                )
+                ),
             ],
           ),
           Padding(
@@ -107,22 +122,25 @@ Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Row(
-//                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-//                    Expanded(
-//                        child: DetailUserFocusWidget(
-//                      hasFocus: true,
-//                      avatarUrl: item.data?.creator?.avatarUrl,
-//                      name: item.data?.creator?.nickname,
-//                    )),
+                    //                    Expanded(
+                    //                        child: DetailUserFocusWidget(
+                    //                      hasFocus: true,
+                    //                      avatarUrl: item.data?.creator?.avatarUrl,
+                    //                      name: item.data?.creator?.nickname,
+                    //                    )),
                     Expanded(
-                        child: _buildFocus(item.data?.creator?.avatarUrl, null,
-                            item.data?.creator?.nickname, viewService.context)),
-                    PraisedWidget(
-                      count: item.data?.praisedCount,
-                    )
+                      child: _buildFocus(
+                        item.data?.creator?.avatarUrl,
+                        null,
+                        item.data?.creator?.nickname,
+                        viewService.context,
+                      ),
+                    ),
+                    PraisedWidget(count: item.data?.praisedCount),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -133,7 +151,11 @@ Widget _buildItem(VideoWaterfallState state, Dispatch dispatch,
 }
 
 Widget _buildFocus(
-    String? avatarUrl, String? bottomUrl, String? name, BuildContext context) {
+  String? avatarUrl,
+  String? bottomUrl,
+  String? name,
+  BuildContext context,
+) {
   return Padding(
     padding: EdgeInsets.only(top: 15, bottom: 20),
     child: Row(
@@ -155,30 +177,33 @@ Widget _buildFocus(
             Positioned(
               bottom: 0,
               right: 0,
-              child: bottomUrl != null
-                  ? CachedNetworkImage(
-                      imageUrl: bottomUrl,
-                      width: 14,
-                      height: 14,
-                    )
-                  : Image.asset(
-                      "assets/images/cm2_icn_daren~iphone.png",
-                      width: 14,
-                      height: 14,
-                    ),
-            )
+              child:
+                  bottomUrl != null
+                      ? CachedNetworkImage(
+                        imageUrl: bottomUrl,
+                        width: 14,
+                        height: 14,
+                      )
+                      : Image.asset(
+                        "assets/images/cm2_icn_daren~iphone.png",
+                        width: 14,
+                        height: 14,
+                      ),
+            ),
           ],
         ),
         Expanded(
-            child: Text(
-          name ?? "",
-          softWrap: true,
-          maxLines: 1,
-          textAlign: TextAlign.left,
-          overflow: TextOverflow.ellipsis,
-          style: GpOtherTheme.size12(context)!
-              .copyWith(color: CommonColors.textColor999, fontSize: 13),
-        )),
+          child: Text(
+            name ?? "",
+            softWrap: true,
+            maxLines: 1,
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+            style: GpOtherTheme.size12(
+              context,
+            )!.copyWith(color: CommonColors.textColor999, fontSize: 13),
+          ),
+        ),
       ],
     ),
   );

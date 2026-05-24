@@ -58,11 +58,7 @@ class _SquareItemWidgetState extends State<SquareItemWidget> {
                 height: widget.size,
                 needAddParam: true,
               ),
-              Positioned(
-                right: 0,
-                top: 0,
-                child: _buildCount(context, count),
-              )
+              Positioned(right: 0, top: 0, child: _buildCount(context, count)),
             ],
           ),
           if (widget.recommendItem != null)
@@ -72,8 +68,9 @@ class _SquareItemWidgetState extends State<SquareItemWidget> {
               child: Text(
                 name,
                 maxLines: 2,
-                style: GpOtherTheme.size13(context)!
-                    .copyWith(color: CommonColors.onSurfaceTextColor),
+                style: GpOtherTheme.size13(
+                  context,
+                )!.copyWith(color: CommonColors.onSurfaceTextColor),
               ),
             ),
           if (widget.stage != null)
@@ -86,11 +83,12 @@ class _SquareItemWidgetState extends State<SquareItemWidget> {
                 textAlign: TextAlign.left,
                 overflow: TextOverflow.ellipsis,
                 style: GpOtherTheme.size13(context)!.copyWith(
-                    color: CommonColors.onSurfaceTextColor,
-//              fontWeight: FontWeight.bold,
-                    fontSize: 13),
+                  color: CommonColors.onSurfaceTextColor,
+                  //              fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                ),
               ),
-            )
+            ),
         ],
       ),
     );
@@ -102,20 +100,18 @@ class _SquareItemWidgetState extends State<SquareItemWidget> {
       padding: const EdgeInsets.only(left: 4, right: 4, top: 1, bottom: 1),
       margin: const EdgeInsets.only(right: 4, top: 3),
       decoration: BoxDecoration(
-          color: Color(0xFF848484).withOpacity(0.8),
-          borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        color: Color(0xFF848484).withValues(alpha: 0.8),
+        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+      ),
       child: Row(
         children: [
-          Icon(
-            Icons.play_arrow,
-            color: Colors.white,
-            size: 19,
-          ),
+          Icon(Icons.play_arrow, color: Colors.white, size: 19),
           Text(
             MathUtils.getPlayNumberStr(count),
-            style: GpOtherTheme.size13(context)!
-                .copyWith(color: CommonColors.onPrimaryTextColor, fontSize: 12),
-          )
+            style: GpOtherTheme.size13(
+              context,
+            )!.copyWith(color: CommonColors.onPrimaryTextColor, fontSize: 12),
+          ),
         ],
       ),
     );

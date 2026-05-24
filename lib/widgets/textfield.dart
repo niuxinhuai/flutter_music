@@ -45,10 +45,11 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
         //禁用menu
         maxLines: 1,
         decoration: InputDecoration(
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
-            hintText: widget.hintText ?? '发现更多精彩',
-            hintStyle: GpOtherTheme.size13Grey(context)),
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          hintText: widget.hintText ?? '发现更多精彩',
+          hintStyle: GpOtherTheme.size13Grey(context),
+        ),
         keyboardType: TextInputType.multiline,
         inputFormatters: [FilteringTextInputFormatter.deny(RegExp(regStr))],
         textInputAction: TextInputAction.search,
@@ -58,10 +59,10 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
             widget.onSubmit!(str);
           }
         },
-        style: Theme.of(context)
-            .textTheme
-            .subtitle2!
-            .copyWith(color: CommonColors.onSurfaceTextColor, fontSize: 15),
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+          color: CommonColors.onSurfaceTextColor,
+          fontSize: 15,
+        ),
         controller: textEditingController,
         textCapitalization: TextCapitalization.sentences,
       ),

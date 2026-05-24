@@ -38,61 +38,68 @@ class SearchplaylistWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              ImageItemWidget(
-                url: stage.coverImgUrl,
-                width: 50,
-                height: 50,
-              ),
+              ImageItemWidget(url: stage.coverImgUrl, width: 50, height: 50),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 10, right: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-//                      Text(
-//                        stage.name ?? "",
-//                        softWrap: true,
-//                        textAlign: TextAlign.left,
-//                        overflow: TextOverflow.ellipsis,
-//                        maxLines: 1,
-//                        style: GpOtherTheme.size17(context)!
-//                            .copyWith(color: CommonColors.onSurfaceTextColor),
-//                      ),
+                      //                      Text(
+                      //                        stage.name ?? "",
+                      //                        softWrap: true,
+                      //                        textAlign: TextAlign.left,
+                      //                        overflow: TextOverflow.ellipsis,
+                      //                        maxLines: 1,
+                      //                        style: GpOtherTheme.size17(context)!
+                      //                            .copyWith(color: CommonColors.onSurfaceTextColor),
+                      //                      ),
                       CustomSearchText(
                         searchKey: searchKey,
                         searchContent: stage.name,
                       ),
                       Text.rich(
                         TextSpan(
-                            text: "${stage.trackCount ?? 0}首音乐",
-                            children: [
-                              if (stage.creator?.nickname != null)
-                                TextSpan(
-                                    text:
-                                        " by ${stage.creator?.nickname ?? ""}，"),
-                              if (stage.playCount != null)
-                                TextSpan(
-                                    text:
-                                        " 播放${MathUtils.getPlayNumberStr(stage.playCount!)}")
-                            ]),
+                          text: "${stage.trackCount ?? 0}首音乐",
+                          children: [
+                            if (stage.creator?.nickname != null)
+                              TextSpan(
+                                text: " by ${stage.creator?.nickname ?? ""}，",
+                              ),
+                            if (stage.playCount != null)
+                              TextSpan(
+                                text:
+                                    " 播放${MathUtils.getPlayNumberStr(stage.playCount!)}",
+                              ),
+                          ],
+                        ),
                         softWrap: true,
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: GpOtherTheme.size13(context)!.copyWith(
-                            color: CommonColors.textColor999, fontSize: 12),
-                      )
+                          color: CommonColors.textColor999,
+                          fontSize: 12,
+                        ),
+                      ),
                     ],
                   ),
                 ),
               ),
               Text.rich(
-                TextSpan(text: "8.9", children: [
-                  TextSpan(text: "分", style: GpOtherTheme.size11Grey(context))
-                ]),
-                style: GpOtherTheme.size17(context)!
-                    .copyWith(fontWeight: FontWeight.bold),
-              )
+                TextSpan(
+                  text: "8.9",
+                  children: [
+                    TextSpan(
+                      text: "分",
+                      style: GpOtherTheme.size11Grey(context),
+                    ),
+                  ],
+                ),
+                style: GpOtherTheme.size17(
+                  context,
+                )!.copyWith(fontWeight: FontWeight.bold),
+              ),
             ],
           ),
           if (stage.officialTags != null &&
@@ -100,46 +107,61 @@ class SearchplaylistWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 60),
               child: Row(
-                children: stage.officialTags!
-                    .map((e) => Container(
-                          decoration: BoxDecoration(
-                            color: Colors.orange.withOpacity(0.1),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.0)),
+                children:
+                    stage.officialTags!
+                        .map(
+                          (e) => Container(
+                            decoration: BoxDecoration(
+                              color: Colors.orange.withValues(alpha: 0.1),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(5.0),
+                              ),
+                            ),
+                            padding: EdgeInsets.all(3.0),
+                            margin: EdgeInsets.only(right: 10),
+                            child: Text(
+                              e,
+                              style: GpOtherTheme.size12(
+                                context,
+                              )!.copyWith(fontSize: 9, color: Colors.orange),
+                            ),
                           ),
-                          padding: EdgeInsets.all(3.0),
-                          margin: EdgeInsets.only(right: 10),
-                          child: Text(
-                            e,
-                            style: GpOtherTheme.size12(context)!
-                                .copyWith(fontSize: 9, color: Colors.orange),
-                          ),
-                        ))
-                    .toList(),
+                        )
+                        .toList(),
               ),
             ),
           if (stage.specialType != null && stage.specialType == 300)
             Padding(
               padding: EdgeInsets.only(left: 60),
               child: Text.rich(
-                TextSpan(text: "包含", children: [
-                  TextSpan(
+                TextSpan(
+                  text: "包含",
+                  children: [
+                    TextSpan(
                       text: "《",
-                      style: GpOtherTheme.size13(context)!
-                          .copyWith(color: CommonColors.textColor999)),
-                  TextSpan(
+                      style: GpOtherTheme.size13(
+                        context,
+                      )!.copyWith(color: CommonColors.textColor999),
+                    ),
+                    TextSpan(
                       text: "哪里都是你",
-                      style: GpOtherTheme.size13(context)!
-                          .copyWith(color: Colors.blue)),
-                  TextSpan(
+                      style: GpOtherTheme.size13(
+                        context,
+                      )!.copyWith(color: Colors.blue),
+                    ),
+                    TextSpan(
                       text: "》",
-                      style: GpOtherTheme.size13(context)!
-                          .copyWith(color: CommonColors.textColor999)),
-                ]),
-                style: GpOtherTheme.size13(context)!
-                    .copyWith(color: CommonColors.textColor999),
+                      style: GpOtherTheme.size13(
+                        context,
+                      )!.copyWith(color: CommonColors.textColor999),
+                    ),
+                  ],
+                ),
+                style: GpOtherTheme.size13(
+                  context,
+                )!.copyWith(color: CommonColors.textColor999),
               ),
-            )
+            ),
         ],
       ),
     );

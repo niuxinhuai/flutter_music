@@ -12,10 +12,9 @@ class CommonColors {
     _isDark = isDark;
   }
 
-  static MaterialColor get primary => _isDark
-      ? const MaterialColor(
-          0xFF2E8867,
-          <int, Color>{
+  static MaterialColor get primary =>
+      _isDark
+          ? const MaterialColor(0xFF2E8867, <int, Color>{
             50: Color(0xFFE6F1ED),
             100: Color(0xFFC0DBD1),
             200: Color(0xFF97C4B3),
@@ -26,11 +25,8 @@ class CommonColors {
             700: Color(0xFF237554),
             800: Color(0xFF1D6B4A),
             900: Color(0xFF125839),
-          },
-        )
-      : const MaterialColor(
-          0xFF43c494,
-          <int, Color>{
+          })
+          : const MaterialColor(0xFF43c494, <int, Color>{
             50: Color(0xFFe8f8f2),
             100: Color(0xFFc7eddf),
             200: Color(0xFFa1e2ca),
@@ -41,13 +37,11 @@ class CommonColors {
             700: Color(0xFF34b681),
             800: Color(0xFF2caf77),
             900: Color(0xFF1ea265),
-          },
-        );
+          });
 
-  static MaterialColor get secondary => _isDark
-      ? const MaterialColor(
-          0xFFB27F35,
-          <int, Color>{
+  static MaterialColor get secondary =>
+      _isDark
+          ? const MaterialColor(0xFFB27F35, <int, Color>{
             50: Color(0xFFF6F0E7),
             100: Color(0xFFE8D9C2),
             200: Color(0xFFD9BF9A),
@@ -58,11 +52,8 @@ class CommonColors {
             700: Color(0xFFA26C28),
             800: Color(0xFF996222),
             900: Color(0xFF8A4F16),
-          },
-        )
-      : const MaterialColor(
-          0xFFffb74d,
-          <int, Color>{
+          })
+          : const MaterialColor(0xFFffb74d, <int, Color>{
             50: Color(0xFFfff6ea),
             100: Color(0xFFffe9ca),
             200: Color(0xFFffdba6),
@@ -73,11 +64,14 @@ class CommonColors {
             700: Color(0xFFffa73d),
             800: Color(0xFFff9f34),
             900: Color(0xFFff9025),
-          },
-        );
+          });
 
   static Color get randomColor => Color.fromRGBO(
-      Random().nextInt(256), Random().nextInt(256), Random().nextInt(256), 1);
+    Random().nextInt(256),
+    Random().nextInt(256),
+    Random().nextInt(256),
+    1,
+  );
 
   static Color get backgroundColor =>
       _isDark ? const Color(0xFF323943) : const Color(0xFFF4F7FA);
@@ -170,18 +164,22 @@ class CommonColors {
   static Color get homeStatisticsStrokeLineColor =>
       _isDark ? const Color(0xFF2E8867) : const Color(0xFF43C494);
 
-  static Color get essayPieKaoyan => _isDark
-      ? const Color(0xFF43C494).withOpacity(0.7)
-      : const Color(0xFF43C494);
+  static Color get essayPieKaoyan =>
+      _isDark
+          ? const Color(0xFF43C494).withValues(alpha: 0.7)
+          : const Color(0xFF43C494);
 
-  static Color get kaoyanPayTwoColor => _isDark
-      ? const Color(0xFF1578FF).withOpacity(0.6)
-      : const Color(0xFF1578FF);
+  static Color get kaoyanPayTwoColor =>
+      _isDark
+          ? const Color(0xFF1578FF).withValues(alpha: 0.6)
+          : const Color(0xFF1578FF);
 
   static Color get kaoyanPayTextColor =>
       _isDark ? const Color(0xFFA1383F) : const Color(0xFFFD6B4B);
 
   //水印
   static Color get blurTextColor =>
-      _isDark ? const Color(0xFF323943).withOpacity(0.3) : Color(0xFFF7F7F7);
+      _isDark
+          ? const Color(0xFF323943).withValues(alpha: 0.3)
+          : Color(0xFFF7F7F7);
 }

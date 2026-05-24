@@ -16,10 +16,7 @@ class DetailSheetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (stage == null) {
-      return Container(
-        width: 0,
-        height: 0,
-      );
+      return Container(width: 0, height: 0);
     }
     return Container(
       width: double.infinity,
@@ -30,10 +27,7 @@ class DetailSheetWidget extends StatelessWidget {
           Scaffold(
             backgroundColor: Colors.transparent,
             appBar: GpAppBar(
-              leading: Container(
-                width: 0,
-                height: 0,
-              ),
+              leading: Container(width: 0, height: 0),
               elevation: 0,
               backgroundColor: Colors.transparent,
             ),
@@ -47,8 +41,9 @@ class DetailSheetWidget extends StatelessWidget {
                     padding: EdgeInsets.only(top: 30, bottom: 20),
                     child: Text(
                       stage?.name ?? "",
-                      style: GpOtherTheme.size17(context)!
-                          .copyWith(color: CommonColors.onPrimaryTextColor),
+                      style: GpOtherTheme.size17(
+                        context,
+                      )!.copyWith(color: CommonColors.onPrimaryTextColor),
                     ),
                   ),
                   Container(
@@ -63,7 +58,7 @@ class DetailSheetWidget extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -73,19 +68,18 @@ class DetailSheetWidget extends StatelessWidget {
     return GpAppBar(
       elevation: 0,
       backgroundColor: Colors.transparent,
-      leading: Container(
-        width: 0,
-        height: 0,
-      ),
+      leading: Container(width: 0, height: 0),
       title: Container(
         padding: EdgeInsets.only(left: 3, right: 3),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(4.0)),
-            border: Border.all(color: CommonColors.foregroundColor)),
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          border: Border.all(color: CommonColors.foregroundColor),
+        ),
         child: Text(
           "精品歌单",
-          style: GpOtherTheme.size17(context)!
-              .copyWith(color: CommonColors.onPrimaryTextColor, fontSize: 13),
+          style: GpOtherTheme.size17(
+            context,
+          )!.copyWith(color: CommonColors.onPrimaryTextColor, fontSize: 13),
         ),
       ),
       actions: [
@@ -100,7 +94,7 @@ class DetailSheetWidget extends StatelessWidget {
             color: CommonColors.foregroundColor,
             size: 40,
           ),
-        )
+        ),
       ],
     );
   }
@@ -108,11 +102,7 @@ class DetailSheetWidget extends StatelessWidget {
   Widget _buildAva(BuildContext context) {
     return Stack(
       children: [
-        ImageItemWidget(
-          url: stage?.coverImgUrl ?? "",
-          width: 200,
-          height: 200,
-        ),
+        ImageItemWidget(url: stage?.coverImgUrl ?? "", width: 200, height: 200),
         ClipRRect(
           borderRadius: BorderRadius.only(topLeft: Radius.circular(8.0)),
           child: Image.asset("assets/images/cm6_list_sup_hot_big~iphone.png"),
@@ -127,26 +117,36 @@ class DetailSheetWidget extends StatelessWidget {
       children: [
         Text(
           "标签",
-          style: GpOtherTheme.size15(context)!
-              .copyWith(color: CommonColors.onPrimaryTextColor),
+          style: GpOtherTheme.size15(
+            context,
+          )!.copyWith(color: CommonColors.onPrimaryTextColor),
         ),
         Row(
-          children: stage!.tags!
-              .map((e) => Container(
-                    decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
-                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
-                    padding:
-                        EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 2),
-                    margin: EdgeInsets.only(left: 10),
-                    child: Text(
-                      e,
-                      style: GpOtherTheme.size13(context)!
-                          .copyWith(color: CommonColors.onPrimaryTextColor),
+          children:
+              stage!.tags!
+                  .map(
+                    (e) => Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.2),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      ),
+                      padding: EdgeInsets.only(
+                        left: 8,
+                        right: 8,
+                        top: 2,
+                        bottom: 2,
+                      ),
+                      margin: EdgeInsets.only(left: 10),
+                      child: Text(
+                        e,
+                        style: GpOtherTheme.size13(
+                          context,
+                        )!.copyWith(color: CommonColors.onPrimaryTextColor),
+                      ),
                     ),
-                  ))
-              .toList(),
-        )
+                  )
+                  .toList(),
+        ),
       ],
     );
   }
@@ -158,8 +158,9 @@ class DetailSheetWidget extends StatelessWidget {
       child: Text(
         stage?.description ?? "",
         maxLines: 1000,
-        style: GpOtherTheme.size15(context)!
-            .copyWith(color: CommonColors.onPrimaryTextColor),
+        style: GpOtherTheme.size15(
+          context,
+        )!.copyWith(color: CommonColors.onPrimaryTextColor),
       ),
     );
   }

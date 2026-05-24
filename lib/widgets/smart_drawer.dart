@@ -19,24 +19,24 @@ class SmartDrawer extends StatelessWidget {
     ///new start
     this.widthPercent = 0.7, // 默认比例
     ///new end
-  })  :
+  }) : ///new start
+       assert(widthPercent != null && widthPercent < 1.0 && widthPercent > 0.0),
 
-        ///new start
-        assert(widthPercent != null && widthPercent < 1.0 && widthPercent > 0.0)
-
-        ///new end
-        ,
-        super(key: key);
+       ///new end
+       super(key: key);
   @override
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterialLocalizations(context));
-    String label = semanticLabel!;
+    String? label = semanticLabel;
     switch (defaultTargetPlatform) {
       case TargetPlatform.iOS:
-        label = semanticLabel!;
+        label = semanticLabel;
         break;
       case TargetPlatform.android:
       case TargetPlatform.fuchsia:
+      case TargetPlatform.linux:
+      case TargetPlatform.macOS:
+      case TargetPlatform.windows:
         label = semanticLabel ?? MaterialLocalizations.of(context).drawerLabel;
     }
 
@@ -54,10 +54,7 @@ class SmartDrawer extends StatelessWidget {
         constraints: BoxConstraints.expand(width: _width),
 
         ///edit end
-        child: Material(
-          elevation: elevation,
-          child: child,
-        ),
+        child: Material(elevation: elevation, child: child),
       ),
     );
   }

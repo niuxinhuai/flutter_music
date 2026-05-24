@@ -8,35 +8,39 @@ class GpErrorWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final bool showBackOnError;
 
-  const GpErrorWidget(
-      {this.errorWidget, this.onTap, this.showBackOnError = false});
+  const GpErrorWidget({
+    this.errorWidget,
+    this.onTap,
+    this.showBackOnError = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     Widget content = GestureDetector(
-      onTap: onTap, behavior: HitTestBehavior.opaque, //需要设置，不然点击范围会变小
-      child: errorWidget ??
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque, //需要设置，不然点击范围会变小
+      child:
+          errorWidget ??
           Container(
             width: double.infinity,
             height: double.infinity,
             alignment: Alignment.center,
             child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Image.asset(
-                    'assets/images/cm8_my_empty_pic_night~iphone.png',
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10),
-                    child: Text('哎呀，程序出错了\n点击屏幕重新加载'),
-                  ),
-                ]),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.asset('assets/images/cm8_my_empty_pic_night~iphone.png'),
+                Padding(
+                  padding: EdgeInsets.only(top: 10),
+                  child: Text('哎呀，程序出错了\n点击屏幕重新加载'),
+                ),
+              ],
+            ),
           ),
     );
     if (showBackOnError) {
       return Scaffold(
         appBar: GpAppBar(
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 0,
         ),
         body: content,

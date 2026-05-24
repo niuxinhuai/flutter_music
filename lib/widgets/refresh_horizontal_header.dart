@@ -26,19 +26,16 @@ class CustomWaterDropHeader extends RefreshIndicator {
     Key? key,
     this.refresh,
     this.complete,
-    Duration completeDuration: const Duration(milliseconds: 600),
+    Duration completeDuration = const Duration(milliseconds: 600),
     this.failed,
-    this.waterDropColor: Colors.grey,
-    this.idleIcon: const Icon(
-      Icons.autorenew,
-      size: 15,
-      color: Colors.white,
-    ),
+    this.waterDropColor = Colors.grey,
+    this.idleIcon = const Icon(Icons.autorenew, size: 15, color: Colors.white),
   }) : super(
-            key: key,
-            height: 60.0,
-            completeDuration: completeDuration,
-            refreshStyle: RefreshStyle.UnFollow);
+         key: key,
+         height: 60.0,
+         completeDuration: completeDuration,
+         refreshStyle: RefreshStyle.UnFollow,
+       );
 
   @override
   State<StatefulWidget> createState() {
@@ -70,12 +67,16 @@ class _CustomWaterDropHeaderState
   @override
   void initState() {
     _dismissCtl = AnimationController(
-        vsync: this, duration: Duration(milliseconds: 400), value: 1.0);
+      vsync: this,
+      duration: Duration(milliseconds: 400),
+      value: 1.0,
+    );
     _animationController = AnimationController(
-        vsync: this,
-        lowerBound: 0.0,
-        upperBound: 50.0,
-        duration: Duration(milliseconds: 400));
+      vsync: this,
+      lowerBound: 0.0,
+      upperBound: 50.0,
+      duration: Duration(milliseconds: 400),
+    );
     super.initState();
   }
 
@@ -89,26 +90,24 @@ class _CustomWaterDropHeaderState
     Widget? child;
     print('>>>>>>>>>>>mode:$mode');
     if (mode == RefreshStatus.refreshing) {
-      child = widget.refresh ??
+      child =
+          widget.refresh ??
           SizedBox(
             width: 25.0,
             height: 25.0,
-            child: defaultTargetPlatform == TargetPlatform.iOS
-                ? const CupertinoActivityIndicator()
-                : const CircularProgressIndicator(strokeWidth: 2.0),
+            child:
+                defaultTargetPlatform == TargetPlatform.iOS
+                    ? const CupertinoActivityIndicator()
+                    : const CircularProgressIndicator(strokeWidth: 2.0),
           );
     } else if (mode == RefreshStatus.completed) {
-      child = widget.complete ??
+      child =
+          widget.complete ??
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Icon(
-                Icons.done,
-                color: Colors.grey,
-              ),
-              Container(
-                width: 15.0,
-              ),
+              const Icon(Icons.done, color: Colors.grey),
+              Container(width: 15.0),
               RotatedBox(
                 quarterTurns: 1,
                 child: Text(
@@ -117,29 +116,26 @@ class _CustomWaterDropHeaderState
                       .refreshCompleteText!,
                   style: TextStyle(color: Colors.grey),
                 ),
-              )
+              ),
             ],
           );
     } else if (mode == RefreshStatus.failed) {
-      child = widget.failed ??
+      child =
+          widget.failed ??
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Icon(
-                Icons.close,
-                color: Colors.grey,
-              ),
-              Container(
-                width: 15.0,
-              ),
+              const Icon(Icons.close, color: Colors.grey),
+              Container(width: 15.0),
               RotatedBox(
                 quarterTurns: 1,
                 child: Text(
-                    (RefreshLocalizations.of(context)?.currentLocalization ??
-                            EnRefreshString())
-                        .refreshFailedText!,
-                    style: TextStyle(color: Colors.grey)),
-              )
+                  (RefreshLocalizations.of(context)?.currentLocalization ??
+                          EnRefreshString())
+                      .refreshFailedText!,
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
             ],
           );
     } else if (mode == RefreshStatus.idle || mode == RefreshStatus.canRefresh) {
@@ -148,25 +144,20 @@ class _CustomWaterDropHeaderState
         height: 25.0,
         child: const CupertinoActivityIndicator(animating: false),
       );
-//      if (mode == RefreshStatus.idle) {
-//        return widget;
-//      }
+      //      if (mode == RefreshStatus.idle) {
+      //        return widget;
+      //      }
       return Row(
         children: <Widget>[
           widget,
           RotatedBox(
             quarterTurns: 1,
             child: Text("你松开我~", style: TextStyle(color: Colors.grey)),
-          )
+          ),
         ],
       );
     }
-    return Container(
-      height: 60.0,
-      child: Center(
-        child: child,
-      ),
-    );
+    return Container(height: 60.0, child: Center(child: child));
   }
 
   @override

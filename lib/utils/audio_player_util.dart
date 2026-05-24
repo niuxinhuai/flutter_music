@@ -5,11 +5,11 @@ class AudioPlayerUtils {
   static Duration get position => _instance._position;
   static Duration get duration => _instance._duration;
   static Stream<Duration> get onPlayerStateChanged =>
-      _instance._audioPlayer!.onAudioPositionChanged;
+      _instance._audioPlayer!.onPositionChanged;
 
   ///单个播放音频
   static void playerHandle(String url) async {
-    await _instance._audioPlayer?.play(url);
+    await _instance._audioPlayer?.play(UrlSource(url));
   }
 
   static void pause() async {
@@ -41,28 +41,31 @@ class AudioPlayerUtils {
     _audioPlayer?.onPlayerStateChanged.listen((PlayerState playerState) {
       if (_audioPlayer != null) {
         switch (playerState) {
-          case PlayerState.STOPPED:
+          case PlayerState.stopped:
             // TODO: Handle this case.
             _state = AudioPlayerState.stopped;
             break;
-          case PlayerState.PLAYING:
+          case PlayerState.playing:
             // TODO: Handle this case.
             _state = AudioPlayerState.playing;
             break;
-          case PlayerState.PAUSED:
+          case PlayerState.paused:
             // TODO: Handle this case.
             _state = AudioPlayerState.paused;
             break;
-          case PlayerState.COMPLETED:
+          case PlayerState.completed:
             // TODO: Handle this case.
             _state = AudioPlayerState.completed;
+            break;
+          case PlayerState.disposed:
+            _state = AudioPlayerState.stopped;
             break;
         }
       }
     });
 
     // 播放进度监听
-    _audioPlayer?.onAudioPositionChanged.listen((Duration p) {
+    _audioPlayer?.onPositionChanged.listen((Duration p) {
       _position = p;
     });
 
@@ -77,5 +80,5 @@ enum AudioPlayerState {
   stopped, // 初始状态，已停止或发生错误
   playing, // 正在播放
   paused, // 暂停
-  completed // 播放结束
+  completed, // 播放结束
 }
