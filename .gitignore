@@ -3,6 +3,7 @@
 # Files and directories created by pub
 .dart_tool/
 .packages
+.flutter-plugins-dependencies
 build/
 # Flutter applications should check in pubspec.lock for reproducible CI builds.
 
