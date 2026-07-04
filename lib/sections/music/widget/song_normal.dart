@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_music/utils/image_url_utils.dart';
 
 class SongNormalWidget extends StatefulWidget {
   final double? width;
@@ -96,9 +98,14 @@ class _SongNormalWidgetState extends State<SongNormalWidget>
                         margin: EdgeInsets.all(50),
                         child: ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(110)),
-                          child: Image.network(
-                            widget.imageUrl ?? "",
+                          child: CachedNetworkImage(
+                            imageUrl: ImageUrlUtils.normalizeMusicImageUrl(
+                              widget.imageUrl ?? "",
+                            ),
+                            httpHeaders: ImageUrlUtils.musicImageHeaders,
                             fit: BoxFit.fill,
+                            errorWidget: (context, url, error) =>
+                                Container(color: Colors.transparent),
                           ),
                         ),
                       ),
@@ -124,27 +131,25 @@ class _SongNormalWidgetState extends State<SongNormalWidget>
             //          color: Colors.red,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children:
-                  imageNameList
-                      .map(
-                        (e) => GestureDetector(
-                          onTap:
-                              e == "ad_icn_download~iphone.png"
-                                  ? widget.onTapDownload
-                                  : null,
-                          child: Container(
-                            //                      color: CommonColors.randomColor,
-                            child: Image.asset(
-                              'assets/images/$e',
-                              color: Colors.white,
-                              width: 30,
-                              height: 30,
-                              fit: BoxFit.fitHeight,
-                            ),
-                          ),
+              children: imageNameList
+                  .map(
+                    (e) => GestureDetector(
+                      onTap: e == "ad_icn_download~iphone.png"
+                          ? widget.onTapDownload
+                          : null,
+                      child: Container(
+                        //                      color: CommonColors.randomColor,
+                        child: Image.asset(
+                          'assets/images/$e',
+                          color: Colors.white,
+                          width: 30,
+                          height: 30,
+                          fit: BoxFit.fitHeight,
                         ),
-                      )
-                      .toList(),
+                      ),
+                    ),
+                  )
+                  .toList(),
             ),
           ),
         ],

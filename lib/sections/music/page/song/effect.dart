@@ -1,4 +1,5 @@
 import 'package:fish_redux/fish_redux.dart';
+import 'package:flutter_music/constants/url.dart';
 import 'package:flutter_music/repository/services/common_service.dart';
 import 'package:flutter_music/sections/music/models/lyric.dart';
 import 'package:flutter_music/sections/music/models/song.dart';
@@ -17,8 +18,7 @@ Effect<AudioPlayerState>? buildEffect() {
 }
 
 void _initState(Action action, Context<AudioPlayerState> ctx) async {
-  String url =
-      "https://netease-cloud-music-api-sable-gamma.vercel.app/song/url?id=115162";
+  String url = "${UrlConstants.baseUrl}${MusicUri.song_url("115162")}";
   SongWrap? songwrap = await CommonService.getSongUrl(ctx.state.id!).catchError(
     (e) {
       Toast.toast(
@@ -33,16 +33,19 @@ void _initState(Action action, Context<AudioPlayerState> ctx) async {
       songwrap.code == 200 &&
       songLyric != null &&
       songLyric.code == 200) {
-    final sourceUrl =
-        songwrap.data?.isNotEmpty == true ? songwrap.data?.first.url : null;
-    String? resolvedUrl = sourceUrl;
-    if (sourceUrl != null && sourceUrl.isNotEmpty) {
-      resolvedUrl = await LocalMediaRepository.resolvePlaybackPath(
-        type: LocalMediaType.audio,
-        id: ctx.state.id!,
-        fallbackUrl: sourceUrl,
-      );
+    final sourceUrl = songwrap.data?.isNotEmpty == true
+        ? songwrap.data?.first.url
+        : null;
+    if (sourceUrl == null || sourceUrl.isEmpty) {
+      Toast.toast(ctx.context, "暂无可播放音源");
+      return;
     }
+    String? resolvedUrl = sourceUrl;
+    resolvedUrl = await LocalMediaRepository.resolvePlaybackPath(
+      type: LocalMediaType.audio,
+      id: ctx.state.id!,
+      fallbackUrl: sourceUrl,
+    );
     ctx.dispatch(
       AudioPlayerActionCreator.didFetchDataAction(
         songwrap,

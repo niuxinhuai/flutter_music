@@ -14,7 +14,7 @@ class AudioPlayerUtils {
       _instance._positionController.stream;
 
   ///单个播放音频
-  static void playerHandle(
+  static Future<void> playerHandle(
     String url, {
     String? id,
     String? title,
@@ -46,10 +46,9 @@ class AudioPlayerUtils {
       }
     }
     _instance._ensureAudioPlayer();
-    final source =
-        LocalMediaStore.isLocalPath(url)
-            ? DeviceFileSource(url)
-            : UrlSource(url);
+    final source = LocalMediaStore.isLocalPath(url)
+        ? DeviceFileSource(url)
+        : UrlSource(url);
     await _instance._audioPlayer?.play(source);
   }
 
@@ -184,10 +183,9 @@ class AudioPlayerUtils {
         final snapshot = await MusicWidgetBridge.getSnapshot();
         _position = snapshot.position;
         _duration = snapshot.duration;
-        _state =
-            snapshot.isPlaying
-                ? AudioPlayerState.playing
-                : AudioPlayerState.paused;
+        _state = snapshot.isPlaying
+            ? AudioPlayerState.playing
+            : AudioPlayerState.paused;
         _positionController.add(_position);
       } on PlatformException {
         _snapshotTimer?.cancel();

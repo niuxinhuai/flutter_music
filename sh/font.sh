@@ -4,7 +4,7 @@
 #2. 运行此脚本
 if [ ! -d "sh" ];then
   cd ..
-fi
+fif v m
 cd assets/fonts/ &&
 python3 translate_icon_font_from_css_to_dart.py
 # rm iconfont.css

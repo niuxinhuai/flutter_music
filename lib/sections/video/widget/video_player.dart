@@ -1,19 +1,28 @@
 import 'dart:io';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/res/other_theme.dart';
+import 'package:flutter_music/utils/image_url_utils.dart';
 import 'package:flutter_music/utils/local_media_store.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
   final String? url;
+  final String? coverUrl;
   final Function(double, Duration)? call;
   final VoidCallback? onTapVideo;
   //用于弹出评论框时，视频衔接播放
   final Duration? position;
 
-  VideoPlayerWidget({this.url, this.call, this.onTapVideo, this.position});
+  VideoPlayerWidget({
+    this.url,
+    this.coverUrl,
+    this.call,
+    this.onTapVideo,
+    this.position,
+  });
 
   @override
   _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
@@ -21,8 +30,7 @@ class VideoPlayerWidget extends StatefulWidget {
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   VideoPlayerController? _controller;
-  String url =
-      "https://netease-cloud-music-api-sable-gamma.vercel.app/video/url?id=D52DA5A9DA969DF16175877C7527E828";
+  Object? _playError;
 
   @override
   void initState() {
@@ -42,13 +50,16 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   void _initController() {
     final playUrl = widget.url;
+    _playError = null;
     if (playUrl == null || playUrl.isEmpty) {
       return;
     }
-    _controller =
-        LocalMediaStore.isLocalPath(playUrl)
-            ? VideoPlayerController.file(File(playUrl))
-            : VideoPlayerController.networkUrl(Uri.parse(playUrl));
+    _controller = LocalMediaStore.isLocalPath(playUrl)
+        ? VideoPlayerController.file(File(playUrl))
+        : VideoPlayerController.networkUrl(
+            Uri.parse(playUrl),
+            httpHeaders: _headersForUrl(playUrl),
+          );
     _controller
         ?.initialize()
         .then((value) {
@@ -65,7 +76,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         })
         .catchError((e) {
           if (mounted) {
-            setState(() {});
+            setState(() {
+              _playError = e;
+            });
           }
         });
 
@@ -87,7 +100,6 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    print(">>>>视频:${widget.url ?? url}");
     return GestureDetector(
       onTap: () {
         if (widget.onTapVideo != null) {
@@ -105,35 +117,27 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
       child: Container(
         color: Colors.black,
         child: Center(
-          child:
-              _controller?.value.isInitialized == true
-                  ? Stack(
-                    children: [
+          child: _controller?.value.isInitialized == true
+              ? Stack(
+                  children: [
+                    Center(
+                      child: AspectRatio(
+                        aspectRatio: _controller!.value.aspectRatio,
+                        child: VideoPlayer(_controller!),
+                      ),
+                    ),
+                    if (_controller!.value.isPlaying == false)
                       Center(
-                        child: AspectRatio(
-                          aspectRatio: _controller!.value.aspectRatio,
-                          child: VideoPlayer(_controller!),
+                        child: Image.asset(
+                          "assets/images/cm6_square_feed_video~iphone.png",
+                          width: 70,
+                          height: 70,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
-                      if (_controller!.value.isPlaying == false)
-                        Center(
-                          child: Image.asset(
-                            "assets/images/cm6_square_feed_video~iphone.png",
-                            width: 70,
-                            height: 70,
-                            fit: BoxFit.fitWidth,
-                          ),
-                        ),
-                    ],
-                  )
-                  : Container(
-                    child: Text(
-                      "无法播放视频时，网页调用$url,将json复制到assets下的video_url中",
-                      style: GpOtherTheme.size17(
-                        context,
-                      )!.copyWith(color: CommonColors.onPrimaryTextColor),
-                    ),
-                  ),
+                  ],
+                )
+              : Container(child: _buildPlaceholder(context)),
         ),
       ),
     );
@@ -143,5 +147,45 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   void dispose() {
     super.dispose();
     _controller?.dispose();
+  }
+
+  Map<String, String> _headersForUrl(String url) {
+    final uri = Uri.tryParse(url);
+    final host = uri?.host ?? "";
+    if (host.endsWith("music.126.net") || host.endsWith("music.163.com")) {
+      return ImageUrlUtils.musicImageHeaders;
+    }
+    return const <String, String>{};
+  }
+
+  Widget _buildPlaceholder(BuildContext context) {
+    final playUrl = widget.url;
+    final text = playUrl == null || playUrl.isEmpty
+        ? "暂无可播放视频"
+        : _playError == null
+        ? "视频加载中"
+        : "视频播放失败，请稍后重试";
+
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        if (widget.coverUrl?.isNotEmpty == true)
+          CachedNetworkImage(
+            imageUrl: ImageUrlUtils.normalizeMusicImageUrl(widget.coverUrl!),
+            httpHeaders: ImageUrlUtils.musicImageHeaders,
+            fit: BoxFit.cover,
+            errorWidget: (context, url, error) => const SizedBox.shrink(),
+          ),
+        Container(color: Colors.black.withOpacity(0.55)),
+        Center(
+          child: Text(
+            text,
+            style: GpOtherTheme.size17(
+              context,
+            )!.copyWith(color: CommonColors.onPrimaryTextColor),
+          ),
+        ),
+      ],
+    );
   }
 }

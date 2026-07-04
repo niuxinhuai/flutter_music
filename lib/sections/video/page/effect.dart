@@ -6,6 +6,7 @@ import 'package:flutter_music/sections/video/models/detail.dart';
 import 'package:flutter_music/sections/video/models/info.dart';
 import 'package:flutter_music/sections/video/models/url.dart';
 import 'package:flutter_music/sections/video/widget/component_page_widget.dart';
+import 'package:flutter_music/sections/village/models/source.dart';
 import 'package:flutter_music/utils/local_media_repository.dart';
 import 'package:flutter_music/utils/local_media_store.dart';
 import 'package:flutter_music/widgets/toast.dart';
@@ -35,13 +36,20 @@ void _initState(Action action, Context<VideoDetailState> ctx) async {
     ctx.state.vid!,
   ).catchError((e) => ctx.dispatch(VideoDetailActionCreator.didErrorAction()));
 
+  final sourceData = ctx.state.sourceData;
+  final detailMatchesVid = detailWrap?.data?.vid == ctx.state.vid;
+  if (sourceData != null && !detailMatchesVid) {
+    detailWrap = _detailWrapFromSource(sourceData);
+    infoWrap = _infoWrapFromSource(sourceData);
+  }
+
   if ((detailWrap != null &&
           detailWrap.code != null &&
           detailWrap.code == 200) &&
-      (urlWrap != null && urlWrap.code != null && urlWrap.code == 200) &&
-      (urlWrap.urls?.isNotEmpty == true) &&
-      (urlWrap.urls?.first.url?.isNotEmpty == true) &&
       (infoWrap != null && infoWrap.code != null && infoWrap.code == 200)) {
+    urlWrap ??= VideoUrlWrap()
+      ..code = 200
+      ..urls = [];
     ctx.dispatch(
       VideoDetailActionCreator.didFetchDataAction(
         detailWrap,
@@ -49,8 +57,9 @@ void _initState(Action action, Context<VideoDetailState> ctx) async {
         infoWrap,
       ),
     );
-    final sourceUrl =
-        urlWrap.urls?.isNotEmpty == true ? urlWrap.urls?.first.url : null;
+    final sourceUrl = urlWrap.urls?.isNotEmpty == true
+        ? urlWrap.urls?.first.url
+        : null;
     if (sourceUrl != null && sourceUrl.isNotEmpty) {
       final resolvedUrl = await LocalMediaRepository.resolvePlaybackPath(
         type: LocalMediaType.video,
@@ -132,3 +141,18 @@ void _onTapError(Action action, Context<VideoDetailState> ctx) {
 }
 
 void _onAction(Action action, Context<VideoDetailState> ctx) {}
+
+VideoDetailWrap _detailWrapFromSource(VideoItemData sourceData) {
+  return VideoDetailWrap()
+    ..code = 200
+    ..data = sourceData;
+}
+
+VideoDetailInfoWrap _infoWrapFromSource(VideoItemData sourceData) {
+  return VideoDetailInfoWrap()
+    ..code = 200
+    ..likedCount = sourceData.praisedCount
+    ..shareCount = sourceData.shareCount
+    ..commentCount = sourceData.commentCount
+    ..liked = false;
+}

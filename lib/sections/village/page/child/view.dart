@@ -6,6 +6,7 @@ import 'package:flutter_music/res/other_theme.dart';
 import 'package:flutter_music/sections/home/widget/image.dart';
 import 'package:flutter_music/sections/music/widget/user_focus.dart';
 import 'package:flutter_music/sections/village/models/source.dart';
+import 'package:flutter_music/utils/image_url_utils.dart';
 import 'package:flutter_music/widgets/child/praised_widget.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
 import 'package:flutter_music/widgets/refresh_indicator.dart';
@@ -167,7 +168,10 @@ Widget _buildFocus(
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(14)),
                 child: CachedNetworkImage(
-                  imageUrl: avatarUrl ?? "",
+                  imageUrl: ImageUrlUtils.normalizeMusicImageUrl(
+                    avatarUrl ?? "",
+                  ),
+                  httpHeaders: ImageUrlUtils.musicImageHeaders,
                   fit: BoxFit.fill,
                   width: 28,
                   height: 28,
@@ -180,7 +184,10 @@ Widget _buildFocus(
               child:
                   bottomUrl != null
                       ? CachedNetworkImage(
-                        imageUrl: bottomUrl,
+                        imageUrl: ImageUrlUtils.normalizeMusicImageUrl(
+                          bottomUrl,
+                        ),
+                        httpHeaders: ImageUrlUtils.musicImageHeaders,
                         width: 14,
                         height: 14,
                       )

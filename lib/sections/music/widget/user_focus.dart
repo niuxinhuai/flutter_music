@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/res/other_theme.dart';
+import 'package:flutter_music/utils/image_url_utils.dart';
 
 class DetailUserFocusWidget extends StatefulWidget {
   String? avatarUrl;
@@ -39,7 +40,10 @@ class _DetailUserFocusWidgetState extends State<DetailUserFocusWidget> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(14)),
                   child: CachedNetworkImage(
-                    imageUrl: widget.avatarUrl ?? "",
+                    imageUrl: ImageUrlUtils.normalizeMusicImageUrl(
+                      widget.avatarUrl ?? "",
+                    ),
+                    httpHeaders: ImageUrlUtils.musicImageHeaders,
                     fit: BoxFit.fill,
                     width: 28,
                     height: 28,
@@ -52,7 +56,10 @@ class _DetailUserFocusWidgetState extends State<DetailUserFocusWidget> {
                 child:
                     widget.bottomUrl != null
                         ? CachedNetworkImage(
-                          imageUrl: widget.bottomUrl!,
+                          imageUrl: ImageUrlUtils.normalizeMusicImageUrl(
+                            widget.bottomUrl!,
+                          ),
+                          httpHeaders: ImageUrlUtils.musicImageHeaders,
                           width: 14,
                           height: 14,
                         )

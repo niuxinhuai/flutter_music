@@ -8,6 +8,7 @@ import 'package:flutter_music/res/other_theme.dart';
 import 'package:flutter_music/sections/music/widget/song_control.dart';
 import 'package:flutter_music/sections/music/widget/song_lyric.dart';
 import 'package:flutter_music/sections/music/widget/song_normal.dart';
+import 'package:flutter_music/utils/image_url_utils.dart';
 import 'package:flutter_music/widgets/appbar.dart';
 import 'package:flutter_music/widgets/effect.dart';
 
@@ -25,7 +26,15 @@ Widget buildView(
       children: [
         ConstrainedBox(
           constraints: BoxConstraints.expand(),
-          child: Image.network(state.imageUrl ?? "", fit: BoxFit.fill),
+          child: CachedNetworkImage(
+            imageUrl: ImageUrlUtils.normalizeMusicImageUrl(
+              state.imageUrl ?? "",
+            ),
+            httpHeaders: ImageUrlUtils.musicImageHeaders,
+            fit: BoxFit.fill,
+            errorWidget: (context, url, error) =>
+                Container(color: Colors.black54),
+          ),
         ),
         EffectWidget(),
         Scaffold(
@@ -48,7 +57,7 @@ PreferredSizeWidget _buildAppbar(
     backgroundColor: Colors.transparent,
     leading: GestureDetector(
       onTap: () {
-        print(">>>>>>>>>点击了");
+        Navigator.maybePop(viewService.context);
       },
       child: UnconstrainedBox(
         child: Image.asset(
@@ -122,7 +131,10 @@ PreferredSizeWidget _buildAppbar(
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(15.0)),
               child: CachedNetworkImage(
-                imageUrl: state.imageUrl ?? "",
+                imageUrl: ImageUrlUtils.normalizeMusicImageUrl(
+                  state.imageUrl ?? "",
+                ),
+                httpHeaders: ImageUrlUtils.musicImageHeaders,
                 //                    fit: BoxFit.fitWidth,
                 width: 30.0,
               ),
@@ -157,19 +169,16 @@ Widget _buildBody(
     children: [
       Expanded(
         child: GestureDetector(
-          onTap:
-              () => dispatch(AudioPlayerActionCreator.didTapShowLyricAction()),
-          child:
-              state.showLyric!
-                  ? AudioLyricWidget(songLyric: state.songLyric)
-                  : SongNormalWidget(
-                    imageUrl: state.imageUrl,
-                    width: width,
-                    onTapDownload:
-                        () => dispatch(
-                          AudioPlayerActionCreator.onTapDownloadAction(),
-                        ),
-                  ),
+          onTap: () =>
+              dispatch(AudioPlayerActionCreator.didTapShowLyricAction()),
+          child: state.showLyric!
+              ? AudioLyricWidget(songLyric: state.songLyric)
+              : SongNormalWidget(
+                  imageUrl: state.imageUrl,
+                  width: width,
+                  onTapDownload: () =>
+                      dispatch(AudioPlayerActionCreator.onTapDownloadAction()),
+                ),
         ),
       ),
       if (state.url != null)

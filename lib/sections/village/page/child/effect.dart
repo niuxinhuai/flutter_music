@@ -30,18 +30,21 @@ void _initState(Action action, Context<VideoWaterfallState> ctx) async {
 }
 
 Future<VideoSourceWrap?> _getVideoData(
-    Action action, Context<VideoWaterfallState> ctx) async {
-  VideoSourceWrap? wrap = await CommonService.getVideoGroupListSource(
-          ctx.state.id!,
-          offset: ctx.state.offset)
-      .catchError((e) {
-    print(">>>>>>>>>error:$e");
-    if (ctx.state.offset == 0) {
-      ctx.dispatch(VideoWaterfallActionCreator.didErrorAction());
-    } else {
-      Toast.toast(ctx.context, "请求数据出错");
-    }
-  });
+  Action action,
+  Context<VideoWaterfallState> ctx,
+) async {
+  VideoSourceWrap? wrap =
+      await CommonService.getVideoGroupListSource(
+        ctx.state.id!,
+        offset: ctx.state.offset,
+      ).catchError((e) {
+        print(">>>>>>>>>error:$e");
+        if (ctx.state.offset == 0) {
+          ctx.dispatch(VideoWaterfallActionCreator.didErrorAction());
+        } else {
+          Toast.toast(ctx.context, "请求数据出错");
+        }
+      });
   return wrap;
 }
 
@@ -66,8 +69,11 @@ void _onTapItem(Action action, Context<VideoWaterfallState> ctx) {
   final VideoSourceItem item = action.payload;
 
   if (item.data?.vid != null) {
-    ARouter.open(ctx.context, RouterKeys.video_detail,
-        params: {"vid": item.data?.vid});
+    ARouter.open(
+      ctx.context,
+      RouterKeys.video_detail,
+      params: {"vid": item.data?.vid, "sourceData": item.data},
+    );
   } else {
     Toast.toast(ctx.context, "视频Vid 为空了");
   }

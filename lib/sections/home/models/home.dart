@@ -52,8 +52,7 @@ class MusicItem {
     if (extInfo == null) {
       return null;
     }
-    String runStr = extInfo.runtimeType.toString();
-    if (runStr == "_InternalLinkedHashMap<String, dynamic>") {
+    if (extInfo is Map) {
       return MusicExtInfo.fromJson(Map<String, dynamic>.from(extInfo as Map));
     }
     return null;
@@ -63,8 +62,7 @@ class MusicItem {
     if (extInfo == null) {
       return null;
     }
-    String runStr = extInfo.runtimeType.toString();
-    if (runStr == "List<dynamic>") {
+    if (extInfo is List) {
       return (extInfo as List<dynamic>)
           .map((e) => ExtInfoItem.fromJson(e))
           .toList();
@@ -99,8 +97,8 @@ class MusicBanner {
   String? pic;
   String? titleColor;
   int? targetId;
-//  @JsonKey(defaultValue: 2)
-//  MusicBannerTargetType? targetType;
+  //  @JsonKey(defaultValue: 2)
+  //  MusicBannerTargetType? targetType;
   int? targetType;
   String? typeTitle;
   String? encodeId;
@@ -130,7 +128,7 @@ enum MusicBannerTargetType {
   @JsonValue(1000)
   song,
   @JsonValue(3000)
-  web
+  web,
 }
 
 /// uiElement
@@ -217,7 +215,7 @@ class CreativesItem {
   String? action;
   String? actionType;
   int? position;
-//  String? logInfo;
+  //  String? logInfo;
   String? alg;
   MusicUiElement? uiElement;
   List<ResourcesItem>? resources;
@@ -241,7 +239,7 @@ class ResourcesItem {
   String? actionType;
   bool? valid;
   String? alg;
-//  String? logInfo;
+  //  String? logInfo;
   ResourceExtInfo? resourceExtInfo;
 
   factory ResourcesItem.fromJson(Map<String, dynamic> json) =>

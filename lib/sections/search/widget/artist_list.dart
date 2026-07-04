@@ -4,6 +4,7 @@ import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/res/other_theme.dart';
 import 'package:flutter_music/sections/home/widget/image.dart';
 import 'package:flutter_music/sections/search/models/search_result.dart';
+import 'package:flutter_music/utils/image_url_utils.dart';
 
 class SearchArtistWidget extends StatelessWidget {
   //歌手/艺人
@@ -52,9 +53,12 @@ class SearchArtistWidget extends StatelessWidget {
                 child: CachedNetworkImage(
                   width: 20,
                   height: 20,
-                  imageUrl: artistsItem.identityIconUrl ?? "",
+                  imageUrl: ImageUrlUtils.normalizeMusicImageUrl(
+                    artistsItem.identityIconUrl ?? "",
+                  ),
+                  httpHeaders: ImageUrlUtils.musicImageHeaders,
                 ),
-              )
+              ),
           ],
         ),
         Expanded(
@@ -65,14 +69,19 @@ class SearchArtistWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text.rich(
-                  TextSpan(text: artistsItem.name, children: [
-                    if (artistsItem.alias != null &&
-                        artistsItem.alias?.isNotEmpty == true)
-                      TextSpan(
+                  TextSpan(
+                    text: artistsItem.name,
+                    children: [
+                      if (artistsItem.alias != null &&
+                          artistsItem.alias?.isNotEmpty == true)
+                        TextSpan(
                           text: "（${artistsItem.alias!.join(" | ")}）",
-                          style: GpOtherTheme.size15(context)!
-                              .copyWith(color: CommonColors.textColor999)),
-                  ]),
+                          style: GpOtherTheme.size15(
+                            context,
+                          )!.copyWith(color: CommonColors.textColor999),
+                        ),
+                    ],
+                  ),
                   softWrap: true,
                   textAlign: TextAlign.left,
                   overflow: TextOverflow.ellipsis,
@@ -82,49 +91,53 @@ class SearchArtistWidget extends StatelessWidget {
                 if (showFans == true)
                   Text(
                     '粉丝：322.2 万',
-                    style: GpOtherTheme.size12(context)!
-                        .copyWith(color: CommonColors.textColor999),
+                    style: GpOtherTheme.size12(
+                      context,
+                    )!.copyWith(color: CommonColors.textColor999),
                   ),
                 Text.rich(
-                  TextSpan(text: "TA的乐迷团", children: [
-                    WidgetSpan(
+                  TextSpan(
+                    text: "TA的乐迷团",
+                    children: [
+                      WidgetSpan(
                         child: Icon(
-                      Icons.keyboard_arrow_right,
-                      color: Colors.blue,
-                      size: 12,
-                    )),
-                  ]),
+                          Icons.keyboard_arrow_right,
+                          color: Colors.blue,
+                          size: 12,
+                        ),
+                      ),
+                    ],
+                  ),
                   softWrap: true,
                   textAlign: TextAlign.left,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  style: GpOtherTheme.size13(context)!
-                      .copyWith(color: Colors.blue),
-                )
+                  style: GpOtherTheme.size13(
+                    context,
+                  )!.copyWith(color: Colors.blue),
+                ),
               ],
             ),
           ),
         ),
         Container(
           decoration: BoxDecoration(
-              border: Border.all(color: Colors.red),
-              borderRadius: BorderRadius.all(Radius.circular(15.0))),
+            border: Border.all(color: Colors.red),
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          ),
           padding: EdgeInsets.only(left: 10, right: 10, top: 3, bottom: 3),
           child: Row(
             children: [
-              Icon(
-                Icons.add,
-                color: Colors.red,
-                size: 13,
-              ),
+              Icon(Icons.add, color: Colors.red, size: 13),
               Text(
                 "关注",
-                style:
-                    GpOtherTheme.size13(context)!.copyWith(color: Colors.red),
-              )
+                style: GpOtherTheme.size13(
+                  context,
+                )!.copyWith(color: Colors.red),
+              ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

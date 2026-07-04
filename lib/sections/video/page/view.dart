@@ -40,16 +40,16 @@ Widget _buildBody(
         child: Stack(
           children: [
             Hero(
-              tag: state.url!,
+              tag: state.url ?? state.vid ?? "",
               child: VideoPlayerWidget(
-                call:
-                    (double progress, Duration position) => dispatch(
-                      VideoDetailActionCreator.onPlayerProgressAction(
-                        progress,
-                        position,
-                      ),
-                    ),
+                call: (double progress, Duration position) => dispatch(
+                  VideoDetailActionCreator.onPlayerProgressAction(
+                    progress,
+                    position,
+                  ),
+                ),
                 url: state.url,
+                coverUrl: state.detailWrap?.data?.coverUrl,
               ),
             ),
             Column(
@@ -61,10 +61,9 @@ Widget _buildBody(
                   elevation: 0,
                   actions: [
                     GestureDetector(
-                      onTap:
-                          () => dispatch(
-                            VideoDetailActionCreator.onTapDownloadAction(),
-                          ),
+                      onTap: () => dispatch(
+                        VideoDetailActionCreator.onTapDownloadAction(),
+                      ),
                       child: Image.asset(
                         "assets/images/cm8_playlist_download~iphone.png",
                         color: Colors.white,
@@ -105,10 +104,8 @@ Widget _buildBody(
         ),
       ),
       BottomCommentWidget(
-        callback:
-            () => dispatch(
-              VideoDetailActionCreator.onTapBottomCommentFloorAction(),
-            ),
+        callback: () =>
+            dispatch(VideoDetailActionCreator.onTapBottomCommentFloorAction()),
       ),
     ],
   );

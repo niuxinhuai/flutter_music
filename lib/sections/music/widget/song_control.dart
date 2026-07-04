@@ -6,6 +6,7 @@ import 'package:flutter_music/res/other_theme.dart';
 import 'package:flutter_music/utils/audio_player_util.dart';
 import 'package:flutter_music/utils/time_utl.dart';
 import 'package:flutter_music/widgets/slider.dart';
+import 'package:flutter_music/widgets/toast.dart';
 
 class AudioControl extends StatefulWidget {
   final String? url;
@@ -44,17 +45,23 @@ class _AudioControlState extends State<AudioControl> {
     }
   }
 
-  void _playCurrentUrl() {
-    if (widget.url == null) {
+  void _playCurrentUrl() async {
+    if (widget.url == null || widget.url!.isEmpty) {
       return;
     }
-    AudioPlayerUtils.playerHandle(
-      widget.url!,
-      id: widget.id,
-      title: widget.name,
-      artist: widget.singer,
-      artworkUrl: widget.imageUrl,
-    );
+    try {
+      await AudioPlayerUtils.playerHandle(
+        widget.url!,
+        id: widget.id,
+        title: widget.name,
+        artist: widget.singer,
+        artworkUrl: widget.imageUrl,
+      );
+    } catch (e) {
+      if (mounted) {
+        Toast.toast(context, "音频播放失败");
+      }
+    }
   }
 
   @override

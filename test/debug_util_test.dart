@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('DebugUtils', () {
-    test('uses mock data by default', () {
-      expect(DebugUtils.debug, isTrue);
+    test('uses real API data by default', () {
+      expect(DebugUtils.debug, isFalse);
     });
 
     test('exposes the dart define key for mock data', () {

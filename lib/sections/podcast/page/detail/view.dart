@@ -7,6 +7,7 @@ import 'package:flutter_music/sections/podcast/models/detail_list.dart';
 import 'package:flutter_music/sections/podcast/widget/detail_header.dart';
 import 'package:flutter_music/sections/podcast/widget/detail_item.dart';
 import 'package:flutter_music/sections/podcast/widget/detail_sticky_bar.dart';
+import 'package:flutter_music/utils/image_url_utils.dart';
 import 'package:flutter_music/widgets/appbar.dart';
 import 'package:flutter_music/widgets/effect.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
@@ -16,14 +17,18 @@ import 'action.dart';
 import 'state.dart';
 
 Widget buildView(
-    PodcastDetailState state, Dispatch dispatch, ViewService viewService) {
+  PodcastDetailState state,
+  Dispatch dispatch,
+  ViewService viewService,
+) {
   return Container(
     color: CommonColors.foregroundColor,
     child: Stack(
       children: [
         if (state.coverImgUrl != null)
           CachedNetworkImage(
-            imageUrl: state.coverImgUrl!,
+            imageUrl: ImageUrlUtils.normalizeMusicImageUrl(state.coverImgUrl!),
+            httpHeaders: ImageUrlUtils.musicImageHeaders,
             width: double.infinity,
             height: double.infinity,
             fit: BoxFit.fill,
@@ -39,8 +44,8 @@ Widget buildView(
                 return _buildBody(state, dispatch, viewService);
               },
             ),
-            onErrorTap: () =>
-                dispatch(PodcastDetailActionCreator.onTapErrorAction()),
+            onErrorTap:
+                () => dispatch(PodcastDetailActionCreator.onTapErrorAction()),
           ),
         ),
       ],
@@ -49,7 +54,10 @@ Widget buildView(
 }
 
 GpAppBar _buildAppbar(
-    PodcastDetailState state, Dispatch dispatch, ViewService viewService) {
+  PodcastDetailState state,
+  Dispatch dispatch,
+  ViewService viewService,
+) {
   return GpAppBar(
     leadingColors: CommonColors.onPrimaryTextColor,
     elevation: 0,
@@ -68,20 +76,23 @@ GpAppBar _buildAppbar(
           "assets/images/cm8_my_music_more_playlist~iphone.png",
           color: Colors.white,
         ),
-      )
+      ),
     ],
   );
 }
 
 Widget _buildBody(
-    PodcastDetailState state, Dispatch dispatch, ViewService viewService) {
+  PodcastDetailState state,
+  Dispatch dispatch,
+  ViewService viewService,
+) {
   return CustomScrollView(
     shrinkWrap: true,
     slivers: [
       SliverToBoxAdapter(
         child: Container(
           width: double.infinity,
-//          height: 300,
+          //          height: 300,
           child: DetailHeaderWidget(
             wrap: state.detailWrap,
             playCount: state.playCount,
@@ -89,30 +100,34 @@ Widget _buildBody(
         ),
       ),
       _buildStickyBar(state, dispatch, viewService),
-      _buildList(state, dispatch, viewService)
+      _buildList(state, dispatch, viewService),
     ],
   );
 }
 
 Widget _buildStickyBar(
-    PodcastDetailState state, Dispatch dispatch, ViewService viewService) {
+  PodcastDetailState state,
+  Dispatch dispatch,
+  ViewService viewService,
+) {
   return SliverPersistentHeader(
     pinned: true, //是否固定在顶部
     floating: true,
     delegate: SliverAppBarDelegate(
-        minHeight: 50, //收起的高度
-        maxHeight: 50, //展开的最大高度
-        child: DetailStickyWidget(
-          count: state.items?.length,
-        )),
+      minHeight: 50, //收起的高度
+      maxHeight: 50, //展开的最大高度
+      child: DetailStickyWidget(count: state.items?.length),
+    ),
   );
 }
 
 Widget _buildList(
-    PodcastDetailState state, Dispatch dispatch, ViewService viewService) {
+  PodcastDetailState state,
+  Dispatch dispatch,
+  ViewService viewService,
+) {
   return SliverList(
-      delegate: SliverChildBuilderDelegate(
-    (context, index) {
+    delegate: SliverChildBuilderDelegate((context, index) {
       DetailProgramsItem item = state.items![index];
       return Container(
         color: Colors.white,
@@ -122,7 +137,6 @@ Widget _buildList(
           rewardCount: state.detailWrap?.data?.dj?.rewardCount,
         ),
       );
-    },
-    childCount: state.items?.length ?? 0,
-  ));
+    }, childCount: state.items?.length ?? 0),
+  );
 }

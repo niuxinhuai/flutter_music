@@ -5,6 +5,7 @@ import 'package:flutter_music/res/colors.dart';
 import 'package:flutter_music/res/other_theme.dart';
 import 'package:flutter_music/sections/video/models/comment.dart';
 import 'package:flutter_music/sections/video/widget/video_player.dart';
+import 'package:flutter_music/utils/image_url_utils.dart';
 import 'package:flutter_music/widgets/loading_wrap.dart';
 
 class VideoCommentPage extends StatefulWidget {
@@ -33,8 +34,9 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
   }
 
   void _getCommentDataSource() async {
-    VideoCommentWrap? wrap =
-        await CommonService.getVideoComment(widget.vid!).catchError((e) {
+    VideoCommentWrap? wrap = await CommonService.getVideoComment(
+      widget.vid!,
+    ).catchError((e) {
       if (mounted) {
         setState(() {
           loadingState = LoadingState.error;
@@ -63,18 +65,17 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          constraints: BoxConstraints(
-            maxHeight: 250,
-          ),
+          constraints: BoxConstraints(maxHeight: 250),
           child: Hero(
-              tag: widget.url!,
-              child: VideoPlayerWidget(
-                url: widget.url,
-                position: widget.position,
-                onTapVideo: () {
-                  Navigator.pop(context);
-                },
-              )),
+            tag: widget.url!,
+            child: VideoPlayerWidget(
+              url: widget.url,
+              position: widget.position,
+              onTapVideo: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
         ),
         Expanded(
           child: Container(
@@ -85,10 +86,7 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
                 Container(
                   width: widget.width,
                   alignment: Alignment.center,
-                  child: Icon(
-                    Icons.keyboard_arrow_down,
-                    size: 30,
-                  ),
+                  child: Icon(Icons.keyboard_arrow_down, size: 30),
                 ),
                 _buildTab(),
                 Expanded(
@@ -100,8 +98,11 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
                     successChild: Builder(
                       builder: (context) {
                         return ListView.builder(
-                          padding:
-                              EdgeInsets.only(top: 20, bottom: 30, left: 20),
+                          padding: EdgeInsets.only(
+                            top: 20,
+                            bottom: 30,
+                            left: 20,
+                          ),
                           itemCount: items.length,
                           shrinkWrap: true,
                           itemBuilder: (BuildContext context, int index) {
@@ -139,31 +140,38 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
             ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(size / 2.0)),
               child: CachedNetworkImage(
-                imageUrl: item.user?.avatarUrl ?? "",
+                imageUrl: ImageUrlUtils.normalizeMusicImageUrl(
+                  item.user?.avatarUrl ?? "",
+                ),
+                httpHeaders: ImageUrlUtils.musicImageHeaders,
                 fit: BoxFit.fill,
                 width: size,
                 height: size,
               ),
             ),
             Expanded(
-                child: Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.user?.nickname ?? "",
-                    style: GpOtherTheme.size15(context)!
-                        .copyWith(color: CommonColors.textColor666),
-                  ),
-                  Text(
-                    item.timeStr ?? "",
-                    style: GpOtherTheme.size12(context)!.copyWith(
-                        color: CommonColors.textColor999, fontSize: 10),
-                  ),
-                ],
+              child: Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.user?.nickname ?? "",
+                      style: GpOtherTheme.size15(
+                        context,
+                      )!.copyWith(color: CommonColors.textColor666),
+                    ),
+                    Text(
+                      item.timeStr ?? "",
+                      style: GpOtherTheme.size12(context)!.copyWith(
+                        color: CommonColors.textColor999,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            )),
+            ),
             Padding(
               padding: EdgeInsets.only(right: 20),
               child: Row(
@@ -172,13 +180,14 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
                   if (item.likedCount != null && item.likedCount != 0)
                     Text(
                       '${item.likedCount ?? 0}',
-                      style: GpOtherTheme.size13(context)!
-                          .copyWith(color: CommonColors.textColor999),
+                      style: GpOtherTheme.size13(
+                        context,
+                      )!.copyWith(color: CommonColors.textColor999),
                     ),
-                  Image.asset("assets/images/cm6_video_icn_praise~iphone.png")
+                  Image.asset("assets/images/cm6_video_icn_praise~iphone.png"),
                 ],
               ),
-            )
+            ),
           ],
         ),
         Padding(
@@ -200,22 +209,25 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
                   width: double.infinity,
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      color: CommonColors.backgroundColor,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                    color: CommonColors.backgroundColor,
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                  ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       RichText(
                         text: TextSpan(
-                            text: beRepliedItem?.user?.nickname,
-                            style: GpOtherTheme.size15(context)!
-                                .copyWith(color: Colors.blue),
-                            children: [
-                              TextSpan(
-                                text: ": ${beRepliedItem?.content ?? ""}",
-                                style: GpOtherTheme.size17(context),
-                              )
-                            ]),
+                          text: beRepliedItem?.user?.nickname,
+                          style: GpOtherTheme.size15(
+                            context,
+                          )!.copyWith(color: Colors.blue),
+                          children: [
+                            TextSpan(
+                              text: ": ${beRepliedItem?.content ?? ""}",
+                              style: GpOtherTheme.size17(context),
+                            ),
+                          ],
+                        ),
                         softWrap: true,
                         maxLines: 5,
                         textAlign: TextAlign.left,
@@ -224,8 +236,9 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
                       if (item.beReplied!.length >= 2)
                         Text(
                           "${item.beReplied!.length}条回复 >",
-                          style: GpOtherTheme.size13(context)!
-                              .copyWith(color: Colors.blue),
+                          style: GpOtherTheme.size13(
+                            context,
+                          )!.copyWith(color: Colors.blue),
                         ),
                     ],
                   ),
@@ -238,7 +251,7 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
           width: double.infinity,
           margin: EdgeInsets.only(left: size + 10, top: 15, bottom: 15),
           color: CommonColors.divider,
-        )
+        ),
       ],
     );
   }
@@ -259,59 +272,63 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
     int count = commentWrap?.total ?? 0;
     return Text(
       "评论${count == 0 ? "" : "($count)"}",
-      style:
-          GpOtherTheme.size15(context)!.copyWith(fontWeight: FontWeight.bold),
+      style: GpOtherTheme.size15(
+        context,
+      )!.copyWith(fontWeight: FontWeight.bold),
     );
   }
 
   Widget _buildSegment() {
     return Row(
-      children: titles.map((e) {
-        bool last = titles.last == e;
-        int index = titles.indexOf(e);
-        return GestureDetector(
-          onTap: () {
-            if (selectIndex != index) {
-              setState(() {
-                if (mounted) {
-                  items = [];
-                  selectIndex = index;
-                  if (selectIndex == 0) {
-                    if (commentWrap?.comments != null &&
-                        commentWrap?.comments?.isNotEmpty == true) {
-                      items = commentWrap!.comments!;
+      children:
+          titles.map((e) {
+            bool last = titles.last == e;
+            int index = titles.indexOf(e);
+            return GestureDetector(
+              onTap: () {
+                if (selectIndex != index) {
+                  setState(() {
+                    if (mounted) {
+                      items = [];
+                      selectIndex = index;
+                      if (selectIndex == 0) {
+                        if (commentWrap?.comments != null &&
+                            commentWrap?.comments?.isNotEmpty == true) {
+                          items = commentWrap!.comments!;
+                        }
+                      } else {
+                        if (commentWrap?.hotComments != null &&
+                            commentWrap?.hotComments?.isNotEmpty == true) {
+                          items = commentWrap!.hotComments!;
+                        }
+                      }
                     }
-                  } else {
-                    if (commentWrap?.hotComments != null &&
-                        commentWrap?.hotComments?.isNotEmpty == true) {
-                      items = commentWrap!.hotComments!;
-                    }
-                  }
+                  });
                 }
-              });
-            }
-          },
-          child: Row(
-            children: [
-              Text(
-                e,
-                style: GpOtherTheme.size13(context)!.copyWith(
-                    color: selectIndex == index
-                        ? CommonColors.onSurfaceTextColor
-                        : CommonColors.textColor999,
-                    fontWeight: FontWeight.bold),
+              },
+              child: Row(
+                children: [
+                  Text(
+                    e,
+                    style: GpOtherTheme.size13(context)!.copyWith(
+                      color:
+                          selectIndex == index
+                              ? CommonColors.onSurfaceTextColor
+                              : CommonColors.textColor999,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  if (last == false)
+                    Container(
+                      width: 1,
+                      height: 15,
+                      color: CommonColors.divider,
+                      margin: EdgeInsets.only(left: 10, right: 10),
+                    ),
+                ],
               ),
-              if (last == false)
-                Container(
-                  width: 1,
-                  height: 15,
-                  color: CommonColors.divider,
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                )
-            ],
-          ),
-        );
-      }).toList(),
+            );
+          }).toList(),
     );
   }
 
@@ -320,33 +337,37 @@ class _VideoCommentPageState extends State<VideoCommentPage> {
       width: widget.width,
       margin: EdgeInsets.only(bottom: 50),
       decoration: BoxDecoration(
-          color: CommonColors.foregroundColor,
-          border:
-              Border(top: BorderSide(color: CommonColors.divider, width: 1))),
+        color: CommonColors.foregroundColor,
+        border: Border(top: BorderSide(color: CommonColors.divider, width: 1)),
+      ),
       padding: EdgeInsets.only(left: 20, right: 20, top: 5),
       child: Row(
         children: [
           Expanded(
-              child: Container(
-            decoration: BoxDecoration(
+            child: Container(
+              decoration: BoxDecoration(
                 color: CommonColors.backgroundColor,
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            padding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
-            child: Text(
-              "随乐而起，有感而发",
-              style: GpOtherTheme.size15(context)!
-                  .copyWith(color: CommonColors.textColor999),
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              ),
+              padding: EdgeInsets.only(top: 10, bottom: 10, left: 20),
+              child: Text(
+                "随乐而起，有感而发",
+                style: GpOtherTheme.size15(
+                  context,
+                )!.copyWith(color: CommonColors.textColor999),
+              ),
             ),
-          )),
+          ),
           Padding(
             padding: EdgeInsets.only(left: 15),
             child: Image.asset("assets/images/cm4_edit_customemoji~iphone.png"),
           ),
           Padding(
             padding: EdgeInsets.only(left: 15),
-            child:
-                Image.asset("assets/images/cm8_input_biubiubiu_off~iphone.png"),
-          )
+            child: Image.asset(
+              "assets/images/cm8_input_biubiubiu_off~iphone.png",
+            ),
+          ),
         ],
       ),
     );
