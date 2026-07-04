@@ -8,6 +8,13 @@ import 'package:http_cache_file_store/http_cache_file_store.dart';
 //import 'package:flutter_wanandroid/helper/user.dart';
 
 class ServiceHelper {
+  static const Map<String, String> _browserHeaders = {
+    "User-Agent":
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148",
+    "Referer": "https://music.163.com/",
+    "Accept": "application/json, text/plain, */*",
+  };
+
   static final CacheStore _cacheStore = FileCacheStore(_cacheDirectoryPath());
 
   static final CacheOptions _cacheOptions = CacheOptions(
@@ -105,16 +112,16 @@ class ServiceHelper {
     return _dio.post<T>(urlPath, data: formData).then((value) => value.data!);
   }
 
-  static Options? _getOptions() {
-    Map<String, String>? map = UserDefault.getHeader();
+  static Options _getOptions() {
+    final headers = <String, String>{..._browserHeaders};
+    final map = UserDefault.getHeader();
     if (map != null) {
-      return Options(headers: map);
-    } else {
-      return null;
+      headers.addAll(map);
     }
+    return Options(headers: headers);
   }
 
-  static Options? buildCacheOption(Duration duration, String cacheKey) {
+  static Options buildCacheOption(Duration duration, String cacheKey) {
     final cacheOptions = _cacheOptions.copyWith(
       maxStale: duration,
       keyBuilder: ({required url, headers, body}) {
@@ -130,7 +137,7 @@ class ServiceHelper {
         );
       },
     );
-    final options = _getOptions() ?? Options();
+    final options = _getOptions();
     return Options(
       headers: options.headers,
       extra: <String, dynamic>{...?options.extra, ...cacheOptions.toExtra()},

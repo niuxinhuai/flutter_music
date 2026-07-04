@@ -2,8 +2,7 @@ import 'package:flutter_music/constants/key.dart';
 
 class UrlConstants {
   static const String apiBaseUrlEnvKey = 'NETEASE_API_BASE_URL';
-  static const String defaultBaseUrl =
-      'https://netease-cloud-music-api-sable-gamma.vercel.app';
+  static const String defaultBaseUrl = 'https://music.163.com/api';
   static const String baseUrl = String.fromEnvironment(
     apiBaseUrlEnvKey,
     defaultValue: defaultBaseUrl,
@@ -46,25 +45,25 @@ class MusicUri extends UrlConstants {
 
   ///推荐歌单
   static String recommend_personalized({int limit = 6}) =>
-      "/personalized?limit=$limit";
+      "/personalized/playlist?limit=$limit";
 
   ///获取每日推荐歌曲
   static const String recommend_songs = "/recommend/songs";
 
   ///获取音乐url
   static String song_url(String id, {String level = "standard"}) =>
-      "/song/url/v1?id=$id&level=$level";
+      "/song/enhance/player/url?ids=%5B$id%5D&br=320000";
 
   ///获取音乐对应的歌词
-  static String song_lyric(String id) => "/lyric?id=$id";
+  static String song_lyric(String id) => "/song/lyric?id=$id&lv=-1&kv=-1&tv=-1";
 
   ///歌单分类
   ///说明 : 调用此接口,可获取歌单分类,包含 category 信息
-  static const String catlist = "/playlist/catlist";
+  static const String catlist = "/playlist/catalogue";
 
   ///热门歌单分类
   ///说明 : 调用此接口,可获取歌单分类,包含 category 信息
-  static const String hot = "/playlist/hot";
+  static const String hot = "/playlist/hottags";
 
   /**
    * 歌单 ( 网友精选碟 )
@@ -72,7 +71,7 @@ class MusicUri extends UrlConstants {
 
       可选参数 : order: 可选值为 'new' 和 'hot', 分别对应最新和最热 , 默认为 'hot'
 
-      cat: tag, 比如 " 华语 "、" 古风 " 、" 欧美 "、" 流行 ", 默认为 "全部",可从歌单分类接口获取(/playlist/catlist)
+      cat: tag, 比如 " 华语 "、" 古风 " 、" 欧美 "、" 流行 ", 默认为 "全部",可从歌单分类接口获取(/playlist/catalogue)
 
       limit: 取出歌单数量 , 默认为 50
 
@@ -84,7 +83,7 @@ class MusicUri extends UrlConstants {
     int offset = 0,
     String order = "hot",
     String tag = "全部",
-  }) => "/top/playlist?limit=$limit&offset=$offset&order=$order&cat=$tag";
+  }) => "/playlist/list?limit=$limit&offset=$offset&order=$order&cat=$tag";
 
   ///获取精品歌单
   /*
